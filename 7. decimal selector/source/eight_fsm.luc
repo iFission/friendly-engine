@@ -1,0 +1,65 @@
+module eight_fsm (
+    input clk,  // clock
+    input rst,  // reset
+    
+    input io_button[5],
+    // output segment[7],
+    output led[8]
+  ) {
+
+.clk(clk) {
+    .rst(rst) {
+      dff counter[27];
+      fsm state = {ONE, TWO, THREE};
+    }
+  }
+ 
+//   seven_seg seg;
+  
+  always {
+  
+    // initial values
+    counter.d = counter.q+1; // connects dff's input to output + 1. everytime clk goes to high, q += 1
+    // segment = 0;
+    // seg.char = 0;
+    led = 0;
+
+    case (state.q){
+      state.ONE:
+        // seg.char = 1;
+        // segment = seg.segs;
+        led = 8b00000001;
+        
+        if (io_button[2] == 1){
+          state.d = state.TWO;
+        }
+        else if (io_button[0] == 1){
+            state.d = state.THREE;
+        }
+        
+      state.TWO:
+        // seg.char = 2;
+        // segment = seg.segs;
+        led = 8b00000010;
+               
+        if (io_button[2] == 1){
+          state.d = state.THREE;
+        }
+        else if (io_button[0] == 1) {
+            state.d = state.ONE;
+        }
+
+      state.THREE:
+        // seg.char = 2;
+        // segment = seg.segs;
+        led = 8b00000100;
+               
+        if (io_button[2] == 1){
+          state.d = state.ONE;
+        }
+        else if (io_button[0] == 1) {
+            state.d = state.TWO;
+        }
+    }
+  }
+}
