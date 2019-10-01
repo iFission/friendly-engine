@@ -1,0 +1,72 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle ise -o
+mojo_top_0.twr -v 30 -l 30 mojo_top_0_routed.ncd mojo_top_0.pcf
+
+Design file:              mojo_top_0_routed.ncd
+Physical constraint file: mojo_top_0.pcf
+Device,package,speed:     xc6slx9,tqg144,C,-2 (PRODUCTION 1.23 2013-10-13)
+Report level:             verbose report, limited to 30 items per constraint
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:2698 - No timing constraints found, doing default enumeration.
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Pad to Pad
+---------------+---------------+---------+
+Source Pad     |Destination Pad|  Delay  |
+---------------+---------------+---------+
+io_dip[0]      |io_seg[0]      |   11.043|
+io_dip[0]      |io_seg[1]      |   10.643|
+io_dip[0]      |io_seg[2]      |   10.550|
+io_dip[0]      |io_seg[3]      |   10.935|
+io_dip[0]      |io_seg[4]      |   10.089|
+io_dip[0]      |io_seg[5]      |   10.889|
+io_dip[0]      |io_seg[6]      |   10.193|
+io_dip[1]      |io_seg[0]      |   10.656|
+io_dip[1]      |io_seg[1]      |   10.970|
+io_dip[1]      |io_seg[2]      |   10.403|
+io_dip[1]      |io_seg[3]      |   10.548|
+io_dip[1]      |io_seg[4]      |   10.162|
+io_dip[1]      |io_seg[5]      |   10.742|
+io_dip[1]      |io_seg[6]      |   10.520|
+io_dip[2]      |io_seg[0]      |   11.580|
+io_dip[2]      |io_seg[1]      |   11.666|
+io_dip[2]      |io_seg[2]      |   11.640|
+io_dip[2]      |io_seg[3]      |   11.472|
+io_dip[2]      |io_seg[4]      |   10.730|
+io_dip[2]      |io_seg[5]      |   11.979|
+io_dip[2]      |io_seg[6]      |   11.216|
+---------------+---------------+---------+
+
+
+Analysis completed Mon Sep 30 06:12:53 2019 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 209 MB
+
+
+
