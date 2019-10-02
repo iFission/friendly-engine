@@ -10,10 +10,13 @@ module eight_tester_2 (
     output reg a,
     output reg b,
     output reg cin,
-    input s,
-    input carry,
+    input s_circuit,
+    input carry_circuit,
     input mode_dip,
+    input test_dip,
     input [4:0] io_button,
+    input s_dip,
+    input carry_dip,
     output reg [7:0] led_expected,
     output reg [7:0] led_result,
     output reg [7:0] led_test
@@ -37,11 +40,20 @@ module eight_tester_2 (
   localparam MANUAL_mode = 1'd1;
   
   reg M_mode_d, M_mode_q = AUTO_mode;
+  localparam CIRCUIT_test = 1'd0;
+  localparam DIP_test = 1'd1;
+  
+  reg M_test_d, M_test_q = CIRCUIT_test;
+  reg [0:0] M_s_d, M_s_q = 1'h0;
+  reg [0:0] M_carry_d, M_carry_q = 1'h0;
   
   always @* begin
+    M_test_d = M_test_q;
     M_state_d = M_state_q;
     M_mode_d = M_mode_q;
+    M_s_d = M_s_q;
     M_counter_d = M_counter_q;
+    M_carry_d = M_carry_q;
     
     M_counter_d = M_counter_q + 1'h1;
     led_test = 1'h0;
@@ -51,6 +63,8 @@ module eight_tester_2 (
     a = 1'h0;
     b = 1'h0;
     cin = 1'h0;
+    M_s_d = s_circuit;
+    M_carry_d = carry_circuit;
     
     case (mode_dip)
       1'h0: begin
@@ -58,6 +72,26 @@ module eight_tester_2 (
       end
       1'h1: begin
         M_mode_d = MANUAL_mode;
+      end
+    endcase
+    
+    case (test_dip)
+      1'h0: begin
+        M_test_d = CIRCUIT_test;
+      end
+      1'h1: begin
+        M_test_d = DIP_test;
+      end
+    endcase
+    
+    case (M_test_q)
+      DIP_test: begin
+        M_s_d = s_dip;
+        M_carry_d = carry_dip;
+      end
+      CIRCUIT_test: begin
+        M_s_d = s_circuit;
+        M_carry_d = carry_circuit;
       end
     endcase
     
@@ -71,7 +105,7 @@ module eight_tester_2 (
             a = 1'h0;
             b = 1'h0;
             cin = 1'h0;
-            if (s == 1'h0 && carry == 1'h0) begin
+            if (M_s_q == 1'h0 && M_carry_q == 1'h0) begin
               led_result = 8'h80;
               if (M_counter_q[26+0-:1] == 1'h1) begin
                 M_state_d = TWO_state;
@@ -84,9 +118,9 @@ module eight_tester_2 (
             a = 1'h0;
             b = 1'h0;
             cin = 1'h1;
-            if (s == 1'h1 && carry == 1'h0) begin
-              led_result = 8'h40;
-              if (M_counter_q[26+0-:1] == 1'h1) begin
+            if (M_s_q == 1'h1 && M_carry_q == 1'h0) begin
+              led_result = 8'hc0;
+              if (M_counter_q[26+0-:1] == 1'h0) begin
                 M_state_d = THREE_state;
               end
             end
@@ -95,10 +129,10 @@ module eight_tester_2 (
             led_expected = 8'h50;
             led_test = 8'h20;
             a = 1'h0;
-            b = 1'h0;
-            cin = 1'h1;
-            if (s == 1'h1 && carry == 1'h0) begin
-              led_result = 8'h20;
+            b = 1'h1;
+            cin = 1'h0;
+            if (M_s_q == 1'h1 && M_carry_q == 1'h0) begin
+              led_result = 8'he0;
               if (M_counter_q[26+0-:1] == 1'h1) begin
                 M_state_d = FOUR_state;
               end
@@ -108,11 +142,11 @@ module eight_tester_2 (
             led_expected = 8'h68;
             led_test = 8'h10;
             a = 1'h0;
-            b = 1'h0;
+            b = 1'h1;
             cin = 1'h1;
-            if (s == 1'h0 && carry == 1'h1) begin
-              led_result = 8'h10;
-              if (M_counter_q[26+0-:1] == 1'h1) begin
+            if (M_s_q == 1'h0 && M_carry_q == 1'h1) begin
+              led_result = 8'hf0;
+              if (M_counter_q[26+0-:1] == 1'h0) begin
                 M_state_d = FIVE_state;
               end
             end
@@ -120,11 +154,11 @@ module eight_tester_2 (
           FIVE_state: begin
             led_expected = 8'h90;
             led_test = 8'h08;
-            a = 1'h0;
+            a = 1'h1;
             b = 1'h0;
-            cin = 1'h1;
-            if (s == 1'h1 && carry == 1'h0) begin
-              led_result = 8'h08;
+            cin = 1'h0;
+            if (M_s_q == 1'h1 && M_carry_q == 1'h0) begin
+              led_result = 8'hf8;
               if (M_counter_q[26+0-:1] == 1'h1) begin
                 M_state_d = SIX_state;
               end
@@ -133,12 +167,12 @@ module eight_tester_2 (
           SIX_state: begin
             led_expected = 8'ha8;
             led_test = 8'h04;
-            a = 1'h0;
+            a = 1'h1;
             b = 1'h0;
             cin = 1'h1;
-            if (s == 1'h0 && carry == 1'h1) begin
-              led_result = 8'h04;
-              if (M_counter_q[26+0-:1] == 1'h1) begin
+            if (M_s_q == 1'h0 && M_carry_q == 1'h1) begin
+              led_result = 8'hfc;
+              if (M_counter_q[26+0-:1] == 1'h0) begin
                 M_state_d = SEVEN_state;
               end
             end
@@ -146,11 +180,11 @@ module eight_tester_2 (
           SEVEN_state: begin
             led_expected = 8'hc8;
             led_test = 8'h02;
-            a = 1'h0;
-            b = 1'h0;
-            cin = 1'h1;
-            if (s == 1'h0 && carry == 1'h1) begin
-              led_result = 8'h02;
+            a = 1'h1;
+            b = 1'h1;
+            cin = 1'h0;
+            if (M_s_q == 1'h0 && M_carry_q == 1'h1) begin
+              led_result = 8'hfe;
               if (M_counter_q[26+0-:1] == 1'h1) begin
                 M_state_d = EIGHT_state;
               end
@@ -159,12 +193,12 @@ module eight_tester_2 (
           EIGHT_state: begin
             led_expected = 8'hf8;
             led_test = 8'h01;
-            a = 1'h0;
-            b = 1'h0;
+            a = 1'h1;
+            b = 1'h1;
             cin = 1'h1;
-            if (s == 1'h1 && carry == 1'h1) begin
-              led_result = 8'h01;
-              if (M_counter_q[26+0-:1] == 1'h1) begin
+            if (M_s_q == 1'h1 && M_carry_q == 1'h1) begin
+              led_result = 8'hff;
+              if (M_counter_q[26+0-:1] == 1'h0) begin
                 M_state_d = PASS_state;
               end
             end
@@ -185,18 +219,18 @@ module eight_tester_2 (
             a = 1'h0;
             b = 1'h0;
             cin = 1'h0;
-            if (s == 1'h0 && carry == 1'h0) begin
+            if (M_s_q == 1'h0 && M_carry_q == 1'h0) begin
               led_result = 8'h80;
-              if (M_counter_q[26+0-:1] == 1'h1) begin
-                if (io_button[4+0-:1] == 1'h1) begin
-                  M_state_d = TWO_state;
+            end
+            if (M_counter_q[26+0-:1] == 1'h1) begin
+              if (io_button[4+0-:1] == 1'h1) begin
+                M_state_d = TWO_state;
+              end else begin
+                if (io_button[3+0-:1] == 1'h1) begin
+                  M_state_d = EIGHT_state;
                 end else begin
-                  if (io_button[3+0-:1] == 1'h1) begin
-                    M_state_d = EIGHT_state;
-                  end else begin
-                    if (io_button[1+0-:1] == 1'h1) begin
-                      M_state_d = ONE_state;
-                    end
+                  if (io_button[1+0-:1] == 1'h1) begin
+                    M_state_d = ONE_state;
                   end
                 end
               end
@@ -208,18 +242,18 @@ module eight_tester_2 (
             a = 1'h0;
             b = 1'h0;
             cin = 1'h1;
-            if (s == 1'h1 && carry == 1'h0) begin
-              led_result = 8'h40;
-              if (M_counter_q[26+0-:1] == 1'h1) begin
-                if (io_button[4+0-:1] == 1'h1) begin
-                  M_state_d = THREE_state;
+            if (M_s_q == 1'h1 && M_carry_q == 1'h0) begin
+              led_result = 8'hc0;
+            end
+            if (M_counter_q[26+0-:1] == 1'h0) begin
+              if (io_button[4+0-:1] == 1'h1) begin
+                M_state_d = THREE_state;
+              end else begin
+                if (io_button[3+0-:1] == 1'h1) begin
+                  M_state_d = ONE_state;
                 end else begin
-                  if (io_button[3+0-:1] == 1'h1) begin
-                    M_state_d = TWO_state;
-                  end else begin
-                    if (io_button[1+0-:1] == 1'h1) begin
-                      M_state_d = ONE_state;
-                    end
+                  if (io_button[1+0-:1] == 1'h1) begin
+                    M_state_d = ONE_state;
                   end
                 end
               end
@@ -229,20 +263,20 @@ module eight_tester_2 (
             led_expected = 8'h50;
             led_test = 8'h20;
             a = 1'h0;
-            b = 1'h0;
-            cin = 1'h1;
-            if (s == 1'h1 && carry == 1'h0) begin
-              led_result = 8'h20;
-              if (M_counter_q[26+0-:1] == 1'h1) begin
-                if (io_button[4+0-:1] == 1'h1) begin
-                  M_state_d = FOUR_state;
+            b = 1'h1;
+            cin = 1'h0;
+            if (M_s_q == 1'h1 && M_carry_q == 1'h0) begin
+              led_result = 8'he0;
+            end
+            if (M_counter_q[26+0-:1] == 1'h1) begin
+              if (io_button[4+0-:1] == 1'h1) begin
+                M_state_d = FOUR_state;
+              end else begin
+                if (io_button[3+0-:1] == 1'h1) begin
+                  M_state_d = TWO_state;
                 end else begin
-                  if (io_button[3+0-:1] == 1'h1) begin
-                    M_state_d = THREE_state;
-                  end else begin
-                    if (io_button[1+0-:1] == 1'h1) begin
-                      M_state_d = ONE_state;
-                    end
+                  if (io_button[1+0-:1] == 1'h1) begin
+                    M_state_d = ONE_state;
                   end
                 end
               end
@@ -252,20 +286,20 @@ module eight_tester_2 (
             led_expected = 8'h68;
             led_test = 8'h10;
             a = 1'h0;
-            b = 1'h0;
+            b = 1'h1;
             cin = 1'h1;
-            if (s == 1'h0 && carry == 1'h1) begin
-              led_result = 8'h10;
-              if (M_counter_q[26+0-:1] == 1'h1) begin
-                if (io_button[4+0-:1] == 1'h1) begin
-                  M_state_d = FIVE_state;
+            if (M_s_q == 1'h0 && M_carry_q == 1'h1) begin
+              led_result = 8'hf0;
+            end
+            if (M_counter_q[26+0-:1] == 1'h0) begin
+              if (io_button[4+0-:1] == 1'h1) begin
+                M_state_d = FIVE_state;
+              end else begin
+                if (io_button[3+0-:1] == 1'h1) begin
+                  M_state_d = THREE_state;
                 end else begin
-                  if (io_button[3+0-:1] == 1'h1) begin
-                    M_state_d = THREE_state;
-                  end else begin
-                    if (io_button[1+0-:1] == 1'h1) begin
-                      M_state_d = ONE_state;
-                    end
+                  if (io_button[1+0-:1] == 1'h1) begin
+                    M_state_d = ONE_state;
                   end
                 end
               end
@@ -274,21 +308,21 @@ module eight_tester_2 (
           FIVE_state: begin
             led_expected = 8'h90;
             led_test = 8'h08;
-            a = 1'h0;
+            a = 1'h1;
             b = 1'h0;
-            cin = 1'h1;
-            if (s == 1'h1 && carry == 1'h0) begin
-              led_result = 8'h08;
-              if (M_counter_q[26+0-:1] == 1'h1) begin
-                if (io_button[4+0-:1] == 1'h1) begin
-                  M_state_d = SIX_state;
+            cin = 1'h0;
+            if (M_s_q == 1'h1 && M_carry_q == 1'h0) begin
+              led_result = 8'hf8;
+            end
+            if (M_counter_q[26+0-:1] == 1'h1) begin
+              if (io_button[4+0-:1] == 1'h1) begin
+                M_state_d = SIX_state;
+              end else begin
+                if (io_button[3+0-:1] == 1'h1) begin
+                  M_state_d = FOUR_state;
                 end else begin
-                  if (io_button[3+0-:1] == 1'h1) begin
-                    M_state_d = FOUR_state;
-                  end else begin
-                    if (io_button[1+0-:1] == 1'h1) begin
-                      M_state_d = ONE_state;
-                    end
+                  if (io_button[1+0-:1] == 1'h1) begin
+                    M_state_d = ONE_state;
                   end
                 end
               end
@@ -297,21 +331,21 @@ module eight_tester_2 (
           SIX_state: begin
             led_expected = 8'ha8;
             led_test = 8'h04;
-            a = 1'h0;
+            a = 1'h1;
             b = 1'h0;
             cin = 1'h1;
-            if (s == 1'h0 && carry == 1'h1) begin
-              led_result = 8'h04;
-              if (M_counter_q[26+0-:1] == 1'h1) begin
-                if (io_button[4+0-:1] == 1'h1) begin
-                  M_state_d = SEVEN_state;
+            if (M_s_q == 1'h0 && M_carry_q == 1'h1) begin
+              led_result = 8'hfc;
+            end
+            if (M_counter_q[26+0-:1] == 1'h0) begin
+              if (io_button[4+0-:1] == 1'h1) begin
+                M_state_d = SEVEN_state;
+              end else begin
+                if (io_button[3+0-:1] == 1'h1) begin
+                  M_state_d = FIVE_state;
                 end else begin
-                  if (io_button[3+0-:1] == 1'h1) begin
-                    M_state_d = FIVE_state;
-                  end else begin
-                    if (io_button[1+0-:1] == 1'h1) begin
-                      M_state_d = ONE_state;
-                    end
+                  if (io_button[1+0-:1] == 1'h1) begin
+                    M_state_d = ONE_state;
                   end
                 end
               end
@@ -320,21 +354,21 @@ module eight_tester_2 (
           SEVEN_state: begin
             led_expected = 8'hc8;
             led_test = 8'h02;
-            a = 1'h0;
-            b = 1'h0;
-            cin = 1'h1;
-            if (s == 1'h0 && carry == 1'h1) begin
-              led_result = 8'h02;
-              if (M_counter_q[26+0-:1] == 1'h1) begin
-                if (io_button[4+0-:1] == 1'h1) begin
-                  M_state_d = EIGHT_state;
+            a = 1'h1;
+            b = 1'h1;
+            cin = 1'h0;
+            if (M_s_q == 1'h0 && M_carry_q == 1'h1) begin
+              led_result = 8'hfe;
+            end
+            if (M_counter_q[26+0-:1] == 1'h1) begin
+              if (io_button[4+0-:1] == 1'h1) begin
+                M_state_d = EIGHT_state;
+              end else begin
+                if (io_button[3+0-:1] == 1'h1) begin
+                  M_state_d = SIX_state;
                 end else begin
-                  if (io_button[3+0-:1] == 1'h1) begin
-                    M_state_d = SIX_state;
-                  end else begin
-                    if (io_button[1+0-:1] == 1'h1) begin
-                      M_state_d = ONE_state;
-                    end
+                  if (io_button[1+0-:1] == 1'h1) begin
+                    M_state_d = ONE_state;
                   end
                 end
               end
@@ -343,21 +377,21 @@ module eight_tester_2 (
           EIGHT_state: begin
             led_expected = 8'hf8;
             led_test = 8'h01;
-            a = 1'h0;
-            b = 1'h0;
+            a = 1'h1;
+            b = 1'h1;
             cin = 1'h1;
-            if (s == 1'h1 && carry == 1'h1) begin
-              led_result = 8'h01;
-              if (M_counter_q[26+0-:1] == 1'h1) begin
-                if (io_button[4+0-:1] == 1'h1) begin
-                  M_state_d = ONE_state;
+            if (M_s_q == 1'h1 && M_carry_q == 1'h1) begin
+              led_result = 8'hff;
+            end
+            if (M_counter_q[26+0-:1] == 1'h0) begin
+              if (io_button[4+0-:1] == 1'h1) begin
+                M_state_d = ONE_state;
+              end else begin
+                if (io_button[3+0-:1] == 1'h1) begin
+                  M_state_d = SEVEN_state;
                 end else begin
-                  if (io_button[3+0-:1] == 1'h1) begin
-                    M_state_d = SEVEN_state;
-                  end else begin
-                    if (io_button[1+0-:1] == 1'h1) begin
-                      M_state_d = ONE_state;
-                    end
+                  if (io_button[1+0-:1] == 1'h1) begin
+                    M_state_d = ONE_state;
                   end
                 end
               end
@@ -371,12 +405,18 @@ module eight_tester_2 (
   always @(posedge clk) begin
     if (rst == 1'b1) begin
       M_counter_q <= 1'h0;
+      M_s_q <= 1'h0;
+      M_carry_q <= 1'h0;
       M_state_q <= 1'h0;
       M_mode_q <= 1'h0;
+      M_test_q <= 1'h0;
     end else begin
       M_counter_q <= M_counter_d;
+      M_s_q <= M_s_d;
+      M_carry_q <= M_carry_d;
       M_state_q <= M_state_d;
       M_mode_q <= M_mode_d;
+      M_test_q <= M_test_d;
     end
   end
   

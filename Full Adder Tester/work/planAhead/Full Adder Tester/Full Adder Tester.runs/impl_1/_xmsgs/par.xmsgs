@@ -5,6 +5,9 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
+<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(0)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
+</msg>
+
 <msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">avr_rx_busy_IBUF</arg> has no load.  PAR will not attempt to route this signal.
 </msg>
 
@@ -80,23 +83,17 @@
 <msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(23)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
 </msg>
 
-<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(17)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
-</msg>
-
 <msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(18)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
 </msg>
 
 <msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">spi_sck_IBUF</arg> has no load.  PAR will not attempt to route this signal.
 </msg>
 
-<msg type="warning" file="Par" num="288" delta="new" >The signal <arg fmt="%s" index="1">io_dip(0)_IBUF</arg> has no load.  PAR will not attempt to route this signal.
-</msg>
-
-<msg type="warning" file="ParHelpers" num="361" delta="new" >There are <arg fmt="%d" index="1">29</arg> loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
+<msg type="warning" file="ParHelpers" num="361" delta="new" >There are <arg fmt="%d" index="1">28</arg> loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
 </msg>
 
-<msg type="warning" file="Par" num="283" delta="new" >There are <arg fmt="%d" index="1">29</arg> loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
+<msg type="warning" file="Par" num="283" delta="new" >There are <arg fmt="%d" index="1">28</arg> loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
 </msg>
 
