@@ -1,4 +1,4 @@
-PIN assignment:
+PIN assignment:  
 51: output a  
 41: outpub b  
 35: output cin
