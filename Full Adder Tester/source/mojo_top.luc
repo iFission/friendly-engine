@@ -12,6 +12,12 @@ module mojo_top(
     output avr_rx,         // AVR RX (FPGA TX)
     input avr_rx_busy,     // AVR RX buffer full
 
+    output a,
+    output b,
+    output cin,
+    input s,
+    input carry,
+
     output io_led[3][8], // LEDs on IO Shield
     output io_seg[8],    // 7-segment LEDs on IO Shield
     output io_sel[4],    // Digit select on IO Shield
@@ -38,25 +44,33 @@ module mojo_top(
         reset_cond.in = ~rst_n; // input raw inverted reset signal
         rst = reset_cond.out;   // conditioned reset
 
-        led = 8h00;               // turn LEDs off
-        spi_miso = bz;            // not using SPI
-        spi_channel = bzzzz;      // not using flags
-        avr_rx = bz;              // not using serial port
-            io_led = 3x{{8h00}}; // turn LEDs off
-            io_seg = 8hff;        // turn segments off
-            io_sel = 4hf;         // select no digits
+        led = 8h00;           // turn LEDs off
+        spi_miso = bz;        // not using SPI
+        spi_channel = bzzzz;  // not using flags
+        avr_rx = bz;          // not using serial port
+        io_led = 3x{{8h00}}; // turn LEDs off
+        io_seg = 8hff;        // turn segments off
+        io_sel = 4hf;         // select no digits
 
         // dip switches and io button inputs
         tester.io_button = io_button;
         tester.mode_dip = io_dip[2][0];
+        tester.test_dip = io_dip[2][1];
 
         // led output from tester
         io_led[2] = tester.led_expected;
         io_led[1] = tester.led_test;
         io_led[0] = tester.led_result;
 
+        a = tester.a;
+        b = tester.b;
+        cin = tester.cin;
+
+        tester.s_circuit = s;
+        tester.carry_circuit = carry;
+
         // assign dip switches as inputs to tester
-        tester.s = io_dip[2][4];
-        tester.carry = io_dip[2][3];
+        tester.s_dip = io_dip[2][4];
+        tester.carry_dip = io_dip[2][3];
     }
 }

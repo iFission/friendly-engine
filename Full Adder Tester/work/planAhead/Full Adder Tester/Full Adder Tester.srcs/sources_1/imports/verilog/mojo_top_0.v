@@ -17,6 +17,11 @@ module mojo_top_0 (
     input avr_tx,
     output reg avr_rx,
     input avr_rx_busy,
+    output reg a,
+    output reg b,
+    output reg cin,
+    input s,
+    input carry,
     output reg [23:0] io_led,
     output reg [7:0] io_seg,
     output reg [3:0] io_sel,
@@ -41,17 +46,23 @@ module mojo_top_0 (
   wire [8-1:0] M_tester_led_expected;
   wire [8-1:0] M_tester_led_result;
   wire [8-1:0] M_tester_led_test;
-  reg [1-1:0] M_tester_s;
-  reg [1-1:0] M_tester_carry;
+  reg [1-1:0] M_tester_s_circuit;
+  reg [1-1:0] M_tester_carry_circuit;
   reg [1-1:0] M_tester_mode_dip;
+  reg [1-1:0] M_tester_test_dip;
   reg [5-1:0] M_tester_io_button;
+  reg [1-1:0] M_tester_s_dip;
+  reg [1-1:0] M_tester_carry_dip;
   eight_tester_2 tester (
     .clk(clk),
     .rst(rst),
-    .s(M_tester_s),
-    .carry(M_tester_carry),
+    .s_circuit(M_tester_s_circuit),
+    .carry_circuit(M_tester_carry_circuit),
     .mode_dip(M_tester_mode_dip),
+    .test_dip(M_tester_test_dip),
     .io_button(M_tester_io_button),
+    .s_dip(M_tester_s_dip),
+    .carry_dip(M_tester_carry_dip),
     .a(M_tester_a),
     .b(M_tester_b),
     .cin(M_tester_cin),
@@ -72,10 +83,16 @@ module mojo_top_0 (
     io_sel = 4'hf;
     M_tester_io_button = io_button;
     M_tester_mode_dip = io_dip[16+0+0-:1];
+    M_tester_test_dip = io_dip[16+1+0-:1];
     io_led[16+7-:8] = M_tester_led_expected;
     io_led[8+7-:8] = M_tester_led_test;
     io_led[0+7-:8] = M_tester_led_result;
-    M_tester_s = io_dip[16+4+0-:1];
-    M_tester_carry = io_dip[16+3+0-:1];
+    a = M_tester_a;
+    b = M_tester_b;
+    cin = M_tester_cin;
+    M_tester_s_circuit = s;
+    M_tester_carry_circuit = carry;
+    M_tester_s_dip = io_dip[16+4+0-:1];
+    M_tester_carry_dip = io_dip[16+3+0-:1];
   end
 endmodule
