@@ -61,17 +61,16 @@ module eight_tester(
     }
 
 case (test_dip) {
-    0:
-    test.d = test.CIRCUIT;
-    1 : test.d = test.DIP;
+    0: test.d = test.CIRCUIT;
+    1: test.d = test.DIP;
 }
 
 case (test.q) {
     test.DIP:
-s.d = s_dip;
-carry.d = carry_dip;
-test.CIRCUIT : s.d = s_circuit;
-carry.d = carry_circuit;
+        s.d = s_dip;
+        carry.d = carry_dip;
+        test.CIRCUIT : s.d = s_circuit;
+        carry.d = carry_circuit;
 }
 
 case (mode.q) {
@@ -79,55 +78,55 @@ case (mode.q) {
 
 case (state.q) {
     state.ONE: // 0 0 0 | 0 0
-led_expected = 8b00000000;
-led_test = 8b10000000; // current test is 1, reflected on io_led[1]
+        led_expected = 8b00000000;
+        led_test = 8b10000000; // current test is 1, reflected on io_led[1]
 
-a = 0;
-b = 0;
-cin = 0;
+        a = 0;
+        b = 0;
+        cin = 0;
 
-if (s.q == 0 && carry.q == 0)
-{
-    led_result = 8b10000000;
-    if (counter.q[26] == 1)
-    {
-        state.d = state.TWO;
-    }
-}
+        if (s.q == 0 && carry.q == 0)
+        {
+            led_result = 8b10000000;
+            if (counter.q[26] == 1)
+            {
+                state.d = state.TWO;
+            }
+        }
 
-state.TWO : // 0 0 1 | 1 0
-            led_expected = 8b00110000;
-led_test = 8b01000000;
+    state.TWO : // 0 0 1 | 1 0
+        led_expected = 8b00110000;
+        led_test = 8b01000000;
 
-a = 0;
-b = 0;
-cin = 1;
+        a = 0;
+        b = 0;
+        cin = 1;
 
-if (s.q == 1 && carry.q == 0)
-{
-    led_result = 8b11000000;
-    if (counter.q[26] == 0)
-    {
-        state.d = state.THREE;
-    }
-}
+        if (s.q == 1 && carry.q == 0)
+        {
+            led_result = 8b11000000;
+            if (counter.q[26] == 0)
+            {
+                state.d = state.THREE;
+            }
+        }
 
-state.THREE : // 0 1 0 | 1 0
-              led_expected = 8b01010000;
-led_test = 8b00100000;
+    tate.THREE : // 0 1 0 | 1 0
+        led_expected = 8b01010000;
+        led_test = 8b00100000;
 
-a = 0;
-b = 1;
-cin = 0;
+        a = 0;
+        b = 1;
+        cin = 0;
 
-if (s.q == 1 && carry.q == 0)
-{
-    led_result = 8b11100000;
-    if (counter.q[26] == 1)
-    {
-        state.d = state.FOUR;
-    }
-}
+        if (s.q == 1 && carry.q == 0)
+        {
+            led_result = 8b11100000;
+            if (counter.q[26] == 1)
+            {
+                state.d = state.FOUR;
+            }
+        }
 
 state.FOUR : // 0 1 1 | 0 1
              led_expected = 8b01101000;
@@ -197,115 +196,116 @@ if (s.q == 0 && carry.q == 1)
     }
 }
 
-state.EIGHT : // 1 1 1 | 1 1
-              led_expected = 8b11111000;
-led_test = 8b00000001;
+    state.EIGHT : // 1 1 1 | 1 1
+        led_expected = 8b11111000;
+        led_test = 8b00000001;
 
-a = 1;
-b = 1;
-cin = 1;
+        a = 1;
+        b = 1;
+        cin = 1;
 
-if (s.q == 1 && carry.q == 1)
-{
-    led_result = 8b11111111;
-    if (counter.q[26] == 0)
-    {
-        state.d = state.PASS;
-    }
-}
+        if (s.q == 1 && carry.q == 1)
+        {
+            led_result = 8b11111111;
+            if (counter.q[26] == 0)
+            {
+                state.d = state.PASS;
+            }
+        }
 
-state.PASS : led_expected = 8b11111111;
-led_test = 8b11111111;
-led_result = 8b11111111;
-}
+    state.PASS :
+        led_expected = 8b11111111;
+        led_test = 8b11111111;
+        led_result = 8b11111111;
+        }
 mode.MANUAL : case (state.q)
 {
     state.ONE : // 0 0 0 | 0 0
-                led_expected = 8b00000000;
-    led_test = 8b10000000; // current test is 1, reflected on io_led[1]
+        led_expected = 8b00000000;
+        led_test = 8b10000000; // current test is 1, reflected on io_led[1]
 
-    a = 0;
-    b = 0;
-    cin = 0;
+        a = 0;
+        b = 0;
+        cin = 0;
 
-    if (s.q == 0 && carry.q == 0)
-    {
-        led_result = 8b10000000;
-        // state.d = state.TWO;
-    }
-    if (counter.q[26] == 1)
-    {
-        if (io_button[4] == 1) // right right button to select test
+        if (s.q == 0 && carry.q == 0)
         {
-            state.d = state.TWO;
+            led_result = 8b10000000;
+            // state.d = state.TWO;
         }
-        else if (io_button[3] == 1)
+        if (counter.q[26] == 1)
         {
-            state.d = state.EIGHT;
+            if (io_button[4] == 1) // right right button to select test
+            {
+                state.d = state.TWO;
+            }
+            else if (io_button[3] == 1)
+            {
+                state.d = state.EIGHT;
+            }
+            else if (io_button[1] == 1)
+            {
+                state.d = state.ONE;
+            }
         }
-        else if (io_button[1] == 1)
-        {
-            state.d = state.ONE;
-        }
-    }
 
     state.TWO : // 0 0 1 | 1 0
-                led_expected = 8b00110000;
-    led_test = 8b01000000;
+        led_expected = 8b00110000;
+        led_test = 8b01000000;
 
-    a = 0;
-    b = 0;
-    cin = 1;
+        a = 0;
+        b = 0;
+        cin = 1;
 
-    if (s.q == 1 && carry.q == 0)
-    {
-        led_result = 8b11000000;
-        // state.d = state.THREE;
-    }
-    if (counter.q[26] == 0)
-    {
-        if (io_button[4] == 1) // right right button to select test
+        if (s.q == 1 && carry.q == 0)
         {
-            state.d = state.THREE;
+            led_result = 8b11000000;
+            // state.d = state.THREE;
         }
-        else if (io_button[3] == 1)
+        if (counter.q[26] == 0)
         {
-            state.d = state.ONE;
+            if (io_button[4] == 1) // right right button to select test
+            {
+                state.d = state.THREE;
+            }
+            else if (io_button[3] == 1)
+            {
+                state.d = state.ONE;
+            }
+            else if (io_button[1] == 1)
+            {
+                state.d = state.ONE;
+            }
         }
-        else if (io_button[1] == 1)
-        {
-            state.d = state.ONE;
-        }
-    }
 
     state.THREE : // 0 1 0 | 1 0
-                  led_expected = 8b01010000;
-    led_test = 8b00100000;
+        led_expected = 8b01010000;
+        led_test = 8b00100000;
 
-    a = 0;
-    b = 1;
-    cin = 0;
+        a = 0;
+        b = 1;
+        cin = 0;
 
-    if (s.q == 1 && carry.q == 0)
-    {
-        led_result = 8b11100000;
-        // state.d = state.FOUR;
-    }
-    if (counter.q[26] == 1)
-    {
-        if (io_button[4] == 1) // right right button to select test
+        if (s.q == 1 && carry.q == 0)
         {
-            state.d = state.FOUR;
+            led_result = 8b11100000;
+            // state.d = state.FOUR;
         }
-        else if (io_button[3] == 1)
+        if (counter.q[26] == 1)
         {
-            state.d = state.TWO;
+            if (io_button[4] == 1) // right right button to select test
+            {
+                state.d = state.FOUR;
+            }
+            else if (io_button[3] == 1)
+            {
+                state.d = state.TWO;
+            }
+            else if (io_button[1] == 1)
+            {
+                state.d = state.ONE;
+            }
         }
-        else if (io_button[1] == 1)
-        {
-            state.d = state.ONE;
-        }
-    }
 
     state.FOUR : // 0 1 1 | 0 1
                  led_expected = 8b01101000;
