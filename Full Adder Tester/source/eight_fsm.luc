@@ -111,7 +111,7 @@ case (state.q) {
             }
         }
 
-    tate.THREE : // 0 1 0 | 1 0
+    state.THREE : // 0 1 0 | 1 0
         led_expected = 8b01010000;
         led_test = 8b00100000;
 
