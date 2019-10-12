@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="xst" Owner="USER" Host="USER-PC" Pid="1424">
+    <Process Command="xst" Owner="USER" Host="USER-PC" Pid="1376">
     </Process>
 </ProcessHandle>

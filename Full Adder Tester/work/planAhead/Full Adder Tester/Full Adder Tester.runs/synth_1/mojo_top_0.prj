@@ -1,3 +1,6 @@
+verilog work "C:/Users/USER/Desktop/mojo/Full Adder Tester/work/planAhead/Full Adder Tester/Full Adder Tester.srcs/sources_1/imports/verilog/pipeline_9.v"
 verilog work "C:/Users/USER/Desktop/mojo/Full Adder Tester/work/planAhead/Full Adder Tester/Full Adder Tester.srcs/sources_1/imports/verilog/reset_conditioner_1.v"
-verilog work "C:/Users/USER/Desktop/mojo/Full Adder Tester/work/planAhead/Full Adder Tester/Full Adder Tester.srcs/sources_1/imports/verilog/eight_fsm_2.v"
+verilog work "C:/Users/USER/Desktop/mojo/Full Adder Tester/work/planAhead/Full Adder Tester/Full Adder Tester.srcs/sources_1/imports/verilog/eight_fsm_8.v"
+verilog work "C:/Users/USER/Desktop/mojo/Full Adder Tester/work/planAhead/Full Adder Tester/Full Adder Tester.srcs/sources_1/imports/verilog/edge_detector_5.v"
+verilog work "C:/Users/USER/Desktop/mojo/Full Adder Tester/work/planAhead/Full Adder Tester/Full Adder Tester.srcs/sources_1/imports/verilog/button_conditioner_2.v"
 verilog work "C:/Users/USER/Desktop/mojo/Full Adder Tester/work/planAhead/Full Adder Tester/Full Adder Tester.srcs/sources_1/imports/verilog/mojo_top_0.v"
