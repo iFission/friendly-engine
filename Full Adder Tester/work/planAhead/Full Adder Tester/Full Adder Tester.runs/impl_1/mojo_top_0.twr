@@ -28,52 +28,16 @@ INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on
 Timing constraint: TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH 50%;
 For more information, see Period Analysis in the Timing Closure User Guide (UG612).
 
- 600 paths analyzed, 158 endpoints analyzed, 0 failing endpoints
+ 2743 paths analyzed, 483 endpoints analyzed, 0 failing endpoints
  0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
- Minimum period is   7.915ns.
+ Minimum period is   6.544ns.
 --------------------------------------------------------------------------------
-Slack:                  12.085ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
-  Destination:          tester/M_state_q_FSM_FFd2_1 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      7.304ns (Levels of Logic = 2)
-  Clock Path Skew:      -0.576ns (0.626 - 1.202)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd2_1
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X9Y36.D2       net (fanout=17)       3.083   tester/M_mode_q
-    SLICE_X9Y36.D        Tilo                  0.259   tester/M_state_q_FSM_FFd2-In1
-                                                       tester/M_state_q_FSM_FFd2-In1
-    SLICE_X10Y30.C1      net (fanout=1)        1.214   tester/M_state_q_FSM_FFd2-In1
-    SLICE_X10Y30.C       Tilo                  0.235   M_state_q_FSM_FFd3
-                                                       tester/M_state_q_FSM_FFd2-In4
-    SLICE_X10Y28.DX      net (fanout=1)        0.621   tester/M_state_q_FSM_FFd2-In
-    SLICE_X10Y28.CLK     Tdick                 0.114   tester/M_state_q_FSM_FFd2_1
-                                                       tester/M_state_q_FSM_FFd2_1
-    -------------------------------------------------  ---------------------------
-    Total                                      7.304ns (2.386ns logic, 4.918ns route)
-                                                       (32.7% logic, 67.3% route)
-
---------------------------------------------------------------------------------
-Slack:                  12.708ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  13.456ns (requirement - (data path - clock path skew + uncertainty))
   Source:               tester/M_mode_q (FF)
   Destination:          tester/M_state_q_FSM_FFd2 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.683ns (Levels of Logic = 2)
-  Clock Path Skew:      -0.574ns (0.628 - 1.202)
+  Data Path Delay:      5.913ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.596ns (0.295 - 0.891)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -88,26 +52,103 @@ Slack:                  12.708ns (requirement - (data path - clock path skew + u
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
+    ILOGIC_X12Y21.Q4     Tickq                 1.778   tester/M_mode_q
                                                        tester/M_mode_q
-    SLICE_X9Y36.D2       net (fanout=17)       3.083   tester/M_mode_q
-    SLICE_X9Y36.D        Tilo                  0.259   tester/M_state_q_FSM_FFd2-In1
-                                                       tester/M_state_q_FSM_FFd2-In1
-    SLICE_X10Y30.C1      net (fanout=1)        1.214   tester/M_state_q_FSM_FFd2-In1
-    SLICE_X10Y30.CLK     Tas                   0.349   M_state_q_FSM_FFd3
-                                                       tester/M_state_q_FSM_FFd2-In4
+    SLICE_X12Y32.C1      net (fanout=19)       2.230   tester/M_mode_q
+    SLICE_X12Y32.C       Tilo                  0.255   tester/M_state_q_FSM_FFd2-In1
+                                                       tester/M_state_q_FSM_FFd2-In5_SW1
+    SLICE_X12Y32.B5      net (fanout=1)        0.416   tester/N22
+    SLICE_X12Y32.B       Tilo                  0.254   tester/M_state_q_FSM_FFd2-In1
+                                                       tester/M_state_q_FSM_FFd2-In5
+    SLICE_X12Y31.B3      net (fanout=1)        0.641   tester/M_state_q_FSM_FFd2-In6
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In7
                                                        tester/M_state_q_FSM_FFd2
     -------------------------------------------------  ---------------------------
-    Total                                      6.683ns (2.386ns logic, 4.297ns route)
-                                                       (35.7% logic, 64.3% route)
+    Total                                      5.913ns (2.626ns logic, 3.287ns route)
+                                                       (44.4% logic, 55.6% route)
 
 --------------------------------------------------------------------------------
-Slack:                  12.737ns (requirement - (data path - clock path skew + uncertainty))
+Slack:                  13.518ns (requirement - (data path - clock path skew + uncertainty))
   Source:               tester/M_mode_q (FF)
+  Destination:          tester/M_state_q_FSM_FFd2 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.851ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.596ns (0.295 - 0.891)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd2
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    ILOGIC_X12Y21.Q4     Tickq                 1.778   tester/M_mode_q
+                                                       tester/M_mode_q
+    SLICE_X12Y32.D3      net (fanout=19)       2.051   tester/M_mode_q
+    SLICE_X12Y32.D       Tilo                  0.254   tester/M_state_q_FSM_FFd2-In1
+                                                       tester/M_state_q_FSM_FFd2-In1
+    SLICE_X12Y32.B1      net (fanout=1)        0.534   tester/M_state_q_FSM_FFd2-In1
+    SLICE_X12Y32.B       Tilo                  0.254   tester/M_state_q_FSM_FFd2-In1
+                                                       tester/M_state_q_FSM_FFd2-In5
+    SLICE_X12Y31.B3      net (fanout=1)        0.641   tester/M_state_q_FSM_FFd2-In6
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In7
+                                                       tester/M_state_q_FSM_FFd2
+    -------------------------------------------------  ---------------------------
+    Total                                      5.851ns (2.625ns logic, 3.226ns route)
+                                                       (44.9% logic, 55.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  13.553ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               tester/M_mode_q (FF)
+  Destination:          tester/M_state_q_FSM_FFd2 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.816ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.596ns (0.295 - 0.891)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd2
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    ILOGIC_X12Y21.Q4     Tickq                 1.778   tester/M_mode_q
+                                                       tester/M_mode_q
+    SLICE_X12Y32.A2      net (fanout=19)       2.407   tester/M_mode_q
+    SLICE_X12Y32.A       Tilo                  0.254   tester/M_state_q_FSM_FFd2-In1
+                                                       tester/M_state_q_FSM_FFd2-In5_SW0
+    SLICE_X12Y32.B6      net (fanout=1)        0.143   tester/N21
+    SLICE_X12Y32.B       Tilo                  0.254   tester/M_state_q_FSM_FFd2-In1
+                                                       tester/M_state_q_FSM_FFd2-In5
+    SLICE_X12Y31.B3      net (fanout=1)        0.641   tester/M_state_q_FSM_FFd2-In6
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In7
+                                                       tester/M_state_q_FSM_FFd2
+    -------------------------------------------------  ---------------------------
+    Total                                      5.816ns (2.625ns logic, 3.191ns route)
+                                                       (45.1% logic, 54.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  13.602ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_5 (FF)
   Destination:          tester/M_state_q_FSM_FFd4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.645ns (Levels of Logic = 2)
-  Clock Path Skew:      -0.583ns (0.712 - 1.295)
+  Data Path Delay:      6.296ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.067ns (0.682 - 0.749)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -118,33 +159,74 @@ Slack:                  12.737ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd4
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_5 to tester/M_state_q_FSM_FFd4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X8Y36.A5       net (fanout=17)       2.802   tester/M_mode_q
-    SLICE_X8Y36.A        Tilo                  0.254   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In2
-    SLICE_X8Y36.C1       net (fanout=1)        0.540   tester/M_state_q_FSM_FFd4-In2
-    SLICE_X8Y36.CMUX     Tilo                  0.430   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In5_G
-                                                       tester/M_state_q_FSM_FFd4-In5
-    SLICE_X8Y36.DX       net (fanout=3)        0.756   tester/M_state_q_FSM_FFd4-In
-    SLICE_X8Y36.CLK      Tdick                 0.085   M_state_q_FSM_FFd4
+    SLICE_X0Y39.BQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[7]
+                                                       io_button_centre_button_conditioner/M_ctr_q_5
+    SLICE_X1Y39.B1       net (fanout=2)        0.803   io_button_centre_button_conditioner/M_ctr_q[5]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y20.C4      net (fanout=2)        2.817   M_io_button_centre_edge_detector_out
+    SLICE_X12Y20.CLK     Tas                   0.423   M_state_q_FSM_FFd4
+                                                       tester/M_state_q_FSM_FFd4-In4_G
+                                                       tester/M_state_q_FSM_FFd4-In4
                                                        tester/M_state_q_FSM_FFd4
     -------------------------------------------------  ---------------------------
-    Total                                      6.645ns (2.547ns logic, 4.098ns route)
-                                                       (38.3% logic, 61.7% route)
+    Total                                      6.296ns (1.466ns logic, 4.830ns route)
+                                                       (23.3% logic, 76.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  12.826ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
+Slack:                  13.638ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_5 (FF)
+  Destination:          tester/M_state_q_FSM_FFd3 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      6.265ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.062ns (0.687 - 0.749)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_5 to tester/M_state_q_FSM_FFd3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y39.BQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[7]
+                                                       io_button_centre_button_conditioner/M_ctr_q_5
+    SLICE_X1Y39.B1       net (fanout=2)        0.803   io_button_centre_button_conditioner/M_ctr_q[5]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.C1      net (fanout=2)        0.547   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd3-In3
+                                                       tester/M_state_q_FSM_FFd3
+    -------------------------------------------------  ---------------------------
+    Total                                      6.265ns (1.636ns logic, 4.629ns route)
+                                                       (26.1% logic, 73.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  13.839ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_3 (FF)
   Destination:          tester/M_state_q_FSM_FFd4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.556ns (Levels of Logic = 2)
-  Clock Path Skew:      -0.583ns (0.712 - 1.295)
+  Data Path Delay:      6.057ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.069ns (0.682 - 0.751)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -155,181 +237,34 @@ Slack:                  12.826ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd4
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_3 to tester/M_state_q_FSM_FFd4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X8Y36.B6       net (fanout=17)       2.629   tester/M_mode_q
-    SLICE_X8Y36.B        Tilo                  0.254   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In1
-    SLICE_X8Y36.D1       net (fanout=1)        0.598   tester/M_state_q_FSM_FFd4-In1
-    SLICE_X8Y36.CMUX     Topdc                 0.456   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In5_F
-                                                       tester/M_state_q_FSM_FFd4-In5
-    SLICE_X8Y36.DX       net (fanout=3)        0.756   tester/M_state_q_FSM_FFd4-In
-    SLICE_X8Y36.CLK      Tdick                 0.085   M_state_q_FSM_FFd4
+    SLICE_X0Y38.DQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[3]
+                                                       io_button_centre_button_conditioner/M_ctr_q_3
+    SLICE_X1Y39.B3       net (fanout=2)        0.564   io_button_centre_button_conditioner/M_ctr_q[3]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y20.C4      net (fanout=2)        2.817   M_io_button_centre_edge_detector_out
+    SLICE_X12Y20.CLK     Tas                   0.423   M_state_q_FSM_FFd4
+                                                       tester/M_state_q_FSM_FFd4-In4_G
+                                                       tester/M_state_q_FSM_FFd4-In4
                                                        tester/M_state_q_FSM_FFd4
     -------------------------------------------------  ---------------------------
-    Total                                      6.556ns (2.573ns logic, 3.983ns route)
-                                                       (39.2% logic, 60.8% route)
+    Total                                      6.057ns (1.466ns logic, 4.591ns route)
+                                                       (24.2% logic, 75.8% route)
 
 --------------------------------------------------------------------------------
-Slack:                  12.869ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
-  Destination:          tester/M_state_q_FSM_FFd4_1 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      6.513ns (Levels of Logic = 2)
-  Clock Path Skew:      -0.583ns (0.712 - 1.295)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd4_1
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X8Y36.A5       net (fanout=17)       2.802   tester/M_mode_q
-    SLICE_X8Y36.A        Tilo                  0.254   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In2
-    SLICE_X8Y36.C1       net (fanout=1)        0.540   tester/M_state_q_FSM_FFd4-In2
-    SLICE_X8Y36.CMUX     Tilo                  0.430   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In5_G
-                                                       tester/M_state_q_FSM_FFd4-In5
-    SLICE_X8Y36.AX       net (fanout=3)        0.624   tester/M_state_q_FSM_FFd4-In
-    SLICE_X8Y36.CLK      Tdick                 0.085   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4_1
-    -------------------------------------------------  ---------------------------
-    Total                                      6.513ns (2.547ns logic, 3.966ns route)
-                                                       (39.1% logic, 60.9% route)
-
---------------------------------------------------------------------------------
-Slack:                  12.934ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
-  Destination:          tester/M_state_q_FSM_FFd4_2 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      6.448ns (Levels of Logic = 2)
-  Clock Path Skew:      -0.583ns (0.712 - 1.295)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd4_2
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X8Y36.A5       net (fanout=17)       2.802   tester/M_mode_q
-    SLICE_X8Y36.A        Tilo                  0.254   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In2
-    SLICE_X8Y36.C1       net (fanout=1)        0.540   tester/M_state_q_FSM_FFd4-In2
-    SLICE_X8Y36.CMUX     Tilo                  0.430   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In5_G
-                                                       tester/M_state_q_FSM_FFd4-In5
-    SLICE_X8Y36.BX       net (fanout=3)        0.559   tester/M_state_q_FSM_FFd4-In
-    SLICE_X8Y36.CLK      Tdick                 0.085   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4_2
-    -------------------------------------------------  ---------------------------
-    Total                                      6.448ns (2.547ns logic, 3.901ns route)
-                                                       (39.5% logic, 60.5% route)
-
---------------------------------------------------------------------------------
-Slack:                  12.958ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
-  Destination:          tester/M_state_q_FSM_FFd4_1 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      6.424ns (Levels of Logic = 2)
-  Clock Path Skew:      -0.583ns (0.712 - 1.295)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd4_1
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X8Y36.B6       net (fanout=17)       2.629   tester/M_mode_q
-    SLICE_X8Y36.B        Tilo                  0.254   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In1
-    SLICE_X8Y36.D1       net (fanout=1)        0.598   tester/M_state_q_FSM_FFd4-In1
-    SLICE_X8Y36.CMUX     Topdc                 0.456   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In5_F
-                                                       tester/M_state_q_FSM_FFd4-In5
-    SLICE_X8Y36.AX       net (fanout=3)        0.624   tester/M_state_q_FSM_FFd4-In
-    SLICE_X8Y36.CLK      Tdick                 0.085   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4_1
-    -------------------------------------------------  ---------------------------
-    Total                                      6.424ns (2.573ns logic, 3.851ns route)
-                                                       (40.1% logic, 59.9% route)
-
---------------------------------------------------------------------------------
-Slack:                  13.023ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
-  Destination:          tester/M_state_q_FSM_FFd4_2 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      6.359ns (Levels of Logic = 2)
-  Clock Path Skew:      -0.583ns (0.712 - 1.295)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd4_2
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X8Y36.B6       net (fanout=17)       2.629   tester/M_mode_q
-    SLICE_X8Y36.B        Tilo                  0.254   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In1
-    SLICE_X8Y36.D1       net (fanout=1)        0.598   tester/M_state_q_FSM_FFd4-In1
-    SLICE_X8Y36.CMUX     Topdc                 0.456   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In5_F
-                                                       tester/M_state_q_FSM_FFd4-In5
-    SLICE_X8Y36.BX       net (fanout=3)        0.559   tester/M_state_q_FSM_FFd4-In
-    SLICE_X8Y36.CLK      Tdick                 0.085   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4_2
-    -------------------------------------------------  ---------------------------
-    Total                                      6.359ns (2.573ns logic, 3.786ns route)
-                                                       (40.5% logic, 59.5% route)
-
---------------------------------------------------------------------------------
-Slack:                  13.448ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
+Slack:                  13.851ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_7 (FF)
   Destination:          tester/M_state_q_FSM_FFd4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.934ns (Levels of Logic = 1)
-  Clock Path Skew:      -0.583ns (0.712 - 1.295)
+  Data Path Delay:      6.047ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.067ns (0.682 - 0.749)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -340,30 +275,114 @@ Slack:                  13.448ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd4
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_7 to tester/M_state_q_FSM_FFd4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X8Y36.C4       net (fanout=17)       2.885   tester/M_mode_q
-    SLICE_X8Y36.CMUX     Tilo                  0.430   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In5_G
-                                                       tester/M_state_q_FSM_FFd4-In5
-    SLICE_X8Y36.DX       net (fanout=3)        0.756   tester/M_state_q_FSM_FFd4-In
-    SLICE_X8Y36.CLK      Tdick                 0.085   M_state_q_FSM_FFd4
+    SLICE_X0Y39.DQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[7]
+                                                       io_button_centre_button_conditioner/M_ctr_q_7
+    SLICE_X1Y39.B2       net (fanout=2)        0.554   io_button_centre_button_conditioner/M_ctr_q[7]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y20.C4      net (fanout=2)        2.817   M_io_button_centre_edge_detector_out
+    SLICE_X12Y20.CLK     Tas                   0.423   M_state_q_FSM_FFd4
+                                                       tester/M_state_q_FSM_FFd4-In4_G
+                                                       tester/M_state_q_FSM_FFd4-In4
                                                        tester/M_state_q_FSM_FFd4
     -------------------------------------------------  ---------------------------
-    Total                                      5.934ns (2.293ns logic, 3.641ns route)
-                                                       (38.6% logic, 61.4% route)
+    Total                                      6.047ns (1.466ns logic, 4.581ns route)
+                                                       (24.2% logic, 75.8% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.513ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
+Slack:                  13.875ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_3 (FF)
+  Destination:          tester/M_state_q_FSM_FFd3 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      6.026ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.064ns (0.687 - 0.751)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_3 to tester/M_state_q_FSM_FFd3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y38.DQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[3]
+                                                       io_button_centre_button_conditioner/M_ctr_q_3
+    SLICE_X1Y39.B3       net (fanout=2)        0.564   io_button_centre_button_conditioner/M_ctr_q[3]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.C1      net (fanout=2)        0.547   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd3-In3
+                                                       tester/M_state_q_FSM_FFd3
+    -------------------------------------------------  ---------------------------
+    Total                                      6.026ns (1.636ns logic, 4.390ns route)
+                                                       (27.1% logic, 72.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  13.887ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_7 (FF)
+  Destination:          tester/M_state_q_FSM_FFd3 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      6.016ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.062ns (0.687 - 0.749)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_7 to tester/M_state_q_FSM_FFd3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y39.DQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[7]
+                                                       io_button_centre_button_conditioner/M_ctr_q_7
+    SLICE_X1Y39.B2       net (fanout=2)        0.554   io_button_centre_button_conditioner/M_ctr_q[7]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.C1      net (fanout=2)        0.547   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd3-In3
+                                                       tester/M_state_q_FSM_FFd3
+    -------------------------------------------------  ---------------------------
+    Total                                      6.016ns (1.636ns logic, 4.380ns route)
+                                                       (27.2% logic, 72.8% route)
+
+--------------------------------------------------------------------------------
+Slack:                  13.961ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_4 (FF)
   Destination:          tester/M_state_q_FSM_FFd4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.869ns (Levels of Logic = 1)
-  Clock Path Skew:      -0.583ns (0.712 - 1.295)
+  Data Path Delay:      5.937ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.067ns (0.682 - 0.749)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -374,166 +393,34 @@ Slack:                  13.513ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd4
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_4 to tester/M_state_q_FSM_FFd4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X8Y36.D5       net (fanout=17)       2.794   tester/M_mode_q
-    SLICE_X8Y36.CMUX     Topdc                 0.456   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In5_F
-                                                       tester/M_state_q_FSM_FFd4-In5
-    SLICE_X8Y36.DX       net (fanout=3)        0.756   tester/M_state_q_FSM_FFd4-In
-    SLICE_X8Y36.CLK      Tdick                 0.085   M_state_q_FSM_FFd4
+    SLICE_X0Y39.AQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[7]
+                                                       io_button_centre_button_conditioner/M_ctr_q_4
+    SLICE_X1Y39.B5       net (fanout=2)        0.444   io_button_centre_button_conditioner/M_ctr_q[4]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y20.C4      net (fanout=2)        2.817   M_io_button_centre_edge_detector_out
+    SLICE_X12Y20.CLK     Tas                   0.423   M_state_q_FSM_FFd4
+                                                       tester/M_state_q_FSM_FFd4-In4_G
+                                                       tester/M_state_q_FSM_FFd4-In4
                                                        tester/M_state_q_FSM_FFd4
     -------------------------------------------------  ---------------------------
-    Total                                      5.869ns (2.319ns logic, 3.550ns route)
-                                                       (39.5% logic, 60.5% route)
+    Total                                      5.937ns (1.466ns logic, 4.471ns route)
+                                                       (24.7% logic, 75.3% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.580ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
-  Destination:          tester/M_state_q_FSM_FFd4_1 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      5.802ns (Levels of Logic = 1)
-  Clock Path Skew:      -0.583ns (0.712 - 1.295)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd4_1
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X8Y36.C4       net (fanout=17)       2.885   tester/M_mode_q
-    SLICE_X8Y36.CMUX     Tilo                  0.430   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In5_G
-                                                       tester/M_state_q_FSM_FFd4-In5
-    SLICE_X8Y36.AX       net (fanout=3)        0.624   tester/M_state_q_FSM_FFd4-In
-    SLICE_X8Y36.CLK      Tdick                 0.085   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4_1
-    -------------------------------------------------  ---------------------------
-    Total                                      5.802ns (2.293ns logic, 3.509ns route)
-                                                       (39.5% logic, 60.5% route)
-
---------------------------------------------------------------------------------
-Slack:                  13.645ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
-  Destination:          tester/M_state_q_FSM_FFd4_2 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      5.737ns (Levels of Logic = 1)
-  Clock Path Skew:      -0.583ns (0.712 - 1.295)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd4_2
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X8Y36.C4       net (fanout=17)       2.885   tester/M_mode_q
-    SLICE_X8Y36.CMUX     Tilo                  0.430   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In5_G
-                                                       tester/M_state_q_FSM_FFd4-In5
-    SLICE_X8Y36.BX       net (fanout=3)        0.559   tester/M_state_q_FSM_FFd4-In
-    SLICE_X8Y36.CLK      Tdick                 0.085   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4_2
-    -------------------------------------------------  ---------------------------
-    Total                                      5.737ns (2.293ns logic, 3.444ns route)
-                                                       (40.0% logic, 60.0% route)
-
---------------------------------------------------------------------------------
-Slack:                  13.645ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
-  Destination:          tester/M_state_q_FSM_FFd4_1 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      5.737ns (Levels of Logic = 1)
-  Clock Path Skew:      -0.583ns (0.712 - 1.295)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd4_1
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X8Y36.D5       net (fanout=17)       2.794   tester/M_mode_q
-    SLICE_X8Y36.CMUX     Topdc                 0.456   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In5_F
-                                                       tester/M_state_q_FSM_FFd4-In5
-    SLICE_X8Y36.AX       net (fanout=3)        0.624   tester/M_state_q_FSM_FFd4-In
-    SLICE_X8Y36.CLK      Tdick                 0.085   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4_1
-    -------------------------------------------------  ---------------------------
-    Total                                      5.737ns (2.319ns logic, 3.418ns route)
-                                                       (40.4% logic, 59.6% route)
-
---------------------------------------------------------------------------------
-Slack:                  13.710ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
-  Destination:          tester/M_state_q_FSM_FFd4_2 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      5.672ns (Levels of Logic = 1)
-  Clock Path Skew:      -0.583ns (0.712 - 1.295)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd4_2
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X8Y36.D5       net (fanout=17)       2.794   tester/M_mode_q
-    SLICE_X8Y36.CMUX     Topdc                 0.456   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4-In5_F
-                                                       tester/M_state_q_FSM_FFd4-In5
-    SLICE_X8Y36.BX       net (fanout=3)        0.559   tester/M_state_q_FSM_FFd4-In
-    SLICE_X8Y36.CLK      Tdick                 0.085   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4_2
-    -------------------------------------------------  ---------------------------
-    Total                                      5.672ns (2.319ns logic, 3.353ns route)
-                                                       (40.9% logic, 59.1% route)
-
---------------------------------------------------------------------------------
-Slack:                  14.201ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
+Slack:                  13.997ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_4 (FF)
   Destination:          tester/M_state_q_FSM_FFd3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.190ns (Levels of Logic = 1)
-  Clock Path Skew:      -0.574ns (0.628 - 1.202)
+  Data Path Delay:      5.906ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.062ns (0.687 - 0.749)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -544,29 +431,36 @@ Slack:                  14.201ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd3
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_4 to tester/M_state_q_FSM_FFd3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X11Y30.C5      net (fanout=17)       2.487   tester/M_mode_q
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
+    SLICE_X0Y39.AQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[7]
+                                                       io_button_centre_button_conditioner/M_ctr_q_4
+    SLICE_X1Y39.B5       net (fanout=2)        0.444   io_button_centre_button_conditioner/M_ctr_q[4]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.C1      net (fanout=2)        0.547   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
                                                        tester/M_state_q_FSM_FFd3-In3
-    SLICE_X10Y30.DX      net (fanout=2)        0.552   tester/M_state_q_FSM_FFd3-In
-    SLICE_X10Y30.CLK     Tdick                 0.114   M_state_q_FSM_FFd3
                                                        tester/M_state_q_FSM_FFd3
     -------------------------------------------------  ---------------------------
-    Total                                      5.190ns (2.151ns logic, 3.039ns route)
-                                                       (41.4% logic, 58.6% route)
+    Total                                      5.906ns (1.636ns logic, 4.270ns route)
+                                                       (27.7% logic, 72.3% route)
 
 --------------------------------------------------------------------------------
-Slack:                  14.261ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
-  Destination:          tester/M_state_q_FSM_FFd3_1 (FF)
+Slack:                  14.035ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_5 (FF)
+  Destination:          tester/M_state_q_FSM_FFd2 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.130ns (Levels of Logic = 1)
-  Clock Path Skew:      -0.574ns (0.628 - 1.202)
+  Data Path Delay:      5.868ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.062ns (0.687 - 0.749)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -577,60 +471,36 @@ Slack:                  14.261ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd3_1
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_5 to tester/M_state_q_FSM_FFd2
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X11Y30.C5      net (fanout=17)       2.487   tester/M_mode_q
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.BX      net (fanout=2)        0.492   tester/M_state_q_FSM_FFd3-In
-    SLICE_X11Y30.CLK     Tdick                 0.114   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3_1
+    SLICE_X0Y39.BQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[7]
+                                                       io_button_centre_button_conditioner/M_ctr_q_5
+    SLICE_X1Y39.B1       net (fanout=2)        0.803   io_button_centre_button_conditioner/M_ctr_q[5]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.B6      net (fanout=2)        0.150   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In7
+                                                       tester/M_state_q_FSM_FFd2
     -------------------------------------------------  ---------------------------
-    Total                                      5.130ns (2.151ns logic, 2.979ns route)
-                                                       (41.9% logic, 58.1% route)
+    Total                                      5.868ns (1.636ns logic, 4.232ns route)
+                                                       (27.9% logic, 72.1% route)
 
 --------------------------------------------------------------------------------
-Slack:                  14.753ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
-  Destination:          tester/M_state_q_FSM_FFd3_2 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      4.638ns (Levels of Logic = 1)
-  Clock Path Skew:      -0.574ns (0.628 - 1.202)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd3_2
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X11Y30.C5      net (fanout=17)       2.487   tester/M_mode_q
-    SLICE_X11Y30.CLK     Tas                   0.373   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In3
-                                                       tester/M_state_q_FSM_FFd3_2
-    -------------------------------------------------  ---------------------------
-    Total                                      4.638ns (2.151ns logic, 2.487ns route)
-                                                       (46.4% logic, 53.6% route)
-
---------------------------------------------------------------------------------
-Slack:                  14.984ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_counter_q_26 (FF)
+Slack:                  14.036ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_left_button_conditioner/M_ctr_q_5 (FF)
   Destination:          tester/M_state_q_FSM_FFd3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      4.951ns (Levels of Logic = 3)
-  Clock Path Skew:      -0.030ns (0.716 - 0.746)
+  Data Path Delay:      5.904ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.025ns (0.687 - 0.712)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -641,300 +511,36 @@ Slack:                  14.984ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: tester/M_counter_q_26 to tester/M_state_q_FSM_FFd3
+  Maximum Data Path at Slow Process Corner: io_button_left_button_conditioner/M_ctr_q_5 to tester/M_state_q_FSM_FFd3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y32.CQ       Tcko                  0.525   tester/M_counter_q[26]
-                                                       tester/M_counter_q_26
-    SLICE_X10Y36.D4      net (fanout=9)        0.966   tester/M_counter_q[26]
-    SLICE_X10Y36.D       Tilo                  0.235   tester/M_state_q_FSM_FFd2-In3
-                                                       tester/M_state_q_FSM_FFd2-In31
-    SLICE_X11Y30.D6      net (fanout=2)        0.622   tester/M_state_q_FSM_FFd2-In3
-    SLICE_X11Y30.D       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
+    SLICE_X12Y36.BQ      Tcko                  0.525   io_button_left_button_conditioner/M_ctr_q[7]
+                                                       io_button_left_button_conditioner/M_ctr_q_5
+    SLICE_X12Y34.C4      net (fanout=2)        1.299   io_button_left_button_conditioner/M_ctr_q[5]
+    SLICE_X12Y34.C       Tilo                  0.255   M_io_button_left_edge_detector_out
+                                                       io_button_left_button_conditioner/out1
+    SLICE_X12Y33.A1      net (fanout=3)        1.603   out_1
+    SLICE_X12Y33.A       Tilo                  0.254   M_last_q_0
+                                                       io_button_left_button_conditioner/out4
+    SLICE_X12Y33.C1      net (fanout=3)        0.553   M_io_button_left_button_conditioner_out
+    SLICE_X12Y33.C       Tilo                  0.255   M_last_q_0
                                                        tester/M_state_q_FSM_FFd3-In2
-    SLICE_X11Y30.C1      net (fanout=1)        1.419   tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
+    SLICE_X12Y31.C3      net (fanout=1)        0.821   tester/M_state_q_FSM_FFd3-In2
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
                                                        tester/M_state_q_FSM_FFd3-In3
-    SLICE_X10Y30.DX      net (fanout=2)        0.552   tester/M_state_q_FSM_FFd3-In
-    SLICE_X10Y30.CLK     Tdick                 0.114   M_state_q_FSM_FFd3
                                                        tester/M_state_q_FSM_FFd3
     -------------------------------------------------  ---------------------------
-    Total                                      4.951ns (1.392ns logic, 3.559ns route)
-                                                       (28.1% logic, 71.9% route)
-
---------------------------------------------------------------------------------
-Slack:                  15.006ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q_1 (FF)
-  Destination:          tester/M_state_q_FSM_FFd3 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      4.950ns (Levels of Logic = 3)
-  Clock Path Skew:      -0.009ns (0.195 - 0.204)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q_1 to tester/M_state_q_FSM_FFd3
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X11Y28.AQ      Tcko                  0.430   tester/M_mode_q_2
-                                                       tester/M_mode_q_1
-    SLICE_X10Y36.D3      net (fanout=3)        1.060   tester/M_mode_q_1
-    SLICE_X10Y36.D       Tilo                  0.235   tester/M_state_q_FSM_FFd2-In3
-                                                       tester/M_state_q_FSM_FFd2-In31
-    SLICE_X11Y30.D6      net (fanout=2)        0.622   tester/M_state_q_FSM_FFd2-In3
-    SLICE_X11Y30.D       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In2
-    SLICE_X11Y30.C1      net (fanout=1)        1.419   tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In3
-    SLICE_X10Y30.DX      net (fanout=2)        0.552   tester/M_state_q_FSM_FFd3-In
-    SLICE_X10Y30.CLK     Tdick                 0.114   M_state_q_FSM_FFd3
-                                                       tester/M_state_q_FSM_FFd3
-    -------------------------------------------------  ---------------------------
-    Total                                      4.950ns (1.297ns logic, 3.653ns route)
-                                                       (26.2% logic, 73.8% route)
-
---------------------------------------------------------------------------------
-Slack:                  15.035ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q (FF)
-  Destination:          tester/M_state_q_FSM_FFd1 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      4.319ns (Levels of Logic = 1)
-  Clock Path Skew:      -0.611ns (0.684 - 1.295)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd1
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    ILOGIC_X12Y21.Q4     Tickq                 1.778   io_dip_16_IBUF
-                                                       tester/M_mode_q
-    SLICE_X18Y36.B3      net (fanout=17)       2.192   tester/M_mode_q
-    SLICE_X18Y36.CLK     Tas                   0.349   tester/M_state_q_FSM_FFd1
-                                                       tester/M_state_q_FSM_FFd1-In1
-                                                       tester/M_state_q_FSM_FFd1
-    -------------------------------------------------  ---------------------------
-    Total                                      4.319ns (2.127ns logic, 2.192ns route)
-                                                       (49.2% logic, 50.8% route)
-
---------------------------------------------------------------------------------
-Slack:                  15.044ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_counter_q_26 (FF)
-  Destination:          tester/M_state_q_FSM_FFd3_1 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      4.891ns (Levels of Logic = 3)
-  Clock Path Skew:      -0.030ns (0.716 - 0.746)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_counter_q_26 to tester/M_state_q_FSM_FFd3_1
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X8Y32.CQ       Tcko                  0.525   tester/M_counter_q[26]
-                                                       tester/M_counter_q_26
-    SLICE_X10Y36.D4      net (fanout=9)        0.966   tester/M_counter_q[26]
-    SLICE_X10Y36.D       Tilo                  0.235   tester/M_state_q_FSM_FFd2-In3
-                                                       tester/M_state_q_FSM_FFd2-In31
-    SLICE_X11Y30.D6      net (fanout=2)        0.622   tester/M_state_q_FSM_FFd2-In3
-    SLICE_X11Y30.D       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In2
-    SLICE_X11Y30.C1      net (fanout=1)        1.419   tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.BX      net (fanout=2)        0.492   tester/M_state_q_FSM_FFd3-In
-    SLICE_X11Y30.CLK     Tdick                 0.114   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3_1
-    -------------------------------------------------  ---------------------------
-    Total                                      4.891ns (1.392ns logic, 3.499ns route)
-                                                       (28.5% logic, 71.5% route)
-
---------------------------------------------------------------------------------
-Slack:                  15.066ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q_1 (FF)
-  Destination:          tester/M_state_q_FSM_FFd3_1 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      4.890ns (Levels of Logic = 3)
-  Clock Path Skew:      -0.009ns (0.195 - 0.204)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q_1 to tester/M_state_q_FSM_FFd3_1
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X11Y28.AQ      Tcko                  0.430   tester/M_mode_q_2
-                                                       tester/M_mode_q_1
-    SLICE_X10Y36.D3      net (fanout=3)        1.060   tester/M_mode_q_1
-    SLICE_X10Y36.D       Tilo                  0.235   tester/M_state_q_FSM_FFd2-In3
-                                                       tester/M_state_q_FSM_FFd2-In31
-    SLICE_X11Y30.D6      net (fanout=2)        0.622   tester/M_state_q_FSM_FFd2-In3
-    SLICE_X11Y30.D       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In2
-    SLICE_X11Y30.C1      net (fanout=1)        1.419   tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.BX      net (fanout=2)        0.492   tester/M_state_q_FSM_FFd3-In
-    SLICE_X11Y30.CLK     Tdick                 0.114   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3_1
-    -------------------------------------------------  ---------------------------
-    Total                                      4.890ns (1.297ns logic, 3.593ns route)
-                                                       (26.5% logic, 73.5% route)
-
---------------------------------------------------------------------------------
-Slack:                  15.106ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_s_q_0 (FF)
-  Destination:          tester/M_state_q_FSM_FFd3 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      4.850ns (Levels of Logic = 3)
-  Clock Path Skew:      -0.009ns (0.195 - 0.204)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_s_q_0 to tester/M_state_q_FSM_FFd3
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X10Y28.AMUX    Tshcko                0.535   tester/M_state_q_FSM_FFd2_1
-                                                       tester/M_s_q_0
-    SLICE_X10Y28.C6      net (fanout=10)       0.820   tester/M_s_q_0
-    SLICE_X10Y28.C       Tilo                  0.235   tester/M_state_q_FSM_FFd2_1
-                                                       tester/M_state_q_FSM_FFd3-In1
-    SLICE_X11Y30.D4      net (fanout=1)        0.657   tester/M_state_q_FSM_FFd3-In1
-    SLICE_X11Y30.D       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In2
-    SLICE_X11Y30.C1      net (fanout=1)        1.419   tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In3
-    SLICE_X10Y30.DX      net (fanout=2)        0.552   tester/M_state_q_FSM_FFd3-In
-    SLICE_X10Y30.CLK     Tdick                 0.114   M_state_q_FSM_FFd3
-                                                       tester/M_state_q_FSM_FFd3
-    -------------------------------------------------  ---------------------------
-    Total                                      4.850ns (1.402ns logic, 3.448ns route)
-                                                       (28.9% logic, 71.1% route)
-
---------------------------------------------------------------------------------
-Slack:                  15.166ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_s_q_0 (FF)
-  Destination:          tester/M_state_q_FSM_FFd3_1 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      4.790ns (Levels of Logic = 3)
-  Clock Path Skew:      -0.009ns (0.195 - 0.204)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_s_q_0 to tester/M_state_q_FSM_FFd3_1
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X10Y28.AMUX    Tshcko                0.535   tester/M_state_q_FSM_FFd2_1
-                                                       tester/M_s_q_0
-    SLICE_X10Y28.C6      net (fanout=10)       0.820   tester/M_s_q_0
-    SLICE_X10Y28.C       Tilo                  0.235   tester/M_state_q_FSM_FFd2_1
-                                                       tester/M_state_q_FSM_FFd3-In1
-    SLICE_X11Y30.D4      net (fanout=1)        0.657   tester/M_state_q_FSM_FFd3-In1
-    SLICE_X11Y30.D       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In2
-    SLICE_X11Y30.C1      net (fanout=1)        1.419   tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.BX      net (fanout=2)        0.492   tester/M_state_q_FSM_FFd3-In
-    SLICE_X11Y30.CLK     Tdick                 0.114   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3_1
-    -------------------------------------------------  ---------------------------
-    Total                                      4.790ns (1.402ns logic, 3.388ns route)
-                                                       (29.3% logic, 70.7% route)
-
---------------------------------------------------------------------------------
-Slack:                  15.257ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_state_q_FSM_FFd3_1 (FF)
-  Destination:          tester/M_state_q_FSM_FFd3 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      4.697ns (Levels of Logic = 3)
-  Clock Path Skew:      -0.011ns (0.195 - 0.206)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_state_q_FSM_FFd3_1 to tester/M_state_q_FSM_FFd3
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X11Y30.BQ      Tcko                  0.430   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3_1
-    SLICE_X10Y36.D6      net (fanout=1)        0.807   tester/M_state_q_FSM_FFd3_1
-    SLICE_X10Y36.D       Tilo                  0.235   tester/M_state_q_FSM_FFd2-In3
-                                                       tester/M_state_q_FSM_FFd2-In31
-    SLICE_X11Y30.D6      net (fanout=2)        0.622   tester/M_state_q_FSM_FFd2-In3
-    SLICE_X11Y30.D       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In2
-    SLICE_X11Y30.C1      net (fanout=1)        1.419   tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In3
-    SLICE_X10Y30.DX      net (fanout=2)        0.552   tester/M_state_q_FSM_FFd3-In
-    SLICE_X10Y30.CLK     Tdick                 0.114   M_state_q_FSM_FFd3
-                                                       tester/M_state_q_FSM_FFd3
-    -------------------------------------------------  ---------------------------
-    Total                                      4.697ns (1.297ns logic, 3.400ns route)
+    Total                                      5.904ns (1.628ns logic, 4.276ns route)
                                                        (27.6% logic, 72.4% route)
 
 --------------------------------------------------------------------------------
-Slack:                  15.328ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_state_q_FSM_FFd3_1 (FF)
-  Destination:          tester/M_state_q_FSM_FFd3_1 (FF)
+Slack:                  14.042ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_6 (FF)
+  Destination:          tester/M_state_q_FSM_FFd4 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      4.637ns (Levels of Logic = 3)
-  Clock Path Skew:      0.000ns
+  Data Path Delay:      5.856ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.067ns (0.682 - 0.749)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -945,180 +551,648 @@ Slack:                  15.328ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: tester/M_state_q_FSM_FFd3_1 to tester/M_state_q_FSM_FFd3_1
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_6 to tester/M_state_q_FSM_FFd4
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X11Y30.BQ      Tcko                  0.430   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3_1
-    SLICE_X10Y36.D6      net (fanout=1)        0.807   tester/M_state_q_FSM_FFd3_1
-    SLICE_X10Y36.D       Tilo                  0.235   tester/M_state_q_FSM_FFd2-In3
-                                                       tester/M_state_q_FSM_FFd2-In31
-    SLICE_X11Y30.D6      net (fanout=2)        0.622   tester/M_state_q_FSM_FFd2-In3
-    SLICE_X11Y30.D       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In2
-    SLICE_X11Y30.C1      net (fanout=1)        1.419   tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.BX      net (fanout=2)        0.492   tester/M_state_q_FSM_FFd3-In
-    SLICE_X11Y30.CLK     Tdick                 0.114   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3_1
-    -------------------------------------------------  ---------------------------
-    Total                                      4.637ns (1.297ns logic, 3.340ns route)
-                                                       (28.0% logic, 72.0% route)
-
---------------------------------------------------------------------------------
-Slack:                  15.478ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_state_q_FSM_FFd2_1 (FF)
-  Destination:          tester/M_state_q_FSM_FFd3 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      4.478ns (Levels of Logic = 3)
-  Clock Path Skew:      -0.009ns (0.195 - 0.204)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_state_q_FSM_FFd2_1 to tester/M_state_q_FSM_FFd3
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X10Y28.DQ      Tcko                  0.476   tester/M_state_q_FSM_FFd2_1
-                                                       tester/M_state_q_FSM_FFd2_1
-    SLICE_X10Y28.C2      net (fanout=2)        0.507   tester/M_state_q_FSM_FFd2_1
-    SLICE_X10Y28.C       Tilo                  0.235   tester/M_state_q_FSM_FFd2_1
-                                                       tester/M_state_q_FSM_FFd3-In1
-    SLICE_X11Y30.D4      net (fanout=1)        0.657   tester/M_state_q_FSM_FFd3-In1
-    SLICE_X11Y30.D       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In2
-    SLICE_X11Y30.C1      net (fanout=1)        1.419   tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In3
-    SLICE_X10Y30.DX      net (fanout=2)        0.552   tester/M_state_q_FSM_FFd3-In
-    SLICE_X10Y30.CLK     Tdick                 0.114   M_state_q_FSM_FFd3
-                                                       tester/M_state_q_FSM_FFd3
-    -------------------------------------------------  ---------------------------
-    Total                                      4.478ns (1.343ns logic, 3.135ns route)
-                                                       (30.0% logic, 70.0% route)
-
---------------------------------------------------------------------------------
-Slack:                  15.480ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_mode_q_1 (FF)
-  Destination:          tester/M_state_q_FSM_FFd3 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      4.476ns (Levels of Logic = 3)
-  Clock Path Skew:      -0.009ns (0.195 - 0.204)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_mode_q_1 to tester/M_state_q_FSM_FFd3
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X11Y28.AQ      Tcko                  0.430   tester/M_mode_q_2
-                                                       tester/M_mode_q_1
-    SLICE_X10Y28.C1      net (fanout=3)        0.551   tester/M_mode_q_1
-    SLICE_X10Y28.C       Tilo                  0.235   tester/M_state_q_FSM_FFd2_1
-                                                       tester/M_state_q_FSM_FFd3-In1
-    SLICE_X11Y30.D4      net (fanout=1)        0.657   tester/M_state_q_FSM_FFd3-In1
-    SLICE_X11Y30.D       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In2
-    SLICE_X11Y30.C1      net (fanout=1)        1.419   tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In3
-    SLICE_X10Y30.DX      net (fanout=2)        0.552   tester/M_state_q_FSM_FFd3-In
-    SLICE_X10Y30.CLK     Tdick                 0.114   M_state_q_FSM_FFd3
-                                                       tester/M_state_q_FSM_FFd3
-    -------------------------------------------------  ---------------------------
-    Total                                      4.476ns (1.297ns logic, 3.179ns route)
-                                                       (29.0% logic, 71.0% route)
-
---------------------------------------------------------------------------------
-Slack:                  15.489ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_state_q_FSM_FFd4_1 (FF)
-  Destination:          tester/M_state_q_FSM_FFd3 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      4.451ns (Levels of Logic = 3)
-  Clock Path Skew:      -0.025ns (0.716 - 0.741)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_state_q_FSM_FFd4_1 to tester/M_state_q_FSM_FFd3
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X8Y36.AQ       Tcko                  0.525   M_state_q_FSM_FFd4
-                                                       tester/M_state_q_FSM_FFd4_1
-    SLICE_X10Y36.D5      net (fanout=2)        0.466   tester/M_state_q_FSM_FFd4_1
-    SLICE_X10Y36.D       Tilo                  0.235   tester/M_state_q_FSM_FFd2-In3
-                                                       tester/M_state_q_FSM_FFd2-In31
-    SLICE_X11Y30.D6      net (fanout=2)        0.622   tester/M_state_q_FSM_FFd2-In3
-    SLICE_X11Y30.D       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In2
-    SLICE_X11Y30.C1      net (fanout=1)        1.419   tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In3
-    SLICE_X10Y30.DX      net (fanout=2)        0.552   tester/M_state_q_FSM_FFd3-In
-    SLICE_X10Y30.CLK     Tdick                 0.114   M_state_q_FSM_FFd3
-                                                       tester/M_state_q_FSM_FFd3
-    -------------------------------------------------  ---------------------------
-    Total                                      4.451ns (1.392ns logic, 3.059ns route)
-                                                       (31.3% logic, 68.7% route)
-
---------------------------------------------------------------------------------
-Slack:                  15.490ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               tester/M_state_q_FSM_FFd4 (FF)
-  Destination:          tester/M_state_q_FSM_FFd3 (FF)
-  Requirement:          20.000ns
-  Data Path Delay:      4.450ns (Levels of Logic = 2)
-  Clock Path Skew:      -0.025ns (0.716 - 0.741)
-  Source Clock:         clk_BUFGP rising at 0.000ns
-  Destination Clock:    clk_BUFGP rising at 20.000ns
-  Clock Uncertainty:    0.035ns
-
-  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
-    Total System Jitter (TSJ):  0.070ns
-    Total Input Jitter (TIJ):   0.000ns
-    Discrete Jitter (DJ):       0.000ns
-    Phase Error (PE):           0.000ns
-
-  Maximum Data Path at Slow Process Corner: tester/M_state_q_FSM_FFd4 to tester/M_state_q_FSM_FFd3
-    Location             Delay type         Delay(ns)  Physical Resource
-                                                       Logical Resource(s)
-    -------------------------------------------------  -------------------
-    SLICE_X8Y36.DQ       Tcko                  0.525   M_state_q_FSM_FFd4
+    SLICE_X0Y39.CQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[7]
+                                                       io_button_centre_button_conditioner/M_ctr_q_6
+    SLICE_X1Y39.B4       net (fanout=2)        0.363   io_button_centre_button_conditioner/M_ctr_q[6]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y20.C4      net (fanout=2)        2.817   M_io_button_centre_edge_detector_out
+    SLICE_X12Y20.CLK     Tas                   0.423   M_state_q_FSM_FFd4
+                                                       tester/M_state_q_FSM_FFd4-In4_G
+                                                       tester/M_state_q_FSM_FFd4-In4
                                                        tester/M_state_q_FSM_FFd4
-    SLICE_X11Y30.D2      net (fanout=20)       1.322   M_state_q_FSM_FFd4
-    SLICE_X11Y30.D       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
-                                                       tester/M_state_q_FSM_FFd3-In2
-    SLICE_X11Y30.C1      net (fanout=1)        1.419   tester/M_state_q_FSM_FFd3-In3
-    SLICE_X11Y30.C       Tilo                  0.259   tester/M_state_q_FSM_FFd3_2
+    -------------------------------------------------  ---------------------------
+    Total                                      5.856ns (1.466ns logic, 4.390ns route)
+                                                       (25.0% logic, 75.0% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.066ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_2 (FF)
+  Destination:          tester/M_state_q_FSM_FFd4 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.830ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.069ns (0.682 - 0.751)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_2 to tester/M_state_q_FSM_FFd4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y38.CQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[3]
+                                                       io_button_centre_button_conditioner/M_ctr_q_2
+    SLICE_X1Y39.B6       net (fanout=2)        0.337   io_button_centre_button_conditioner/M_ctr_q[2]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y20.C4      net (fanout=2)        2.817   M_io_button_centre_edge_detector_out
+    SLICE_X12Y20.CLK     Tas                   0.423   M_state_q_FSM_FFd4
+                                                       tester/M_state_q_FSM_FFd4-In4_G
+                                                       tester/M_state_q_FSM_FFd4-In4
+                                                       tester/M_state_q_FSM_FFd4
+    -------------------------------------------------  ---------------------------
+    Total                                      5.830ns (1.466ns logic, 4.364ns route)
+                                                       (25.1% logic, 74.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.078ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_6 (FF)
+  Destination:          tester/M_state_q_FSM_FFd3 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.825ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.062ns (0.687 - 0.749)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_6 to tester/M_state_q_FSM_FFd3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y39.CQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[7]
+                                                       io_button_centre_button_conditioner/M_ctr_q_6
+    SLICE_X1Y39.B4       net (fanout=2)        0.363   io_button_centre_button_conditioner/M_ctr_q[6]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.C1      net (fanout=2)        0.547   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
                                                        tester/M_state_q_FSM_FFd3-In3
-    SLICE_X10Y30.DX      net (fanout=2)        0.552   tester/M_state_q_FSM_FFd3-In
-    SLICE_X10Y30.CLK     Tdick                 0.114   M_state_q_FSM_FFd3
                                                        tester/M_state_q_FSM_FFd3
     -------------------------------------------------  ---------------------------
-    Total                                      4.450ns (1.157ns logic, 3.293ns route)
+    Total                                      5.825ns (1.636ns logic, 4.189ns route)
+                                                       (28.1% logic, 71.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.098ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_8 (FF)
+  Destination:          tester/M_state_q_FSM_FFd4 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.800ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.067ns (0.682 - 0.749)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_8 to tester/M_state_q_FSM_FFd4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y40.AQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[11]
+                                                       io_button_centre_button_conditioner/M_ctr_q_8
+    SLICE_X1Y40.A1       net (fanout=2)        0.748   io_button_centre_button_conditioner/M_ctr_q[8]
+    SLICE_X1Y40.A        Tilo                  0.259   M_io_button_centre_button_conditioner_out_inv
+                                                       io_button_centre_button_conditioner/out3
+    SLICE_X1Y39.A1       net (fanout=3)        0.769   out2
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y20.C4      net (fanout=2)        2.817   M_io_button_centre_edge_detector_out
+    SLICE_X12Y20.CLK     Tas                   0.423   M_state_q_FSM_FFd4
+                                                       tester/M_state_q_FSM_FFd4-In4_G
+                                                       tester/M_state_q_FSM_FFd4-In4
+                                                       tester/M_state_q_FSM_FFd4
+    -------------------------------------------------  ---------------------------
+    Total                                      5.800ns (1.466ns logic, 4.334ns route)
+                                                       (25.3% logic, 74.7% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.102ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_2 (FF)
+  Destination:          tester/M_state_q_FSM_FFd3 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.799ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.064ns (0.687 - 0.751)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_2 to tester/M_state_q_FSM_FFd3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y38.CQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[3]
+                                                       io_button_centre_button_conditioner/M_ctr_q_2
+    SLICE_X1Y39.B6       net (fanout=2)        0.337   io_button_centre_button_conditioner/M_ctr_q[2]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.C1      net (fanout=2)        0.547   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd3-In3
+                                                       tester/M_state_q_FSM_FFd3
+    -------------------------------------------------  ---------------------------
+    Total                                      5.799ns (1.636ns logic, 4.163ns route)
+                                                       (28.2% logic, 71.8% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.134ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_8 (FF)
+  Destination:          tester/M_state_q_FSM_FFd3 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.769ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.062ns (0.687 - 0.749)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_8 to tester/M_state_q_FSM_FFd3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y40.AQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[11]
+                                                       io_button_centre_button_conditioner/M_ctr_q_8
+    SLICE_X1Y40.A1       net (fanout=2)        0.748   io_button_centre_button_conditioner/M_ctr_q[8]
+    SLICE_X1Y40.A        Tilo                  0.259   M_io_button_centre_button_conditioner_out_inv
+                                                       io_button_centre_button_conditioner/out3
+    SLICE_X1Y39.A1       net (fanout=3)        0.769   out2
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.C1      net (fanout=2)        0.547   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd3-In3
+                                                       tester/M_state_q_FSM_FFd3
+    -------------------------------------------------  ---------------------------
+    Total                                      5.769ns (1.636ns logic, 4.133ns route)
+                                                       (28.4% logic, 71.6% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.224ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               tester/M_mode_q (FF)
+  Destination:          tester/M_state_q_FSM_FFd2 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.145ns (Levels of Logic = 2)
+  Clock Path Skew:      -0.596ns (0.295 - 0.891)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: tester/M_mode_q to tester/M_state_q_FSM_FFd2
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    ILOGIC_X12Y21.Q4     Tickq                 1.778   tester/M_mode_q
+                                                       tester/M_mode_q
+    SLICE_X12Y33.B3      net (fanout=19)       2.325   tester/M_mode_q
+    SLICE_X12Y33.B       Tilo                  0.254   M_last_q_0
+                                                       tester/M_state_q_FSM_FFd2-In6
+    SLICE_X12Y31.B5      net (fanout=1)        0.449   tester/M_state_q_FSM_FFd2-In7
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In7
+                                                       tester/M_state_q_FSM_FFd2
+    -------------------------------------------------  ---------------------------
+    Total                                      5.145ns (2.371ns logic, 2.774ns route)
+                                                       (46.1% logic, 53.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.265ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_left_button_conditioner/M_ctr_q_5 (FF)
+  Destination:          tester/M_state_q_FSM_FFd2 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.675ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.025ns (0.687 - 0.712)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_left_button_conditioner/M_ctr_q_5 to tester/M_state_q_FSM_FFd2
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y36.BQ      Tcko                  0.525   io_button_left_button_conditioner/M_ctr_q[7]
+                                                       io_button_left_button_conditioner/M_ctr_q_5
+    SLICE_X12Y34.C4      net (fanout=2)        1.299   io_button_left_button_conditioner/M_ctr_q[5]
+    SLICE_X12Y34.C       Tilo                  0.255   M_io_button_left_edge_detector_out
+                                                       io_button_left_button_conditioner/out1
+    SLICE_X12Y33.A1      net (fanout=3)        1.603   out_1
+    SLICE_X12Y33.A       Tilo                  0.254   M_last_q_0
+                                                       io_button_left_button_conditioner/out4
+    SLICE_X12Y32.B4      net (fanout=3)        0.505   M_io_button_left_button_conditioner_out
+    SLICE_X12Y32.B       Tilo                  0.254   tester/M_state_q_FSM_FFd2-In1
+                                                       tester/M_state_q_FSM_FFd2-In5
+    SLICE_X12Y31.B3      net (fanout=1)        0.641   tester/M_state_q_FSM_FFd2-In6
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In7
+                                                       tester/M_state_q_FSM_FFd2
+    -------------------------------------------------  ---------------------------
+    Total                                      5.675ns (1.627ns logic, 4.048ns route)
+                                                       (28.7% logic, 71.3% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.265ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_18 (FF)
+  Destination:          tester/M_state_q_FSM_FFd4 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.628ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.072ns (0.682 - 0.754)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_18 to tester/M_state_q_FSM_FFd4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y42.CQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[19]
+                                                       io_button_centre_button_conditioner/M_ctr_q_18
+    SLICE_X1Y39.D1       net (fanout=2)        0.973   io_button_centre_button_conditioner/M_ctr_q[18]
+    SLICE_X1Y39.D        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out2
+    SLICE_X1Y39.A3       net (fanout=3)        0.372   out1
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y20.C4      net (fanout=2)        2.817   M_io_button_centre_edge_detector_out
+    SLICE_X12Y20.CLK     Tas                   0.423   M_state_q_FSM_FFd4
+                                                       tester/M_state_q_FSM_FFd4-In4_G
+                                                       tester/M_state_q_FSM_FFd4-In4
+                                                       tester/M_state_q_FSM_FFd4
+    -------------------------------------------------  ---------------------------
+    Total                                      5.628ns (1.466ns logic, 4.162ns route)
                                                        (26.0% logic, 74.0% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.268ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_19 (FF)
+  Destination:          tester/M_state_q_FSM_FFd4 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.625ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.072ns (0.682 - 0.754)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_19 to tester/M_state_q_FSM_FFd4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y42.DQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[19]
+                                                       io_button_centre_button_conditioner/M_ctr_q_19
+    SLICE_X1Y39.D2       net (fanout=2)        0.970   io_button_centre_button_conditioner/M_ctr_q[19]
+    SLICE_X1Y39.D        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out2
+    SLICE_X1Y39.A3       net (fanout=3)        0.372   out1
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y20.C4      net (fanout=2)        2.817   M_io_button_centre_edge_detector_out
+    SLICE_X12Y20.CLK     Tas                   0.423   M_state_q_FSM_FFd4
+                                                       tester/M_state_q_FSM_FFd4-In4_G
+                                                       tester/M_state_q_FSM_FFd4-In4
+                                                       tester/M_state_q_FSM_FFd4
+    -------------------------------------------------  ---------------------------
+    Total                                      5.625ns (1.466ns logic, 4.159ns route)
+                                                       (26.1% logic, 73.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.272ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_3 (FF)
+  Destination:          tester/M_state_q_FSM_FFd2 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.629ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.064ns (0.687 - 0.751)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_3 to tester/M_state_q_FSM_FFd2
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y38.DQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[3]
+                                                       io_button_centre_button_conditioner/M_ctr_q_3
+    SLICE_X1Y39.B3       net (fanout=2)        0.564   io_button_centre_button_conditioner/M_ctr_q[3]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.B6      net (fanout=2)        0.150   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In7
+                                                       tester/M_state_q_FSM_FFd2
+    -------------------------------------------------  ---------------------------
+    Total                                      5.629ns (1.636ns logic, 3.993ns route)
+                                                       (29.1% logic, 70.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.284ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_7 (FF)
+  Destination:          tester/M_state_q_FSM_FFd2 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.619ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.062ns (0.687 - 0.749)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_7 to tester/M_state_q_FSM_FFd2
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y39.DQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[7]
+                                                       io_button_centre_button_conditioner/M_ctr_q_7
+    SLICE_X1Y39.B2       net (fanout=2)        0.554   io_button_centre_button_conditioner/M_ctr_q[7]
+    SLICE_X1Y39.B        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out1
+    SLICE_X1Y39.A2       net (fanout=3)        1.210   out
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.B6      net (fanout=2)        0.150   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In7
+                                                       tester/M_state_q_FSM_FFd2
+    -------------------------------------------------  ---------------------------
+    Total                                      5.619ns (1.636ns logic, 3.983ns route)
+                                                       (29.1% logic, 70.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.291ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_13 (FF)
+  Destination:          tester/M_state_q_FSM_FFd4 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.605ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.069ns (0.682 - 0.751)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_13 to tester/M_state_q_FSM_FFd4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y41.BQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[15]
+                                                       io_button_centre_button_conditioner/M_ctr_q_13
+    SLICE_X1Y40.A3       net (fanout=2)        0.553   io_button_centre_button_conditioner/M_ctr_q[13]
+    SLICE_X1Y40.A        Tilo                  0.259   M_io_button_centre_button_conditioner_out_inv
+                                                       io_button_centre_button_conditioner/out3
+    SLICE_X1Y39.A1       net (fanout=3)        0.769   out2
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y20.C4      net (fanout=2)        2.817   M_io_button_centre_edge_detector_out
+    SLICE_X12Y20.CLK     Tas                   0.423   M_state_q_FSM_FFd4
+                                                       tester/M_state_q_FSM_FFd4-In4_G
+                                                       tester/M_state_q_FSM_FFd4-In4
+                                                       tester/M_state_q_FSM_FFd4
+    -------------------------------------------------  ---------------------------
+    Total                                      5.605ns (1.466ns logic, 4.139ns route)
+                                                       (26.2% logic, 73.8% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.293ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_10 (FF)
+  Destination:          tester/M_state_q_FSM_FFd4 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.605ns (Levels of Logic = 3)
+  Clock Path Skew:      -0.067ns (0.682 - 0.749)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_10 to tester/M_state_q_FSM_FFd4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y40.CQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[11]
+                                                       io_button_centre_button_conditioner/M_ctr_q_10
+    SLICE_X1Y40.A2       net (fanout=2)        0.553   io_button_centre_button_conditioner/M_ctr_q[10]
+    SLICE_X1Y40.A        Tilo                  0.259   M_io_button_centre_button_conditioner_out_inv
+                                                       io_button_centre_button_conditioner/out3
+    SLICE_X1Y39.A1       net (fanout=3)        0.769   out2
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y20.C4      net (fanout=2)        2.817   M_io_button_centre_edge_detector_out
+    SLICE_X12Y20.CLK     Tas                   0.423   M_state_q_FSM_FFd4
+                                                       tester/M_state_q_FSM_FFd4-In4_G
+                                                       tester/M_state_q_FSM_FFd4-In4
+                                                       tester/M_state_q_FSM_FFd4
+    -------------------------------------------------  ---------------------------
+    Total                                      5.605ns (1.466ns logic, 4.139ns route)
+                                                       (26.2% logic, 73.8% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.301ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_18 (FF)
+  Destination:          tester/M_state_q_FSM_FFd3 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.597ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.067ns (0.687 - 0.754)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_18 to tester/M_state_q_FSM_FFd3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y42.CQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[19]
+                                                       io_button_centre_button_conditioner/M_ctr_q_18
+    SLICE_X1Y39.D1       net (fanout=2)        0.973   io_button_centre_button_conditioner/M_ctr_q[18]
+    SLICE_X1Y39.D        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out2
+    SLICE_X1Y39.A3       net (fanout=3)        0.372   out1
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.C1      net (fanout=2)        0.547   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd3-In3
+                                                       tester/M_state_q_FSM_FFd3
+    -------------------------------------------------  ---------------------------
+    Total                                      5.597ns (1.636ns logic, 3.961ns route)
+                                                       (29.2% logic, 70.8% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.304ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_19 (FF)
+  Destination:          tester/M_state_q_FSM_FFd3 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.594ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.067ns (0.687 - 0.754)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_19 to tester/M_state_q_FSM_FFd3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y42.DQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[19]
+                                                       io_button_centre_button_conditioner/M_ctr_q_19
+    SLICE_X1Y39.D2       net (fanout=2)        0.970   io_button_centre_button_conditioner/M_ctr_q[19]
+    SLICE_X1Y39.D        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out2
+    SLICE_X1Y39.A3       net (fanout=3)        0.372   out1
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.C1      net (fanout=2)        0.547   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd3-In3
+                                                       tester/M_state_q_FSM_FFd3
+    -------------------------------------------------  ---------------------------
+    Total                                      5.594ns (1.636ns logic, 3.958ns route)
+                                                       (29.2% logic, 70.8% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.327ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_13 (FF)
+  Destination:          tester/M_state_q_FSM_FFd3 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.574ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.064ns (0.687 - 0.751)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_13 to tester/M_state_q_FSM_FFd3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y41.BQ       Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[15]
+                                                       io_button_centre_button_conditioner/M_ctr_q_13
+    SLICE_X1Y40.A3       net (fanout=2)        0.553   io_button_centre_button_conditioner/M_ctr_q[13]
+    SLICE_X1Y40.A        Tilo                  0.259   M_io_button_centre_button_conditioner_out_inv
+                                                       io_button_centre_button_conditioner/out3
+    SLICE_X1Y39.A1       net (fanout=3)        0.769   out2
+    SLICE_X1Y39.A        Tilo                  0.259   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X12Y31.A5      net (fanout=2)        2.069   M_io_button_centre_edge_detector_out
+    SLICE_X12Y31.A       Tilo                  0.254   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.C1      net (fanout=2)        0.547   tester/M_state_q_FSM_FFd2-In11
+    SLICE_X12Y31.CLK     Tas                   0.339   M_state_q_FSM_FFd3
+                                                       tester/M_state_q_FSM_FFd3-In3
+                                                       tester/M_state_q_FSM_FFd3
+    -------------------------------------------------  ---------------------------
+    Total                                      5.574ns (1.636ns logic, 3.938ns route)
+                                                       (29.4% logic, 70.6% route)
 
 --------------------------------------------------------------------------------
 
@@ -1135,7 +1209,7 @@ Slack: 17.334ns (period - min period limit)
 Slack: 18.134ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 1.866ns (535.906MHz) (Tickper)
-  Physical resource: io_dip_16_IBUF/CLK0
+  Physical resource: tester/M_mode_q/CLK0
   Logical resource: tester/M_mode_q/CLK0
   Location pin: ILOGIC_X12Y21.CLK0
   Clock network: clk_BUFGP
@@ -1144,7 +1218,7 @@ Slack: 18.134ns (period - (min high pulse limit / (high pulse / period)))
   Period: 20.000ns
   High pulse: 10.000ns
   High pulse limit: 0.933ns (Tispwh)
-  Physical resource: io_dip_16_IBUF/SR
+  Physical resource: tester/M_mode_q/SR
   Logical resource: tester/M_mode_q/SR
   Location pin: ILOGIC_X12Y21.SR
   Clock network: M_reset_cond_out
@@ -1166,204 +1240,204 @@ Slack: 18.134ns (period - (min high pulse limit / (high pulse / period)))
   Location pin: ILOGIC_X12Y20.SR
   Clock network: M_reset_cond_out
 --------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
+Slack: 18.601ns (period - min period limit)
   Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[3]/CLK
-  Logical resource: tester/M_counter_q_0/CK
-  Location pin: SLICE_X8Y26.CLK
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: io_button_right_button_conditioner/M_sync_out/CLK
+  Logical resource: io_button_centre_button_conditioner/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X4Y50.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: io_button_right_button_conditioner/M_sync_out/CLK
+  Logical resource: io_button_left_button_conditioner/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X4Y50.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: io_button_right_button_conditioner/M_sync_out/CLK
+  Logical resource: io_button_right_button_conditioner/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X4Y50.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[3]/CLK
-  Logical resource: tester/M_counter_q_1/CK
-  Location pin: SLICE_X8Y26.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_0/CK
+  Location pin: SLICE_X12Y35.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[3]/CLK
-  Logical resource: tester/M_counter_q_2/CK
-  Location pin: SLICE_X8Y26.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_1/CK
+  Location pin: SLICE_X12Y35.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[3]/CLK
-  Logical resource: tester/M_counter_q_3/CK
-  Location pin: SLICE_X8Y26.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_2/CK
+  Location pin: SLICE_X12Y35.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[7]/CLK
-  Logical resource: tester/M_counter_q_4/CK
-  Location pin: SLICE_X8Y27.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_3/CK
+  Location pin: SLICE_X12Y35.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[7]/CLK
-  Logical resource: tester/M_counter_q_5/CK
-  Location pin: SLICE_X8Y27.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[7]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_4/CK
+  Location pin: SLICE_X12Y36.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[7]/CLK
-  Logical resource: tester/M_counter_q_6/CK
-  Location pin: SLICE_X8Y27.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[7]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_5/CK
+  Location pin: SLICE_X12Y36.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[7]/CLK
-  Logical resource: tester/M_counter_q_7/CK
-  Location pin: SLICE_X8Y27.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[7]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_6/CK
+  Location pin: SLICE_X12Y36.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[11]/CLK
-  Logical resource: tester/M_counter_q_8/CK
-  Location pin: SLICE_X8Y28.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[7]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_7/CK
+  Location pin: SLICE_X12Y36.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[11]/CLK
-  Logical resource: tester/M_counter_q_9/CK
-  Location pin: SLICE_X8Y28.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[11]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_8/CK
+  Location pin: SLICE_X12Y37.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[11]/CLK
-  Logical resource: tester/M_counter_q_10/CK
-  Location pin: SLICE_X8Y28.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[11]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_9/CK
+  Location pin: SLICE_X12Y37.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[11]/CLK
-  Logical resource: tester/M_counter_q_11/CK
-  Location pin: SLICE_X8Y28.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[11]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_10/CK
+  Location pin: SLICE_X12Y37.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[15]/CLK
-  Logical resource: tester/M_counter_q_12/CK
-  Location pin: SLICE_X8Y29.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[11]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_11/CK
+  Location pin: SLICE_X12Y37.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[15]/CLK
-  Logical resource: tester/M_counter_q_13/CK
-  Location pin: SLICE_X8Y29.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[15]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_12/CK
+  Location pin: SLICE_X12Y38.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[15]/CLK
-  Logical resource: tester/M_counter_q_14/CK
-  Location pin: SLICE_X8Y29.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[15]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_13/CK
+  Location pin: SLICE_X12Y38.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[15]/CLK
-  Logical resource: tester/M_counter_q_15/CK
-  Location pin: SLICE_X8Y29.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[15]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_14/CK
+  Location pin: SLICE_X12Y38.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[19]/CLK
-  Logical resource: tester/M_counter_q_16/CK
-  Location pin: SLICE_X8Y30.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[15]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_15/CK
+  Location pin: SLICE_X12Y38.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[19]/CLK
-  Logical resource: tester/M_counter_q_17/CK
-  Location pin: SLICE_X8Y30.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[19]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_16/CK
+  Location pin: SLICE_X12Y39.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[19]/CLK
-  Logical resource: tester/M_counter_q_18/CK
-  Location pin: SLICE_X8Y30.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[19]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_17/CK
+  Location pin: SLICE_X12Y39.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[19]/CLK
-  Logical resource: tester/M_counter_q_19/CK
-  Location pin: SLICE_X8Y30.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[19]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_18/CK
+  Location pin: SLICE_X12Y39.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[23]/CLK
-  Logical resource: tester/M_counter_q_20/CK
-  Location pin: SLICE_X8Y31.CLK
+  Physical resource: io_button_left_button_conditioner/M_ctr_q[19]/CLK
+  Logical resource: io_button_left_button_conditioner/M_ctr_q_19/CK
+  Location pin: SLICE_X12Y39.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[23]/CLK
-  Logical resource: tester/M_counter_q_21/CK
-  Location pin: SLICE_X8Y31.CLK
+  Physical resource: io_button_centre_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_centre_button_conditioner/M_ctr_q_0/CK
+  Location pin: SLICE_X0Y38.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[23]/CLK
-  Logical resource: tester/M_counter_q_22/CK
-  Location pin: SLICE_X8Y31.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[23]/CLK
-  Logical resource: tester/M_counter_q_23/CK
-  Location pin: SLICE_X8Y31.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: tester/M_counter_q[26]/CLK
-  Logical resource: tester/M_counter_q_24/CK
-  Location pin: SLICE_X8Y32.CLK
+  Physical resource: io_button_centre_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_centre_button_conditioner/M_ctr_q_1/CK
+  Location pin: SLICE_X0Y38.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 
@@ -1380,7 +1454,7 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    7.915|         |         |         |
+clk            |    6.544|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
@@ -1389,23 +1463,23 @@ Timing summary:
 
 Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
 
-Constraints cover 600 paths, 0 nets, and 148 connections
+Constraints cover 2743 paths, 0 nets, and 375 connections
 
 Design statistics:
-   Minimum period:   7.915ns{1}   (Maximum frequency: 126.342MHz)
+   Minimum period:   6.544ns{1}   (Maximum frequency: 152.812MHz)
 
 
 ------------------------------------Footnotes-----------------------------------
 1)  The minimum period statistic assumes all single cycle delays.
 
-Analysis completed Tue Oct 01 21:25:58 2019 
+Analysis completed Sat Oct 12 01:14:17 2019 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 213 MB
+Peak Memory Usage: 211 MB
 
 
 

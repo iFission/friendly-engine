@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module eight_tester_2 (
+module eight_tester_8 (
     input clk,
     input rst,
     output reg a,
@@ -14,7 +14,9 @@ module eight_tester_2 (
     input carry_circuit,
     input mode_dip,
     input test_dip,
-    input [4:0] io_button,
+    input io_button_left,
+    input io_button_right,
+    input io_button_centre,
     input s_dip,
     input carry_dip,
     output reg [7:0] led_expected,
@@ -222,16 +224,14 @@ module eight_tester_2 (
             if (M_s_q == 1'h0 && M_carry_q == 1'h0) begin
               led_result = 8'h80;
             end
-            if (M_counter_q[26+0-:1] == 1'h1) begin
-              if (io_button[4+0-:1] == 1'h1) begin
-                M_state_d = TWO_state;
+            if (io_button_right == 1'h1) begin
+              M_state_d = TWO_state;
+            end else begin
+              if (io_button_left == 1'h1) begin
+                M_state_d = EIGHT_state;
               end else begin
-                if (io_button[3+0-:1] == 1'h1) begin
-                  M_state_d = EIGHT_state;
-                end else begin
-                  if (io_button[1+0-:1] == 1'h1) begin
-                    M_state_d = ONE_state;
-                  end
+                if (io_button_centre == 1'h1) begin
+                  M_state_d = ONE_state;
                 end
               end
             end
@@ -245,16 +245,14 @@ module eight_tester_2 (
             if (M_s_q == 1'h1 && M_carry_q == 1'h0) begin
               led_result = 8'hc0;
             end
-            if (M_counter_q[26+0-:1] == 1'h0) begin
-              if (io_button[4+0-:1] == 1'h1) begin
-                M_state_d = THREE_state;
+            if (io_button_right == 1'h1) begin
+              M_state_d = THREE_state;
+            end else begin
+              if (io_button_left == 1'h1) begin
+                M_state_d = ONE_state;
               end else begin
-                if (io_button[3+0-:1] == 1'h1) begin
+                if (io_button_centre == 1'h1) begin
                   M_state_d = ONE_state;
-                end else begin
-                  if (io_button[1+0-:1] == 1'h1) begin
-                    M_state_d = ONE_state;
-                  end
                 end
               end
             end
@@ -268,16 +266,14 @@ module eight_tester_2 (
             if (M_s_q == 1'h1 && M_carry_q == 1'h0) begin
               led_result = 8'he0;
             end
-            if (M_counter_q[26+0-:1] == 1'h1) begin
-              if (io_button[4+0-:1] == 1'h1) begin
-                M_state_d = FOUR_state;
+            if (io_button_right == 1'h1) begin
+              M_state_d = FOUR_state;
+            end else begin
+              if (io_button_left == 1'h1) begin
+                M_state_d = TWO_state;
               end else begin
-                if (io_button[3+0-:1] == 1'h1) begin
-                  M_state_d = TWO_state;
-                end else begin
-                  if (io_button[1+0-:1] == 1'h1) begin
-                    M_state_d = ONE_state;
-                  end
+                if (io_button_centre == 1'h1) begin
+                  M_state_d = ONE_state;
                 end
               end
             end
@@ -291,16 +287,14 @@ module eight_tester_2 (
             if (M_s_q == 1'h0 && M_carry_q == 1'h1) begin
               led_result = 8'hf0;
             end
-            if (M_counter_q[26+0-:1] == 1'h0) begin
-              if (io_button[4+0-:1] == 1'h1) begin
-                M_state_d = FIVE_state;
+            if (io_button_right == 1'h1) begin
+              M_state_d = FIVE_state;
+            end else begin
+              if (io_button_left == 1'h1) begin
+                M_state_d = THREE_state;
               end else begin
-                if (io_button[3+0-:1] == 1'h1) begin
-                  M_state_d = THREE_state;
-                end else begin
-                  if (io_button[1+0-:1] == 1'h1) begin
-                    M_state_d = ONE_state;
-                  end
+                if (io_button_centre == 1'h1) begin
+                  M_state_d = ONE_state;
                 end
               end
             end
@@ -314,16 +308,14 @@ module eight_tester_2 (
             if (M_s_q == 1'h1 && M_carry_q == 1'h0) begin
               led_result = 8'hf8;
             end
-            if (M_counter_q[26+0-:1] == 1'h1) begin
-              if (io_button[4+0-:1] == 1'h1) begin
-                M_state_d = SIX_state;
+            if (io_button_right == 1'h1) begin
+              M_state_d = SIX_state;
+            end else begin
+              if (io_button_left == 1'h1) begin
+                M_state_d = FOUR_state;
               end else begin
-                if (io_button[3+0-:1] == 1'h1) begin
-                  M_state_d = FOUR_state;
-                end else begin
-                  if (io_button[1+0-:1] == 1'h1) begin
-                    M_state_d = ONE_state;
-                  end
+                if (io_button_centre == 1'h1) begin
+                  M_state_d = ONE_state;
                 end
               end
             end
@@ -337,16 +329,14 @@ module eight_tester_2 (
             if (M_s_q == 1'h0 && M_carry_q == 1'h1) begin
               led_result = 8'hfc;
             end
-            if (M_counter_q[26+0-:1] == 1'h0) begin
-              if (io_button[4+0-:1] == 1'h1) begin
-                M_state_d = SEVEN_state;
+            if (io_button_right == 1'h1) begin
+              M_state_d = SEVEN_state;
+            end else begin
+              if (io_button_left == 1'h1) begin
+                M_state_d = FIVE_state;
               end else begin
-                if (io_button[3+0-:1] == 1'h1) begin
-                  M_state_d = FIVE_state;
-                end else begin
-                  if (io_button[1+0-:1] == 1'h1) begin
-                    M_state_d = ONE_state;
-                  end
+                if (io_button_centre == 1'h1) begin
+                  M_state_d = ONE_state;
                 end
               end
             end
@@ -360,16 +350,14 @@ module eight_tester_2 (
             if (M_s_q == 1'h0 && M_carry_q == 1'h1) begin
               led_result = 8'hfe;
             end
-            if (M_counter_q[26+0-:1] == 1'h1) begin
-              if (io_button[4+0-:1] == 1'h1) begin
-                M_state_d = EIGHT_state;
+            if (io_button_right == 1'h1) begin
+              M_state_d = EIGHT_state;
+            end else begin
+              if (io_button_left == 1'h1) begin
+                M_state_d = SIX_state;
               end else begin
-                if (io_button[3+0-:1] == 1'h1) begin
-                  M_state_d = SIX_state;
-                end else begin
-                  if (io_button[1+0-:1] == 1'h1) begin
-                    M_state_d = ONE_state;
-                  end
+                if (io_button_centre == 1'h1) begin
+                  M_state_d = ONE_state;
                 end
               end
             end
@@ -383,16 +371,14 @@ module eight_tester_2 (
             if (M_s_q == 1'h1 && M_carry_q == 1'h1) begin
               led_result = 8'hff;
             end
-            if (M_counter_q[26+0-:1] == 1'h0) begin
-              if (io_button[4+0-:1] == 1'h1) begin
-                M_state_d = ONE_state;
+            if (io_button_right == 1'h1) begin
+              M_state_d = ONE_state;
+            end else begin
+              if (io_button_left == 1'h1) begin
+                M_state_d = SEVEN_state;
               end else begin
-                if (io_button[3+0-:1] == 1'h1) begin
-                  M_state_d = SEVEN_state;
-                end else begin
-                  if (io_button[1+0-:1] == 1'h1) begin
-                    M_state_d = ONE_state;
-                  end
+                if (io_button_centre == 1'h1) begin
+                  M_state_d = ONE_state;
                 end
               end
             end
