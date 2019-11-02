@@ -2,7 +2,6 @@ module bitshift (
     input inpa[16], //16-bit input
     input inpb[16],
     input alufn[6],//selector signal for SHR, SHL, SRA
-    input rst,  // reset
     output shift[16]
   ) {
 
