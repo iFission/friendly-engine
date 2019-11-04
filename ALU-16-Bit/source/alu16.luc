@@ -39,8 +39,6 @@ module alu16(
         cmp16.v = add16.v;
         cmp16.alufn = alufn;
     
-        alu = 0;
-
     case (alufn[5:4]) {
         2b00:
             alu = add16.outputsum;
@@ -50,6 +48,7 @@ module alu16(
             alu = shift16.shift;
         2b11:
             alu = cmp16.cmp;
+        default: alu = 0;
         }
     }
 }
