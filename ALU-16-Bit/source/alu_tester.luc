@@ -46,11 +46,14 @@ case(scrambler_dip){
             
             led_test_case = 8b10000000;
             
-            alu16.a = 16b1111111111111111;
-            alu16.b = 16b1111111111111111;
+            alu16.a = 16b1000000000000000;
+            alu16.b = 16b1000000000000000;
             alu16.alufn = 6b0;
 
-            if (alu_output == 16b0000000000000000 && alu16.z == 0 && alu16.v == 1 && alu16.n == 0)
+            led_test_case[2] = alu16.z;
+            led_test_case[1] = alu16.v;
+            led_test_case[0] = alu16.n;
+            if (alu_output == 16b0)
             {
                 if (counter.q[26] == 1)
                 {
