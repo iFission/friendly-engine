@@ -2,16 +2,11 @@ module alu_tester(
     input clk, // clock
     input rst, // reset
 
-    // // logic output a, b, cin, to be sent to full adder board
-    // output alufn[6];
-    // output a[16];
-    // output b[16];
-
-    // // login input s, count, to be received from full adder board
-    // input ALU[16];
+    // 
+    input scrambler_dip,
 
     // led output
-    output led_test_func[8],
+    output led_alu_output[16],
     output led_test_case[8])
 {
 
@@ -21,40 +16,41 @@ module alu_tester(
         {
             
             dff counter[27];
-            fsm test_func = {ADD16, BOOL16, SHIFT16, CMP16};
             fsm test_case = {ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, PASS};
         }
     }
     alu16 alu16;
 
+    sig alu_output[16];
+
     always
     {
-
         // initial values
         counter.d = counter.q + 1; // connects dff's input to output + 1. everytime clk goes to high, q += 1
-        led_test_func = 0;
         led_test_case = 0;
-        led_test_func = 0;
     
         alu16.a = 16b0;
         alu16.b = 16b0;
         alu16.alufn = 6b0;
 
+case(scrambler_dip){
+    0: alu_output = alu16.alu;
+    1: alu_output = 16b1010101010101010;
+      default: alu_output = alu16.alu;
+}
 
-case(test_func.q){
-    test_func.ADD16:
-            led_test_func = 8b10000000; // current test is 1, reflected on io_led[1]
+    led_alu_output = alu_output;
 
     case (test_case.q) {
         test_case.ONE: // adder 16b0 + 16b0 = 16b0
             
             led_test_case = 8b10000000;
             
-            alu16.a = 16b0;
-            alu16.b = 16b0;
+            alu16.a = 16b1111111111111111;
+            alu16.b = 16b1111111111111111;
             alu16.alufn = 6b0;
 
-            if (alu16.alu == 16b0)
+            if (alu_output == 16b0000000000000000 && alu16.z == 0 && alu16.v == 1 && alu16.n == 0)
             {
                 if (counter.q[26] == 1)
                 {
@@ -70,7 +66,7 @@ case(test_func.q){
             alu16.b = 16b1;
             alu16.alufn = 6b0;
 
-            if (alu16.alu == 16b1)
+            if (alu_output == 16b1)
             {
                 if (counter.q[26] == 0)
                 {
@@ -86,7 +82,7 @@ case(test_func.q){
             alu16.b = 16b0;
             alu16.alufn = 6b011000;
 
-            if (alu16.alu == 16b0)
+            if (alu_output == 16b0)
             {
                 if (counter.q[26] == 1)
                 {
@@ -102,7 +98,7 @@ case(test_func.q){
             alu16.b = 16b1;
             alu16.alufn = 6b011000;
 
-            if (alu16.alu == 16b1)
+            if (alu_output == 16b1)
             {
                 if (counter.q[26] == 0)
                 {
@@ -118,7 +114,7 @@ case(test_func.q){
             alu16.b = 16b1;
             alu16.alufn = 6b100000;
 
-            if (alu16.alu == 16b10)
+            if (alu_output == 16b10)
             {
                 if (counter.q[26] == 1)
                 {
@@ -134,7 +130,7 @@ case(test_func.q){
             alu16.b = 16b101;
             alu16.alufn = 6b100000;
 
-            if (alu16.alu == 16b100000)
+            if (alu_output == 16b100000)
             {
                 if (counter.q[26] == 0)
                 {
@@ -146,11 +142,11 @@ case(test_func.q){
 
             led_test_case = 8b11111110;
             
-            alu16.a = 16b0;
-            alu16.b = 16b0;
+            alu16.a = 16b1;
+            alu16.b = 16b1;
             alu16.alufn = 6b110011;
 
-            if (alu16.alu == 16b1111111111111111)
+            if (alu_output == 16b1)
             {
                 if (counter.q[26] == 1)
                 {
@@ -166,12 +162,11 @@ case(test_func.q){
             alu16.b = 16b0;
             alu16.alufn = 6b110101;
 
-            if (alu16.alu == 16b0)
+            if (alu_output == 16b0)
             {
                 if (counter.q[26] == 0)
                 {
                     test_case.d = test_case.PASS;
-                    test_func.d = test_func.BOOL16;
                 }
             }
 
@@ -179,24 +174,6 @@ case(test_func.q){
             led_test_case = 8b11111111;
 
         }
-
-    test_func.BOOL16:
-        led_test_func = 8b01000000;
-                if (counter.q[26] == 0)
-                {
-                    test_func.d = test_func.SHIFT16;
-                }
-
-    test_func.SHIFT16:
-        led_test_func = 8b00100000;
-                if (counter.q[26] == 0)
-                {
-                    test_func.d = test_func.CMP16;
-                }
-
-    test_func.CMP16:
-        led_test_func = 8b00010000;
-    }
 
     }
 }

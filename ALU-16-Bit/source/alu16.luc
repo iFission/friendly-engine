@@ -6,8 +6,11 @@ module alu16(
     input b[16],
 
     // login input s, count, to be received from full adder board
-    output alu[16])
-
+    output alu[16],
+    output z, // z is 1 is all outputs of the sum of a and b are 0
+    output v, // v is true if overflow occurs
+    output n // n is true if the sum is negative)
+)
 {
     sixteenbitadder add16;
     alu_bool bool16;
@@ -22,6 +25,9 @@ module alu16(
         add16.a = a;
         add16.b = b;
         add16.alufn = alufn[1:0];
+        z = add16.z;
+        n = add16.n;
+        v = add16.v;
 
         // bool16
         bool16.a = a;

@@ -1,54 +1,181 @@
-module mojo_top (
-    input clk,              // 50MHz clock
-    input rst_n,            // reset button (active low)
-    output led [8],         // 8 user controllable LEDs
-    input cclk,             // configuration clock, AVR ready when high
-    output spi_miso,        // AVR SPI MISO
-    input spi_ss,           // AVR SPI Slave Select
-    input spi_mosi,         // AVR SPI MOSI
-    input spi_sck,          // AVR SPI Clock
-    output spi_channel [4], // AVR general purpose pins (used by default to select ADC channel)
-    input avr_tx,           // AVR TX (FPGA RX)
-    output avr_rx,          // AVR RX (FPGA TX)
-    input avr_rx_busy,      // AVR RX buffer full
-    output io_led [3][8],   // LEDs on IO Shield
-    output io_seg [8],      // 7-segment LEDs on IO Shield
-    output io_sel [4],      // Digit select on IO Shield
-    input io_button [5],    // 5 buttons on IO Shield
-    input io_dip [3][8]     // DIP switches on IO Shield
-  ) {
-  
-  sig rst;                  // reset signal
-  
-  .clk(clk) {
-    // The reset conditioner is used to synchronize the reset signal to the FPGA
-    // clock. This ensures the entire FPGA comes out of reset at the same time.
-    reset_conditioner reset_cond;
+module alu_tester(
+    input clk, // clock
+    input rst, // reset
 
+    // 
+    input scrambler_dip,
+
+    // led output
+    output led_alu_output[16],
+    output led_test_case[8])
+{
+
+    .clk(clk)
+    {
         .rst(rst)
         {
-            alu_tester alu_tester;
+            
+            dff counter[27];
+            fsm test_case = {ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, PASS};
         }
-  }
-  
-  always {
-    reset_cond.in = ~rst_n; // input raw inverted reset signal
-    rst = reset_cond.out;   // conditioned reset
-    
-    led = 8h00;             // turn LEDs off
-    spi_miso = bz;          // not using SPI
-    spi_channel = bzzzz;    // not using flags
-    avr_rx = bz;            // not using serial port
-    
-    io_led = 3x{{8h00}};    // turn LEDs off
-    io_seg = 8hff;          // turn segments off
-    io_sel = 4hf;           // select no digits
+    }
+    alu16 alu16;
 
-    //
-    // alu_tester
+    sig alu_output[16];
 
-    // led output from tester
-    io_led[1] = alu_tester.led_test_func;
-    io_led[0] = alu_tester.led_test_case;
-  }
+    always
+    {
+
+        // initial values
+        counter.d = counter.q + 1; // connects dff's input to output + 1. everytime clk goes to high, q += 1
+        led_test_case = 0;
+    
+        alu16.a = 16b0;
+        alu16.b = 16b0;
+        alu16.alufn = 6b0;
+
+
+case(scrambler_dip){
+    0: alu_output = alu16.alu;
+    1: alu_output = 16b1010101010101010;
+      default: alu_output = alu16.alu;
+}
+
+            led_alu_output = alu_output;
+
+    case (test_case.q) {
+        test_case.ONE: // adder 16b0 + 16b0 = 16b0
+            
+            led_test_case = 8b10000000;
+            
+            alu16.a = 16b1111111111111111;
+            alu16.b = 16b0000000000000000;
+            alu16.alufn = 6b0;
+
+            if (alu_output == 16b1111111111111111 && alu16.z == 0 && alu16.v == 0 && alu16.n == 0)
+            {
+                if (counter.q[26] == 1)
+                {
+                    test_case.d = test_case.TWO;
+                }
+            }
+
+        test_case.TWO: // adder 16b0 + 16b1 = 16b1
+
+            led_test_case = 8b11000000;
+            
+            alu16.a = 16b0;
+            alu16.b = 16b1;
+            alu16.alufn = 6b0;
+
+            if (alu_output == 16b1)
+            {
+                if (counter.q[26] == 0)
+                {
+                    test_case.d = test_case.THREE;
+                }
+            }
+
+        test_case.THREE: // bool 16b0 & 16b0 = 16b0
+
+            led_test_case = 8b11100000;
+            
+            alu16.a = 16b0;
+            alu16.b = 16b0;
+            alu16.alufn = 6b011000;
+
+            if (alu_output == 16b0)
+            {
+                if (counter.q[26] == 1)
+                {
+                    test_case.d = test_case.FOUR;
+                }
+            }
+
+        test_case.FOUR: // bool 16b1 & 16b1 = 16b1
+    
+            led_test_case = 8b11110000;
+            
+            alu16.a = 16b1;
+            alu16.b = 16b1;
+            alu16.alufn = 6b011000;
+
+            if (alu_output == 16b1)
+            {
+                if (counter.q[26] == 0)
+                {
+                    test_case.d = test_case.FIVE;
+                }
+            }
+
+        test_case.FIVE: // shift 16b1 << 1 in binary 4b0001 = 16b10
+
+            led_test_case = 8b11111000;
+            
+            alu16.a = 16b1;
+            alu16.b = 16b1;
+            alu16.alufn = 6b100000;
+
+            if (alu_output == 16b10)
+            {
+                if (counter.q[26] == 1)
+                {
+                    test_case.d = test_case.SIX;
+                }
+            }
+
+        test_case.SIX: // shift 16b1 << 5 in binary 4b0001 = 16b100000
+
+            led_test_case = 8b11111100;
+            
+            alu16.a = 16b1;
+            alu16.b = 16b101;
+            alu16.alufn = 6b100000;
+
+            if (alu_output == 16b100000)
+            {
+                if (counter.q[26] == 0)
+                {
+                    test_case.d = test_case.SEVEN;
+                }
+            }
+
+        test_case.SEVEN: // cmp16 a=16b0, b=16b0, a==b true
+
+            led_test_case = 8b11111110;
+            
+            alu16.a = 16b1;
+            alu16.b = 16b1;
+            alu16.alufn = 6b110011;
+
+            if (alu_output == 16b1)
+            {
+                if (counter.q[26] == 1)
+                {
+                    test_case.d = test_case.EIGHT;
+                }
+            }
+
+        test_case.EIGHT: // cmp16 a=16b0, b=16b0, a>b false
+
+            led_test_case = 8b11111111;
+            
+            alu16.a = 16b10;
+            alu16.b = 16b0;
+            alu16.alufn = 6b110101;
+
+            if (alu_output == 16b1)
+            {
+                if (counter.q[26] == 0)
+                {
+                    test_case.d = test_case.PASS;
+                }
+            }
+
+        test_case.PASS :
+            led_test_case = 8b11111111;
+
+        }
+
+    }
 }
