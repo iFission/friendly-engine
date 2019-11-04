@@ -3,9 +3,9 @@
   <files>
     <src>bool16.luc</src>
     <src>bitshift.luc</src>
+    <src>alu16.luc</src>
     <src>alucmp.luc</src>
     <src>16bitadder.luc</src>
-    <src>alu16.luc</src>
     <src>alu_tester.luc</src>
     <src top="true">mojo_top.luc</src>
     <ucf lib="true">io_shield.ucf</ucf>

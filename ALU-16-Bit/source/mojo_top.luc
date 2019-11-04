@@ -48,7 +48,7 @@ module mojo_top (
     // alu_tester
 
     // led output from tester
-    io_led[1] = alu_tester.led_test;
-    io_led[0] = alu_tester.led_result;
+    io_led[1] = alu_tester.led_test_func;
+    io_led[0] = alu_tester.led_test_case;
   }
 }

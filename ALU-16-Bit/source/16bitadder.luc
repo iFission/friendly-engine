@@ -14,6 +14,8 @@ module sixteenbitadder (
         case(alufn[1:0]){
         b00: sum = a+b; // addition when alufn0 set to 0
         b01: sum = a-b; // subtraction when alufn0 set to 1
+        b10: sum = a*b;
+        b11: sum = a/b;
         default: sum = a+b;
       }
       outputsum = sum[15:0]; // output sum is 16 bits
