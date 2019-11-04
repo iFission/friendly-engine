@@ -7,26 +7,20 @@ module sixteenbitadder (
     output n, // n is true if the sum is negative
     output outputsum[16] // 16 bit sum
   ) {
-    sig xordb[16]; // xor'd B with alufn
-    sig sum[17]; // sum of A and xordB
+    sig sum[17]; // sum of A and B
+    sig negsum[16]; // A - B
     always{
-      xordb = b ^ 16x{alufn[0]}; // xors each B input to alufn0, whereby '^' serves as logic gate XOR    
+        negsum = a-b;
         case(alufn[1:0]){
         b00: sum = a+b; // addition when alufn0 set to 0
-        b01: sum = a-b; // subtraction when alufn0 set to 1
+        b01: sum = negsum; // subtraction when alufn0 set to 1
         b10: sum = a*b;
         b11: sum = a/b;
         default: sum = a+b;
       }
       outputsum = sum[15:0]; // output sum is 16 bits
-      z = 0; 
-      if(sum == 16x{0}){
-        z = 1; // If S[0:15], ie: all S outputs are 0, z is true(1).
-      }
-      n = sum[15]; // n is true(1) when sum is negative(MSB of sum would be 1)  
-      v = 0;
-      if(sum[16]==1){
-        v = 1; // v is 1 if overflow occurs, so v = 1 if there is a 16th bit(overflow).
-      }
+      z = ~|negsum; 
+      n = sum[16]; // n is true(1) when sum is negsum(MSB of sum would be 1)  
+      v = (a[15] & ~b[15] & (~negsum[15])) | ((~a[15])&(b[15])&negsum[15]);
     }
   }
