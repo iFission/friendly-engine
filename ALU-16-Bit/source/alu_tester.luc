@@ -42,9 +42,37 @@ case(scrambler_dip){
     led_alu_output = alu_output;
 
     case (test_case.q) {
-        test_case.ONE: // adder 16b0 + 16b0 = 16b0
-            
+        test_case.ONE:
+            // adder
+            // 16b0 + 16b16*{1} = 16b16*{1}
+            // z = 0
+            // v = 0
+            // n = 1
+             
             led_test_case = 8b10000000;
+            
+            alu16.a = 16b1111111111111111;
+            alu16.b = 16b0000000000000000;
+            alu16.alufn = 6b0;
+
+            led_test_case[2] = alu16.z;
+            led_test_case[1] = alu16.v;
+            led_test_case[0] = alu16.n;
+            if (alu_output == 16b1111111111111111 && alu16.z == 0 && alu16.v == 0 && alu16.n == 1)
+            {
+                if (counter.q[26] == 1)
+                {
+                    test_case.d = test_case.TWO;
+                }
+            }
+
+        test_case.TWO:            
+            // adder
+            // 16b10000000000000000 + 16b10000000000000000 = 16b0
+            // z = 1
+            // v = 1
+            // n = 0
+            led_test_case = 8b01000000;
             
             alu16.a = 16b1000000000000000;
             alu16.b = 16b1000000000000000;
@@ -53,23 +81,8 @@ case(scrambler_dip){
             led_test_case[2] = alu16.z;
             led_test_case[1] = alu16.v;
             led_test_case[0] = alu16.n;
-            if (alu_output == 16b0)
-            {
-                if (counter.q[26] == 1)
-                {
-                    test_case.d = test_case.TWO;
-                }
-            }
 
-        test_case.TWO: // adder 16b0 + 16b1 = 16b1
-
-            led_test_case = 8b11000000;
-            
-            alu16.a = 16b0;
-            alu16.b = 16b1;
-            alu16.alufn = 6b0;
-
-            if (alu_output == 16b1)
+            if (alu_output == 16b0 && alu16.z == 1 && alu16.v == 1 && alu16.n == 0)
             {
                 if (counter.q[26] == 0)
                 {
@@ -77,15 +90,17 @@ case(scrambler_dip){
                 }
             }
 
-        test_case.THREE: // bool 16b0 & 16b0 = 16b0
+        test_case.THREE: 
+            // bool
+            // 16b0101010010010100 & 16b1010001010101010 = 16b0000000010000000
 
-            led_test_case = 8b11100000;
+            led_test_case = 8b00100000;
             
-            alu16.a = 16b0;
-            alu16.b = 16b0;
+            alu16.a = 16b0101010010010100;
+            alu16.b = 16b1010001010101010;
             alu16.alufn = 6b011000;
 
-            if (alu_output == 16b0)
+            if (alu_output == 16b0000000010000000)
             {
                 if (counter.q[26] == 1)
                 {
@@ -93,15 +108,17 @@ case(scrambler_dip){
                 }
             }
 
-        test_case.FOUR: // bool 16b1 & 16b1 = 16b1
-    
-            led_test_case = 8b11110000;
+        test_case.FOUR:
+            // bool
+            // 16b0101010010010100 & 16b1010001010101010 = 16b1111011010111110
+
+            led_test_case = 8b00010000;
             
-            alu16.a = 16b1;
-            alu16.b = 16b1;
+            alu16.a = 16b0101010010010100;
+            alu16.b = 16b1010001010101010;
             alu16.alufn = 6b011000;
 
-            if (alu_output == 16b1)
+            if (alu_output == 16b0000000010000000)
             {
                 if (counter.q[26] == 0)
                 {
@@ -109,15 +126,17 @@ case(scrambler_dip){
                 }
             }
 
-        test_case.FIVE: // shift 16b1 << 1 in binary 4b0001 = 16b10
+        test_case.FIVE:
+            // shift
+            // 16b0101010010010100 << 2 in binary 4b0010 = 16b010101001001010000
 
-            led_test_case = 8b11111000;
+            led_test_case = 8b00001000;
             
-            alu16.a = 16b1;
-            alu16.b = 16b1;
+            alu16.a = 16b0101010010010100;
+            alu16.b = 16b0010;
             alu16.alufn = 6b100000;
 
-            if (alu_output == 16b10)
+            if (alu_output == 16b0101001001010000)
             {
                 if (counter.q[26] == 1)
                 {
@@ -125,15 +144,17 @@ case(scrambler_dip){
                 }
             }
 
-        test_case.SIX: // shift 16b1 << 5 in binary 4b0001 = 16b100000
+        test_case.SIX:
+            // shift right arithmetic
+            // 16b1101010010010100 >> 2 in binary 4b0010 = 16b1111010100100101
 
-            led_test_case = 8b11111100;
+            led_test_case = 8b00000100;
             
-            alu16.a = 16b1;
-            alu16.b = 16b101;
-            alu16.alufn = 6b100000;
+            alu16.a = 16b0101010010010100;
+            alu16.b = 16b0010;
+            alu16.alufn = 6b100001;
 
-            if (alu_output == 16b100000)
+            if (alu_output == 16b0001010100100101)
             {
                 if (counter.q[26] == 0)
                 {
@@ -141,15 +162,19 @@ case(scrambler_dip){
                 }
             }
 
-        test_case.SEVEN: // cmp16 a=16b0, b=16b0, a==b true
+        test_case.SEVEN:
+            // cmp16
+            // a=16b0
+            // b=16b0
+            // a==b true
 
-            led_test_case = 8b11111110;
+            led_test_case = 8b00000010;
             
             alu16.a = 16b1;
-            alu16.b = 16b1;
+            alu16.b = 16b0000000000000001;
             alu16.alufn = 6b110011;
 
-            if (alu_output == 16b1)
+            if (alu_output == 16b0000000000000001)
             {
                 if (counter.q[26] == 1)
                 {
@@ -157,15 +182,16 @@ case(scrambler_dip){
                 }
             }
 
-        test_case.EIGHT: // cmp16 a=16b0, b=16b0, a>b false
-
-            led_test_case = 8b11111111;
+        test_case.EIGHT:
+            // adder multiply
+            // 16b010010 * 16b101001 = 16b0000001011100010
+            led_test_case = 8b00000001;
             
-            alu16.a = 16b0;
-            alu16.b = 16b0;
-            alu16.alufn = 6b110101;
+            alu16.a = 16b0000000000010010;
+            alu16.b = 16b0000000000101001;
+            alu16.alufn = 6b000010;
 
-            if (alu_output == 16b0)
+            if (alu_output == 16b0000001011100010)
             {
                 if (counter.q[26] == 0)
                 {

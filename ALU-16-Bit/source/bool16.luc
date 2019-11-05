@@ -7,11 +7,11 @@ module alu_bool (
   
   always {
     case (aLUFN[3:0]){
-      b1000: bool=a&b;      //AND operator
-      b1110: bool=a|b;      //OR operator
-      b0110: bool=a^b;      //XOR operator
-      b1010: bool=b;        //Select B
-      b1100: bool=a;        //Select A
+      4b1000: bool=a&b;      //AND operator
+      4b1110: bool=a|b;      //OR operator
+      4b0110: bool=a^b;      //XOR operator
+      4b1010: bool=b;        //Select B
+      4b1100: bool=a;        //Select A
       default: bool=0;
       // A B  A*operator*B
     }
