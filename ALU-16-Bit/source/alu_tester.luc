@@ -51,16 +51,18 @@ case(scrambler_dip){
              
             led_test_case = 8b10000000;
             
-            alu16.a = 16b1111111111111111;
-            alu16.b = 16b0000000000000000;
-            alu16.alufn = 6b0;
+            alu16.a = 16b1111111111111111; // assign value for a
+            alu16.b = 16b0000000000000000; // assign value for b
+            alu16.alufn = 6b0; // assign alufn
 
             led_test_case[2] = alu16.z;
             led_test_case[1] = alu16.v;
             led_test_case[0] = alu16.n;
+
+            // check if the output of the alu matches the expected output, as well as z, v, n
             if (alu_output == 16b1111111111111111 && alu16.z == 0 && alu16.v == 0 && alu16.n == 1)
             {
-                if (counter.q[26] == 1)
+                if (counter.q[26] == 1) // add a delay before proceeding to the next test case
                 {
                     test_case.d = test_case.TWO;
                 }
@@ -82,9 +84,10 @@ case(scrambler_dip){
             led_test_case[1] = alu16.v;
             led_test_case[0] = alu16.n;
 
+            // check if the output of the alu matches the expected output
             if (alu_output == 16b0 && alu16.z == 1 && alu16.v == 1 && alu16.n == 0)
             {
-                if (counter.q[26] == 0)
+                if (counter.q[26] == 0) // add a delay before proceeding to the next test case, different from the previous number
                 {
                     test_case.d = test_case.THREE;
                 }
