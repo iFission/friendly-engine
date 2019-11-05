@@ -1,9 +1,10 @@
 module bitshift (
     input inpa[16], //16-bit input
-    input inpb[16],
-    input alufn[6],//selector signal for SHR, SHL, SRA
-    output shift[16]
-  ) {
+    input inpb[16], //16-bit shifter
+    input alufn[6], //selector signal for SHR, SHL, SRA
+    input rst,  // reset
+    output shift[16]//16-bit output
+    ) {
 
   always {
     case(alufn[1:0]) {
@@ -14,7 +15,7 @@ module bitshift (
       2b11: //shift right arithmetic
       shift = inpa >>> inpb[3:0];
       default:
-      shift = inpa;
+      shift = inpa;//set value of shift to inpa
       
     }
   }
