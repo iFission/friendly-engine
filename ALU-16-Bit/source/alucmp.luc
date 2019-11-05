@@ -3,16 +3,16 @@ module comparator (
     input z,
     input n,
     input v,
-    output cmp[16]
+    output cmp[16]              //16bit cmp
   ) {
   
   always {
     cmp[15:1] = 15b0;
     case(alufn[2:1]){
-      2b01: cmp[0] = z; 
-      2b10: cmp[0] = n ^ v;
-      2b11: cmp[0] = z | (n^v);
-      default: cmp[0] = 0;
+      2b01: cmp[0] = z;         //alufn2 0,alufn1 1 for a=b
+      2b10: cmp[0] = n ^ v;     //alufn2 1,alufn1 0 for a<b
+      2b11: cmp[0] = z | (n^v); //alufn2 1,alufn1 1 for a<=b
+      default: cmp[0] = 0;      //default case
       
     }
   }
