@@ -7,11 +7,11 @@ module bitshift (
 
   always {
     case(alufn[1:0]) {
-      b00: //shift left       
+      2b00: //shift left       
       shift = inpa << inpb[3:0];
-      b01: //shift right
+      2b01: //shift right
       shift = inpa >> inpb[3:0];
-      b11: //shift right arithmetic
+      2b11: //shift right arithmetic
       shift = inpa >>> inpb[3:0];
       default:
       shift = inpa;

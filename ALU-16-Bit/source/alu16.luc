@@ -40,9 +40,11 @@ module alu16(
         shift16.alufn = alufn[1:0];
 
         // cmp16
-        cmp16.z = add16.z;
-        cmp16.n = add16.n;
-        cmp16.v = add16.v;
+        cmp16.a = a;
+        cmp16.b = b;
+        // cmp16.z = add16.z;
+        // cmp16.n = add16.n;
+        // cmp16.v = add16.v;
         cmp16.alufn = alufn;
     
     case (alufn[5:4]) {
