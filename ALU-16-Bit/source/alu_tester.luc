@@ -200,6 +200,7 @@ case(scrambler_dip){
             }
 
         test_case.PASS :
+            // io_led[0] lights up if all passes
             led_test_case = 8b11111111;
 
         }
