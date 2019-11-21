@@ -1,0 +1,54 @@
+module mojo_top (
+    input clk,              // 50MHz clock
+    input rst_n,            // reset button (active low)
+    output led [8],         // 8 user controllable LEDs
+    input cclk,             // configuration clock, AVR ready when high
+    output spi_miso,        // AVR SPI MISO
+    input spi_ss,           // AVR SPI Slave Select
+    input spi_mosi,         // AVR SPI MOSI
+    input spi_sck,          // AVR SPI Clock
+    output spi_channel [4], // AVR general purpose pins (used by default to select ADC channel)
+    input avr_tx,           // AVR TX (FPGA RX)
+    output avr_rx,          // AVR RX (FPGA TX)
+    input avr_rx_busy,       // AVR RX buffer full
+    
+    output outled    
+  ) {
+  
+  sig rst;                  // reset signal
+  
+  .clk(clk) {
+    // The reset conditioner is used to synchronize the reset signal to the FPGA
+    // clock. This ensures the entire FPGA comes out of reset at the same time.
+    reset_conditioner reset_cond;
+.rst(rst)
+    {
+      //ws2812b led1;
+      ledprocess led2;
+      //dff zero[8];
+      //dff one[8];
+    }    
+  }
+  
+  always {
+    reset_cond.in = ~rst_n; // input raw inverted reset signal
+    rst = reset_cond.out;   // conditioned reset
+    
+    led = 8h11;             // turn LEDs on
+    spi_miso = bz;          // not using SPI
+    spi_channel = bzzzz;    // not using flags
+    avr_rx = bz;            // not using serial port
+
+    led2.update=1;
+    led2.win_pos=8b01110101;        //x=7, y=5
+    led2.player_pos=16b1000100010001001;    //8,8 and 8,9
+    led2.map=256x{b1};
+    outled=led2.led;
+    //outled=led1.led;
+    //led1.update=1;
+    //led1.color=24b000000001111111100000000;
+    //Red =   24b111111110000000000000000
+    //Green = 24b000000001111111100000000
+    //Blue =  24b000000000000000011111111
+  }
+}

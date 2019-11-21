@@ -1,0 +1,2 @@
+NET "outled" LOC = P75;
+NET "outled" IOSTANDARD = LVTTL;
