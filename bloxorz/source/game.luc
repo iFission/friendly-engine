@@ -17,7 +17,11 @@ module game (
 {
   .clk(clk){
     .rst(rst){
-      regfile regfile;      
+      regfile regfile;
+      dff portrait_orientation;
+      dff horizontal_orientation;
+      dff vertical_orientation;
+
     }
   }
   
@@ -26,29 +30,94 @@ module game (
     regfile.player_position_in = regfile.player_position_out;
     player_position_out = regfile.player_position_out;
 
-
+      portrait_orientation.d = 1;
+      horizontal_orientation.d = 0;
+      vertical_orientation.d = 0;
 
     if (button_reset == 1)
     {
       regfile.player_position_in = 16b0;
     }
 
-    if (button_left == 1)
-    {
-      regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 1;
-    }
-    if (button_right == 1)
-    {
-      regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 1;
-    }
-    if (button_up == 1)
-    {
-      regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 16;
-    }
-    if (button_down == 1)
-    {
-      regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 16;
-    }
+    if (portrait_orientation.q == 1){
+      if (button_left == 1)
+      {
+        regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 2;
+        regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 1;
+        horizontal_orientation.d = 1;
+      }
+      if (button_right == 1)
+      {
+        regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 1;
+        regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 1;
+        horizontal_orientation.d = 1;
+      }
+      if (button_up == 1)
+      {
+        regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 32;
+        regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 16;
+        vertical_orientation.d = 1;
+      }
+      if (button_down == 1)
+      {
+        regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 16;
+        regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 16;
+        vertical_orientation.d = 1;
+      }}
+
+    if (vertical_orientation.q == 1){
+      if (button_left == 1)
+      {
+        regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 1;
+        regfile.player_position_in[7:0] = regfile.player_position_out[7:0] - 1;
+      }
+      if (button_right == 1)
+      {
+        regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 1;
+        regfile.player_position_in[7:0] = regfile.player_position_out[7:0] + 1;
+        horizontal_orientation.d = 1;
+      }
+      if (button_up == 1)
+      {
+        regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 16;
+        regfile.player_position_in[7:0] = 0;
+        vertical_orientation.d = 0;
+        portrait_orientation.d = 1;
+      }
+      if (button_down == 1)
+      {
+        regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 32;
+        regfile.player_position_in[7:0] = 0;
+        vertical_orientation.d = 0;
+        portrait_orientation.d = 1;
+      }}
+
+    if (horizontal_orientation.q == 1){
+      if (button_left == 1)
+      {
+        regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 1;
+        regfile.player_position_in[7:0] = 0;
+        horizontal_orientation.d = 0;
+        portrait_orientation.d = 1;
+      }
+      if (button_right == 1)
+      {
+        regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 2;
+        regfile.player_position_in[7:0] = 0;
+        horizontal_orientation.d = 0;
+        portrait_orientation.d = 1;
+
+      }
+      if (button_up == 1)
+      {
+        regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 16;
+        regfile.player_position_in[7:0] = regfile.player_position_out[7:0] - 16;
+      }
+      if (button_down == 1)
+      {
+        regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 16;
+        regfile.player_position_in[7:0] = regfile.player_position_out[7:0] + 16;
+      }}
 
 
       
