@@ -16,7 +16,9 @@ module mojo_top(
     output io_seg[8],    // 7-segment LEDs on IO Shield
     output io_sel[4],    // Digit select on IO Shield
     input io_button[5],  // 5 buttons on IO Shield
-    input io_dip[3][8]   // DIP switches on IO Shield
+    input io_dip[3][8],   // DIP switches on IO Shield
+
+    output outled
 )
 {
 
@@ -45,6 +47,8 @@ module mojo_top(
         .rst(rst)
         {
             game game;
+            ledprocess led_grid;
+
         }
     }
 
@@ -91,5 +95,10 @@ module mojo_top(
         io_led[1] = game.player_position_out[15:8];
         io_led[0] = game.player_position_out[7:0];
 
+        led_grid.update=1;
+        led_grid.win_pos=8b01110101;        //x=7, y=5
+        led_grid.player_pos=game.player_position_out;    //8,8 and 8,9
+        led_grid.map=256x{b1};
+        outled=led_grid.led;
     }
 }

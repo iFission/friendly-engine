@@ -21,7 +21,9 @@ module mojo_top_0 (
     output reg [7:0] io_seg,
     output reg [3:0] io_sel,
     input [4:0] io_button,
-    input [23:0] io_dip
+    input [23:0] io_dip,
+    output reg outled,
+    input button_right
   );
   
   
@@ -121,6 +123,22 @@ module mojo_top_0 (
     .io_button_down(M_game_io_button_down),
     .player_position_out(M_game_player_position_out)
   );
+  wire [8-1:0] M_led_grid_pixel;
+  wire [1-1:0] M_led_grid_led;
+  reg [256-1:0] M_led_grid_map;
+  reg [8-1:0] M_led_grid_win_pos;
+  reg [16-1:0] M_led_grid_player_pos;
+  reg [1-1:0] M_led_grid_update;
+  ledprocess_13 led_grid (
+    .clk(clk),
+    .rst(rst),
+    .map(M_led_grid_map),
+    .win_pos(M_led_grid_win_pos),
+    .player_pos(M_led_grid_player_pos),
+    .update(M_led_grid_update),
+    .pixel(M_led_grid_pixel),
+    .led(M_led_grid_led)
+  );
   
   always @* begin
     M_reset_cond_in = ~rst_n;
@@ -135,7 +153,7 @@ module mojo_top_0 (
     M_io_button_left_button_conditioner_in = io_button[3+0-:1];
     M_io_button_left_edge_detector_in = M_io_button_left_button_conditioner_out;
     M_game_io_button_left = M_io_button_left_edge_detector_out;
-    M_io_button_right_button_conditioner_in = io_button[4+0-:1];
+    M_io_button_right_button_conditioner_in = button_right;
     M_io_button_right_edge_detector_in = M_io_button_right_button_conditioner_out;
     M_game_io_button_right = M_io_button_right_edge_detector_out;
     M_io_button_centre_button_conditioner_in = io_button[1+0-:1];
@@ -149,5 +167,10 @@ module mojo_top_0 (
     M_game_io_button_down = M_io_button_down_edge_detector_out;
     io_led[8+7-:8] = M_game_player_position_out[8+7-:8];
     io_led[0+7-:8] = M_game_player_position_out[0+7-:8];
+    M_led_grid_update = 1'h1;
+    M_led_grid_win_pos = 8'h75;
+    M_led_grid_player_pos = M_game_player_position_out;
+    M_led_grid_map = 256'hffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
+    outled = M_led_grid_led;
   end
 endmodule

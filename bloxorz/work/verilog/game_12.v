@@ -19,7 +19,7 @@ module game_12 (
   
   wire [16-1:0] M_regfile_player_position_out;
   reg [16-1:0] M_regfile_player_position_in;
-  regfile_18 regfile (
+  regfile_19 regfile (
     .clk(clk),
     .rst(rst),
     .player_position_in(M_regfile_player_position_in),
