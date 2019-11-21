@@ -13,5 +13,7 @@ alu
 
 20191120 plan
 // write buttons
-> move in map 16x16 grid
-> display grid number in io_led
+// move in map 16x16 grid
+// display grid number in io_led
+complex movement with orientation
+write arcade buttons

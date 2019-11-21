@@ -1,0 +1,1 @@
+NET "button_up" LOC = P58 | IOSTANDARD = LVTTL | PULLDOWN;

@@ -75,6 +75,7 @@ module mojo_top(
         game.io_button_left = io_button_left_edge_detector.out;
 
         // right button
+        io_button_right_button_conditioner.in = io_button[4];
         io_button_right_button_conditioner.in = button_right;
         io_button_right_edge_detector.in = io_button_right_button_conditioner.out;
         game.io_button_right = io_button_right_edge_detector.out;
