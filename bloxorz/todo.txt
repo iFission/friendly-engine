@@ -1,0 +1,17 @@
+todo
+
+main
+button controls
+
+register
+all variables used
+
+fsm
+
+alu
+
+
+20191120 plan
+// write buttons
+> move in map 16x16 grid
+> display grid number in io_led

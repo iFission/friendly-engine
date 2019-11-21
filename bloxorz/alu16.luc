@@ -1,0 +1,61 @@
+module alu16(
+
+    // logic output a, b, cin, to be sent to full adder board
+    input alufn[6],
+    input a[16],
+    input b[16],
+
+    // login input s, count, to be received from full adder board
+    output alu[16],
+    output z, // z is 1 is all outputs of the sum of a and b are 0
+    output v, // v is true if overflow occurs
+    output n // n is true if the sum is negative)
+)
+{
+    sixteenbitadder add16;
+    alu_bool bool16;
+    comparator cmp16;
+    bitshift shift16;
+
+    always
+    {
+
+        // initial values
+        // add16
+        add16.a = a;
+        add16.b = b;
+        add16.alufn = alufn[1:0];
+        z = add16.z;
+        n = add16.n;
+        v = add16.v;
+
+        // bool16
+        bool16.a = a;
+        bool16.b = b;
+        bool16.aLUFN = alufn[3:0];
+        
+        // shift16
+        shift16.inpa = a;
+        shift16.inpb = b;
+        shift16.alufn = alufn[1:0];
+
+        // cmp16
+        cmp16.z = add16.z;
+        cmp16.n = add16.n;
+        cmp16.v = add16.v;
+        cmp16.alufn = alufn;
+    
+    case (alufn[5:4]) {
+        // selects the operation based on alufn[5:4]
+        2b00:
+            alu = add16.outputsum;
+        2b01:
+            alu = bool16.bool;
+        2b10:
+            alu = shift16.shift;
+        2b11:
+            alu = cmp16.cmp;
+        default: alu = 0;
+        }
+    }
+}

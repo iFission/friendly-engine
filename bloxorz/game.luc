@@ -1,0 +1,55 @@
+module game (
+    input clk,  // clock
+    input rst,  // reset
+
+    input io_button_left, // left on IO Shield
+    input io_button_right, // right on IO Shield
+    input io_button_centre, // centre on IO Shield
+    input io_button_up, // up on IO Shield
+    input io_button_down, // down on IO Shield
+
+    output player_position_out[16]
+
+  ) 
+
+{
+  .clk(clk){
+    .rst(rst){
+      regfile regfile;      
+    }
+  }
+  
+  always {
+    
+    regfile.player_position_in = regfile.player_position_out;
+    player_position_out = regfile.player_position_out;
+
+
+
+    if (io_button_centre == 1)
+    {
+      regfile.player_position_in = 16b0;
+    }
+
+    if (io_button_left == 1)
+    {
+      regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 1;
+    }
+    if (io_button_right == 1)
+    {
+      regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 1;
+    }
+    if (io_button_up == 1)
+    {
+      regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 16;
+    }
+    if (io_button_down == 1)
+    {
+      regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 16;
+    }
+
+
+      
+    
+  }
+}

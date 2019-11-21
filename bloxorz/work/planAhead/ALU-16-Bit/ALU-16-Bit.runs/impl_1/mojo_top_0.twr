@@ -1,0 +1,1577 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle ise -o
+mojo_top_0.twr -v 30 -l 30 mojo_top_0_routed.ncd mojo_top_0.pcf
+
+Design file:              mojo_top_0_routed.ncd
+Physical constraint file: mojo_top_0.pcf
+Device,package,speed:     xc6slx9,tqg144,C,-2 (PRODUCTION 1.23 2013-10-13)
+Report level:             verbose report, limited to 30 items per constraint
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+================================================================================
+Timing constraint: TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH 50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 4927 paths analyzed, 612 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is   6.402ns.
+--------------------------------------------------------------------------------
+Slack:                  13.598ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_16 (FF)
+  Destination:          game/regfile/M_player_position_q_15 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      6.351ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.016ns (0.288 - 0.304)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_16 to game/regfile/M_player_position_q_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y42.AQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[19]
+                                                       io_button_right_button_conditioner/M_ctr_q_16
+    SLICE_X15Y38.C2      net (fanout=2)        1.232   io_button_right_button_conditioner/M_ctr_q[16]
+    SLICE_X15Y38.C       Tilo                  0.259   game/N36
+                                                       io_button_right_button_conditioner/out2
+    SLICE_X15Y38.B1      net (fanout=3)        0.711   out1_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X23Y39.C4      net (fanout=15)       0.964   M_io_button_right_edge_detector_out
+    SLICE_X23Y39.C       Tilo                  0.259   out1_3
+                                                       game/Mmux_M_regfile_player_position_in<10>2101_SW0
+    SLICE_X14Y37.B3      net (fanout=1)        1.187   game/N25
+    SLICE_X14Y37.B       Tilo                  0.235   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.C4      net (fanout=1)        0.371   game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2104
+                                                       game/regfile/M_player_position_q_15
+    -------------------------------------------------  ---------------------------
+    Total                                      6.351ns (1.886ns logic, 4.465ns route)
+                                                       (29.7% logic, 70.3% route)
+
+--------------------------------------------------------------------------------
+Slack:                  13.798ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_17 (FF)
+  Destination:          game/regfile/M_player_position_q_13 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      6.149ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.018ns (0.288 - 0.306)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_17 to game/regfile/M_player_position_q_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y39.BQ      Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[19]
+                                                       io_button_centre_button_conditioner/M_ctr_q_17
+    SLICE_X21Y36.C2      net (fanout=2)        1.206   io_button_centre_button_conditioner/M_ctr_q[17]
+    SLICE_X21Y36.C       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_button_conditioner/out2
+    SLICE_X21Y36.A2      net (fanout=3)        0.549   out1_1
+    SLICE_X21Y36.A       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X16Y37.B2      net (fanout=5)        1.199   M_io_button_centre_edge_detector_out
+    SLICE_X16Y37.B       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>21011
+    SLICE_X16Y37.D3      net (fanout=4)        1.162   game/Mmux_M_regfile_player_position_in<10>2101
+    SLICE_X16Y37.D       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>2611
+    SLICE_X16Y37.C6      net (fanout=1)        0.143   game/Mmux_M_regfile_player_position_in<10>261
+    SLICE_X16Y37.CLK     Tas                   0.339   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>26
+                                                       game/regfile/M_player_position_q_13
+    -------------------------------------------------  ---------------------------
+    Total                                      6.149ns (1.890ns logic, 4.259ns route)
+                                                       (30.7% logic, 69.3% route)
+
+--------------------------------------------------------------------------------
+Slack:                  13.844ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_18 (FF)
+  Destination:          game/regfile/M_player_position_q_15 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      6.105ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.016ns (0.288 - 0.304)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_18 to game/regfile/M_player_position_q_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y42.CQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[19]
+                                                       io_button_right_button_conditioner/M_ctr_q_18
+    SLICE_X15Y38.C1      net (fanout=2)        0.986   io_button_right_button_conditioner/M_ctr_q[18]
+    SLICE_X15Y38.C       Tilo                  0.259   game/N36
+                                                       io_button_right_button_conditioner/out2
+    SLICE_X15Y38.B1      net (fanout=3)        0.711   out1_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X23Y39.C4      net (fanout=15)       0.964   M_io_button_right_edge_detector_out
+    SLICE_X23Y39.C       Tilo                  0.259   out1_3
+                                                       game/Mmux_M_regfile_player_position_in<10>2101_SW0
+    SLICE_X14Y37.B3      net (fanout=1)        1.187   game/N25
+    SLICE_X14Y37.B       Tilo                  0.235   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.C4      net (fanout=1)        0.371   game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2104
+                                                       game/regfile/M_player_position_q_15
+    -------------------------------------------------  ---------------------------
+    Total                                      6.105ns (1.886ns logic, 4.219ns route)
+                                                       (30.9% logic, 69.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  13.948ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_17 (FF)
+  Destination:          game/regfile/M_player_position_q_15 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      6.001ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.016ns (0.288 - 0.304)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_17 to game/regfile/M_player_position_q_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y42.BQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[19]
+                                                       io_button_right_button_conditioner/M_ctr_q_17
+    SLICE_X15Y38.C5      net (fanout=2)        0.882   io_button_right_button_conditioner/M_ctr_q[17]
+    SLICE_X15Y38.C       Tilo                  0.259   game/N36
+                                                       io_button_right_button_conditioner/out2
+    SLICE_X15Y38.B1      net (fanout=3)        0.711   out1_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X23Y39.C4      net (fanout=15)       0.964   M_io_button_right_edge_detector_out
+    SLICE_X23Y39.C       Tilo                  0.259   out1_3
+                                                       game/Mmux_M_regfile_player_position_in<10>2101_SW0
+    SLICE_X14Y37.B3      net (fanout=1)        1.187   game/N25
+    SLICE_X14Y37.B       Tilo                  0.235   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.C4      net (fanout=1)        0.371   game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2104
+                                                       game/regfile/M_player_position_q_15
+    -------------------------------------------------  ---------------------------
+    Total                                      6.001ns (1.886ns logic, 4.115ns route)
+                                                       (31.4% logic, 68.6% route)
+
+--------------------------------------------------------------------------------
+Slack:                  13.949ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_13 (FF)
+  Destination:          game/regfile/M_player_position_q_15 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      6.002ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.014ns (0.288 - 0.302)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_13 to game/regfile/M_player_position_q_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y41.BQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[15]
+                                                       io_button_right_button_conditioner/M_ctr_q_13
+    SLICE_X13Y38.A2      net (fanout=2)        0.976   io_button_right_button_conditioner/M_ctr_q[13]
+    SLICE_X13Y38.A       Tilo                  0.259   io_button_right_edge_detector/M_last_q
+                                                       io_button_right_button_conditioner/out3
+    SLICE_X15Y38.B3      net (fanout=3)        0.618   out2_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X23Y39.C4      net (fanout=15)       0.964   M_io_button_right_edge_detector_out
+    SLICE_X23Y39.C       Tilo                  0.259   out1_3
+                                                       game/Mmux_M_regfile_player_position_in<10>2101_SW0
+    SLICE_X14Y37.B3      net (fanout=1)        1.187   game/N25
+    SLICE_X14Y37.B       Tilo                  0.235   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.C4      net (fanout=1)        0.371   game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2104
+                                                       game/regfile/M_player_position_q_15
+    -------------------------------------------------  ---------------------------
+    Total                                      6.002ns (1.886ns logic, 4.116ns route)
+                                                       (31.4% logic, 68.6% route)
+
+--------------------------------------------------------------------------------
+Slack:                  13.952ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_12 (FF)
+  Destination:          game/regfile/M_player_position_q_15 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.999ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.014ns (0.288 - 0.302)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_12 to game/regfile/M_player_position_q_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y41.AQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[15]
+                                                       io_button_right_button_conditioner/M_ctr_q_12
+    SLICE_X13Y38.A1      net (fanout=2)        0.973   io_button_right_button_conditioner/M_ctr_q[12]
+    SLICE_X13Y38.A       Tilo                  0.259   io_button_right_edge_detector/M_last_q
+                                                       io_button_right_button_conditioner/out3
+    SLICE_X15Y38.B3      net (fanout=3)        0.618   out2_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X23Y39.C4      net (fanout=15)       0.964   M_io_button_right_edge_detector_out
+    SLICE_X23Y39.C       Tilo                  0.259   out1_3
+                                                       game/Mmux_M_regfile_player_position_in<10>2101_SW0
+    SLICE_X14Y37.B3      net (fanout=1)        1.187   game/N25
+    SLICE_X14Y37.B       Tilo                  0.235   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.C4      net (fanout=1)        0.371   game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2104
+                                                       game/regfile/M_player_position_q_15
+    -------------------------------------------------  ---------------------------
+    Total                                      5.999ns (1.886ns logic, 4.113ns route)
+                                                       (31.4% logic, 68.6% route)
+
+--------------------------------------------------------------------------------
+Slack:                  13.968ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_up_button_conditioner/M_ctr_q_16 (FF)
+  Destination:          game/regfile/M_player_position_q_13 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.944ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.053ns (0.593 - 0.646)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_up_button_conditioner/M_ctr_q_16 to game/regfile/M_player_position_q_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X8Y42.AQ       Tcko                  0.525   io_button_up_button_conditioner/M_ctr_q[19]
+                                                       io_button_up_button_conditioner/M_ctr_q_16
+    SLICE_X9Y40.D2       net (fanout=2)        0.958   io_button_up_button_conditioner/M_ctr_q[16]
+    SLICE_X9Y40.D        Tilo                  0.259   io_button_up_edge_detector/M_last_q
+                                                       io_button_up_button_conditioner/out2
+    SLICE_X11Y38.B1      net (fanout=3)        1.021   out1_0
+    SLICE_X11Y38.B       Tilo                  0.259   game/N39
+                                                       io_button_up_edge_detector/out1
+    SLICE_X17Y37.B2      net (fanout=13)       1.506   M_io_button_up_edge_detector_out
+    SLICE_X17Y37.B       Tilo                  0.259   game/N31
+                                                       game/Mmux_M_regfile_player_position_in<10>2811
+    SLICE_X16Y37.C1      net (fanout=3)        0.818   game/Mmux_M_regfile_player_position_in<10>281
+    SLICE_X16Y37.CLK     Tas                   0.339   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>26
+                                                       game/regfile/M_player_position_q_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.944ns (1.641ns logic, 4.303ns route)
+                                                       (27.6% logic, 72.4% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.008ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_14 (FF)
+  Destination:          game/regfile/M_player_position_q_15 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.943ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.014ns (0.288 - 0.302)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_14 to game/regfile/M_player_position_q_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y41.CQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[15]
+                                                       io_button_right_button_conditioner/M_ctr_q_14
+    SLICE_X15Y38.C3      net (fanout=2)        0.824   io_button_right_button_conditioner/M_ctr_q[14]
+    SLICE_X15Y38.C       Tilo                  0.259   game/N36
+                                                       io_button_right_button_conditioner/out2
+    SLICE_X15Y38.B1      net (fanout=3)        0.711   out1_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X23Y39.C4      net (fanout=15)       0.964   M_io_button_right_edge_detector_out
+    SLICE_X23Y39.C       Tilo                  0.259   out1_3
+                                                       game/Mmux_M_regfile_player_position_in<10>2101_SW0
+    SLICE_X14Y37.B3      net (fanout=1)        1.187   game/N25
+    SLICE_X14Y37.B       Tilo                  0.235   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.C4      net (fanout=1)        0.371   game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2104
+                                                       game/regfile/M_player_position_q_15
+    -------------------------------------------------  ---------------------------
+    Total                                      5.943ns (1.886ns logic, 4.057ns route)
+                                                       (31.7% logic, 68.3% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.021ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_15 (FF)
+  Destination:          game/regfile/M_player_position_q_15 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.930ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.014ns (0.288 - 0.302)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_15 to game/regfile/M_player_position_q_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y41.DQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[15]
+                                                       io_button_right_button_conditioner/M_ctr_q_15
+    SLICE_X15Y38.C6      net (fanout=2)        0.811   io_button_right_button_conditioner/M_ctr_q[15]
+    SLICE_X15Y38.C       Tilo                  0.259   game/N36
+                                                       io_button_right_button_conditioner/out2
+    SLICE_X15Y38.B1      net (fanout=3)        0.711   out1_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X23Y39.C4      net (fanout=15)       0.964   M_io_button_right_edge_detector_out
+    SLICE_X23Y39.C       Tilo                  0.259   out1_3
+                                                       game/Mmux_M_regfile_player_position_in<10>2101_SW0
+    SLICE_X14Y37.B3      net (fanout=1)        1.187   game/N25
+    SLICE_X14Y37.B       Tilo                  0.235   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.C4      net (fanout=1)        0.371   game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2104
+                                                       game/regfile/M_player_position_q_15
+    -------------------------------------------------  ---------------------------
+    Total                                      5.930ns (1.886ns logic, 4.044ns route)
+                                                       (31.8% logic, 68.2% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.038ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_12 (FF)
+  Destination:          game/regfile/M_player_position_q_13 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.907ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.020ns (0.288 - 0.308)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_12 to game/regfile/M_player_position_q_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y38.AQ      Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[15]
+                                                       io_button_centre_button_conditioner/M_ctr_q_12
+    SLICE_X22Y36.A1      net (fanout=2)        0.961   io_button_centre_button_conditioner/M_ctr_q[12]
+    SLICE_X22Y36.A       Tilo                  0.235   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out3
+    SLICE_X21Y36.A3      net (fanout=3)        0.576   out2_1
+    SLICE_X21Y36.A       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X16Y37.B2      net (fanout=5)        1.199   M_io_button_centre_edge_detector_out
+    SLICE_X16Y37.B       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>21011
+    SLICE_X16Y37.D3      net (fanout=4)        1.162   game/Mmux_M_regfile_player_position_in<10>2101
+    SLICE_X16Y37.D       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>2611
+    SLICE_X16Y37.C6      net (fanout=1)        0.143   game/Mmux_M_regfile_player_position_in<10>261
+    SLICE_X16Y37.CLK     Tas                   0.339   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>26
+                                                       game/regfile/M_player_position_q_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.907ns (1.866ns logic, 4.041ns route)
+                                                       (31.6% logic, 68.4% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.044ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_19 (FF)
+  Destination:          game/regfile/M_player_position_q_15 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.905ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.016ns (0.288 - 0.304)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_19 to game/regfile/M_player_position_q_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y42.DQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[19]
+                                                       io_button_right_button_conditioner/M_ctr_q_19
+    SLICE_X15Y38.C4      net (fanout=2)        0.786   io_button_right_button_conditioner/M_ctr_q[19]
+    SLICE_X15Y38.C       Tilo                  0.259   game/N36
+                                                       io_button_right_button_conditioner/out2
+    SLICE_X15Y38.B1      net (fanout=3)        0.711   out1_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X23Y39.C4      net (fanout=15)       0.964   M_io_button_right_edge_detector_out
+    SLICE_X23Y39.C       Tilo                  0.259   out1_3
+                                                       game/Mmux_M_regfile_player_position_in<10>2101_SW0
+    SLICE_X14Y37.B3      net (fanout=1)        1.187   game/N25
+    SLICE_X14Y37.B       Tilo                  0.235   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.C4      net (fanout=1)        0.371   game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2104
+                                                       game/regfile/M_player_position_q_15
+    -------------------------------------------------  ---------------------------
+    Total                                      5.905ns (1.886ns logic, 4.019ns route)
+                                                       (31.9% logic, 68.1% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.075ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_18 (FF)
+  Destination:          game/regfile/M_player_position_q_13 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.872ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.018ns (0.288 - 0.306)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_18 to game/regfile/M_player_position_q_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y39.CQ      Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[19]
+                                                       io_button_centre_button_conditioner/M_ctr_q_18
+    SLICE_X21Y36.C1      net (fanout=2)        0.929   io_button_centre_button_conditioner/M_ctr_q[18]
+    SLICE_X21Y36.C       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_button_conditioner/out2
+    SLICE_X21Y36.A2      net (fanout=3)        0.549   out1_1
+    SLICE_X21Y36.A       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X16Y37.B2      net (fanout=5)        1.199   M_io_button_centre_edge_detector_out
+    SLICE_X16Y37.B       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>21011
+    SLICE_X16Y37.D3      net (fanout=4)        1.162   game/Mmux_M_regfile_player_position_in<10>2101
+    SLICE_X16Y37.D       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>2611
+    SLICE_X16Y37.C6      net (fanout=1)        0.143   game/Mmux_M_regfile_player_position_in<10>261
+    SLICE_X16Y37.CLK     Tas                   0.339   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>26
+                                                       game/regfile/M_player_position_q_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.872ns (1.890ns logic, 3.982ns route)
+                                                       (32.2% logic, 67.8% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.087ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_17 (FF)
+  Destination:          game/regfile/M_player_position_q_15 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.860ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.018ns (0.288 - 0.306)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_17 to game/regfile/M_player_position_q_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y39.BQ      Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[19]
+                                                       io_button_centre_button_conditioner/M_ctr_q_17
+    SLICE_X21Y36.C2      net (fanout=2)        1.206   io_button_centre_button_conditioner/M_ctr_q[17]
+    SLICE_X21Y36.C       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_button_conditioner/out2
+    SLICE_X21Y36.A2      net (fanout=3)        0.549   out1_1
+    SLICE_X21Y36.A       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X16Y37.B2      net (fanout=5)        1.199   M_io_button_centre_edge_detector_out
+    SLICE_X16Y37.B       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>21011
+    SLICE_X14Y37.B4      net (fanout=4)        0.654   game/Mmux_M_regfile_player_position_in<10>2101
+    SLICE_X14Y37.B       Tilo                  0.235   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.C4      net (fanout=1)        0.371   game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2104
+                                                       game/regfile/M_player_position_q_15
+    -------------------------------------------------  ---------------------------
+    Total                                      5.860ns (1.881ns logic, 3.979ns route)
+                                                       (32.1% logic, 67.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.137ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_16 (FF)
+  Destination:          game/regfile/M_player_position_q_10 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.815ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.013ns (0.291 - 0.304)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_16 to game/regfile/M_player_position_q_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y42.AQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[19]
+                                                       io_button_right_button_conditioner/M_ctr_q_16
+    SLICE_X15Y38.C2      net (fanout=2)        1.232   io_button_right_button_conditioner/M_ctr_q[16]
+    SLICE_X15Y38.C       Tilo                  0.259   game/N36
+                                                       io_button_right_button_conditioner/out2
+    SLICE_X15Y38.B1      net (fanout=3)        0.711   out1_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X21Y36.D4      net (fanout=15)       1.007   M_io_button_right_edge_detector_out
+    SLICE_X21Y36.D       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       game/Mmux_M_regfile_player_position_in<10>2101111
+    SLICE_X17Y36.A2      net (fanout=1)        1.190   game/Mmux_M_regfile_player_position_in<10>210111
+    SLICE_X17Y36.CLK     Tas                   0.373   M_game_player_position_out[11]
+                                                       game/Mmux_M_regfile_player_position_in<10>2
+                                                       game/regfile/M_player_position_q_10
+    -------------------------------------------------  ---------------------------
+    Total                                      5.815ns (1.675ns logic, 4.140ns route)
+                                                       (28.8% logic, 71.2% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.185ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_16 (FF)
+  Destination:          game/regfile/M_player_position_q_13 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.764ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.016ns (0.288 - 0.304)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_16 to game/regfile/M_player_position_q_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y42.AQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[19]
+                                                       io_button_right_button_conditioner/M_ctr_q_16
+    SLICE_X15Y38.C2      net (fanout=2)        1.232   io_button_right_button_conditioner/M_ctr_q[16]
+    SLICE_X15Y38.C       Tilo                  0.259   game/N36
+                                                       io_button_right_button_conditioner/out2
+    SLICE_X15Y38.B1      net (fanout=3)        0.711   out1_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X11Y38.C5      net (fanout=15)       0.766   M_io_button_right_edge_detector_out
+    SLICE_X11Y38.C       Tilo                  0.259   game/N39
+                                                       game/Mmux_M_regfile_player_position_in<10>26_SW0
+    SLICE_X16Y37.C2      net (fanout=1)        1.414   game/N9
+    SLICE_X16Y37.CLK     Tas                   0.339   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>26
+                                                       game/regfile/M_player_position_q_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.764ns (1.641ns logic, 4.123ns route)
+                                                       (28.5% logic, 71.5% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.204ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_up_button_conditioner/M_ctr_q_14 (FF)
+  Destination:          game/regfile/M_player_position_q_13 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.711ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.050ns (0.593 - 0.643)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_up_button_conditioner/M_ctr_q_14 to game/regfile/M_player_position_q_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X8Y41.CQ       Tcko                  0.525   io_button_up_button_conditioner/M_ctr_q[15]
+                                                       io_button_up_button_conditioner/M_ctr_q_14
+    SLICE_X9Y40.D1       net (fanout=2)        0.725   io_button_up_button_conditioner/M_ctr_q[14]
+    SLICE_X9Y40.D        Tilo                  0.259   io_button_up_edge_detector/M_last_q
+                                                       io_button_up_button_conditioner/out2
+    SLICE_X11Y38.B1      net (fanout=3)        1.021   out1_0
+    SLICE_X11Y38.B       Tilo                  0.259   game/N39
+                                                       io_button_up_edge_detector/out1
+    SLICE_X17Y37.B2      net (fanout=13)       1.506   M_io_button_up_edge_detector_out
+    SLICE_X17Y37.B       Tilo                  0.259   game/N31
+                                                       game/Mmux_M_regfile_player_position_in<10>2811
+    SLICE_X16Y37.C1      net (fanout=3)        0.818   game/Mmux_M_regfile_player_position_in<10>281
+    SLICE_X16Y37.CLK     Tas                   0.339   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>26
+                                                       game/regfile/M_player_position_q_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.711ns (1.641ns logic, 4.070ns route)
+                                                       (28.7% logic, 71.3% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.236ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_15 (FF)
+  Destination:          game/regfile/M_player_position_q_13 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.709ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.020ns (0.288 - 0.308)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_15 to game/regfile/M_player_position_q_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y38.DQ      Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[15]
+                                                       io_button_centre_button_conditioner/M_ctr_q_15
+    SLICE_X21Y36.C3      net (fanout=2)        0.766   io_button_centre_button_conditioner/M_ctr_q[15]
+    SLICE_X21Y36.C       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_button_conditioner/out2
+    SLICE_X21Y36.A2      net (fanout=3)        0.549   out1_1
+    SLICE_X21Y36.A       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X16Y37.B2      net (fanout=5)        1.199   M_io_button_centre_edge_detector_out
+    SLICE_X16Y37.B       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>21011
+    SLICE_X16Y37.D3      net (fanout=4)        1.162   game/Mmux_M_regfile_player_position_in<10>2101
+    SLICE_X16Y37.D       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>2611
+    SLICE_X16Y37.C6      net (fanout=1)        0.143   game/Mmux_M_regfile_player_position_in<10>261
+    SLICE_X16Y37.CLK     Tas                   0.339   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>26
+                                                       game/regfile/M_player_position_q_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.709ns (1.890ns logic, 3.819ns route)
+                                                       (33.1% logic, 66.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.237ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_left_button_conditioner/M_ctr_q_18 (FF)
+  Destination:          game/regfile/M_player_position_q_14 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.708ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.020ns (0.288 - 0.308)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_left_button_conditioner/M_ctr_q_18 to game/regfile/M_player_position_q_14
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X22Y41.CQ      Tcko                  0.476   io_button_left_button_conditioner/M_ctr_q[19]
+                                                       io_button_left_button_conditioner/M_ctr_q_18
+    SLICE_X23Y39.D1      net (fanout=2)        0.781   io_button_left_button_conditioner/M_ctr_q[18]
+    SLICE_X23Y39.D       Tilo                  0.259   out1_3
+                                                       io_button_left_button_conditioner/out2
+    SLICE_X23Y39.B2      net (fanout=3)        0.549   out1_3
+    SLICE_X23Y39.B       Tilo                  0.259   out1_3
+                                                       io_button_left_edge_detector/out1
+    SLICE_X11Y38.D3      net (fanout=11)       1.532   M_io_button_left_edge_detector_out
+    SLICE_X11Y38.D       Tilo                  0.259   game/N39
+                                                       game/Mmux_M_regfile_player_position_in<10>28_SW3
+    SLICE_X14Y37.A1      net (fanout=1)        1.244   game/N39
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>28
+                                                       game/regfile/M_player_position_q_14
+    -------------------------------------------------  ---------------------------
+    Total                                      5.708ns (1.602ns logic, 4.106ns route)
+                                                       (28.1% logic, 71.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.254ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_9 (FF)
+  Destination:          game/regfile/M_player_position_q_13 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.688ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.023ns (0.288 - 0.311)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_9 to game/regfile/M_player_position_q_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y37.BQ      Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[11]
+                                                       io_button_centre_button_conditioner/M_ctr_q_9
+    SLICE_X22Y36.A2      net (fanout=2)        0.742   io_button_centre_button_conditioner/M_ctr_q[9]
+    SLICE_X22Y36.A       Tilo                  0.235   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out3
+    SLICE_X21Y36.A3      net (fanout=3)        0.576   out2_1
+    SLICE_X21Y36.A       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X16Y37.B2      net (fanout=5)        1.199   M_io_button_centre_edge_detector_out
+    SLICE_X16Y37.B       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>21011
+    SLICE_X16Y37.D3      net (fanout=4)        1.162   game/Mmux_M_regfile_player_position_in<10>2101
+    SLICE_X16Y37.D       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>2611
+    SLICE_X16Y37.C6      net (fanout=1)        0.143   game/Mmux_M_regfile_player_position_in<10>261
+    SLICE_X16Y37.CLK     Tas                   0.339   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>26
+                                                       game/regfile/M_player_position_q_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.688ns (1.866ns logic, 3.822ns route)
+                                                       (32.8% logic, 67.2% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.256ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_16 (FF)
+  Destination:          game/regfile/M_player_position_q_14 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.693ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.016ns (0.288 - 0.304)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_16 to game/regfile/M_player_position_q_14
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y42.AQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[19]
+                                                       io_button_right_button_conditioner/M_ctr_q_16
+    SLICE_X15Y38.C2      net (fanout=2)        1.232   io_button_right_button_conditioner/M_ctr_q[16]
+    SLICE_X15Y38.C       Tilo                  0.259   game/N36
+                                                       io_button_right_button_conditioner/out2
+    SLICE_X15Y38.B1      net (fanout=3)        0.711   out1_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X11Y38.D4      net (fanout=15)       0.855   M_io_button_right_edge_detector_out
+    SLICE_X11Y38.D       Tilo                  0.259   game/N39
+                                                       game/Mmux_M_regfile_player_position_in<10>28_SW3
+    SLICE_X14Y37.A1      net (fanout=1)        1.244   game/N39
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>28
+                                                       game/regfile/M_player_position_q_14
+    -------------------------------------------------  ---------------------------
+    Total                                      5.693ns (1.651ns logic, 4.042ns route)
+                                                       (29.0% logic, 71.0% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.264ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_left_button_conditioner/M_ctr_q_15 (FF)
+  Destination:          game/regfile/M_player_position_q_14 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.683ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.018ns (0.288 - 0.306)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_left_button_conditioner/M_ctr_q_15 to game/regfile/M_player_position_q_14
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X22Y40.DQ      Tcko                  0.476   io_button_left_button_conditioner/M_ctr_q[15]
+                                                       io_button_left_button_conditioner/M_ctr_q_15
+    SLICE_X23Y39.D2      net (fanout=2)        0.756   io_button_left_button_conditioner/M_ctr_q[15]
+    SLICE_X23Y39.D       Tilo                  0.259   out1_3
+                                                       io_button_left_button_conditioner/out2
+    SLICE_X23Y39.B2      net (fanout=3)        0.549   out1_3
+    SLICE_X23Y39.B       Tilo                  0.259   out1_3
+                                                       io_button_left_edge_detector/out1
+    SLICE_X11Y38.D3      net (fanout=11)       1.532   M_io_button_left_edge_detector_out
+    SLICE_X11Y38.D       Tilo                  0.259   game/N39
+                                                       game/Mmux_M_regfile_player_position_in<10>28_SW3
+    SLICE_X14Y37.A1      net (fanout=1)        1.244   game/N39
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>28
+                                                       game/regfile/M_player_position_q_14
+    -------------------------------------------------  ---------------------------
+    Total                                      5.683ns (1.602ns logic, 4.081ns route)
+                                                       (28.2% logic, 71.8% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.275ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_19 (FF)
+  Destination:          game/regfile/M_player_position_q_13 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.672ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.018ns (0.288 - 0.306)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_19 to game/regfile/M_player_position_q_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y39.DQ      Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[19]
+                                                       io_button_centre_button_conditioner/M_ctr_q_19
+    SLICE_X21Y36.C4      net (fanout=2)        0.729   io_button_centre_button_conditioner/M_ctr_q[19]
+    SLICE_X21Y36.C       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_button_conditioner/out2
+    SLICE_X21Y36.A2      net (fanout=3)        0.549   out1_1
+    SLICE_X21Y36.A       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X16Y37.B2      net (fanout=5)        1.199   M_io_button_centre_edge_detector_out
+    SLICE_X16Y37.B       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>21011
+    SLICE_X16Y37.D3      net (fanout=4)        1.162   game/Mmux_M_regfile_player_position_in<10>2101
+    SLICE_X16Y37.D       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>2611
+    SLICE_X16Y37.C6      net (fanout=1)        0.143   game/Mmux_M_regfile_player_position_in<10>261
+    SLICE_X16Y37.CLK     Tas                   0.339   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>26
+                                                       game/regfile/M_player_position_q_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.672ns (1.890ns logic, 3.782ns route)
+                                                       (33.3% logic, 66.7% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.308ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_16 (FF)
+  Destination:          game/regfile/M_player_position_q_13 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.641ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.016ns (0.288 - 0.304)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_16 to game/regfile/M_player_position_q_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y42.AQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[19]
+                                                       io_button_right_button_conditioner/M_ctr_q_16
+    SLICE_X15Y38.C2      net (fanout=2)        1.232   io_button_right_button_conditioner/M_ctr_q[16]
+    SLICE_X15Y38.C       Tilo                  0.259   game/N36
+                                                       io_button_right_button_conditioner/out2
+    SLICE_X15Y38.B1      net (fanout=3)        0.711   out1_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X16Y37.B5      net (fanout=15)       0.503   M_io_button_right_edge_detector_out
+    SLICE_X16Y37.B       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>21011
+    SLICE_X16Y37.D3      net (fanout=4)        1.162   game/Mmux_M_regfile_player_position_in<10>2101
+    SLICE_X16Y37.D       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>2611
+    SLICE_X16Y37.C6      net (fanout=1)        0.143   game/Mmux_M_regfile_player_position_in<10>261
+    SLICE_X16Y37.CLK     Tas                   0.339   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>26
+                                                       game/regfile/M_player_position_q_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.641ns (1.890ns logic, 3.751ns route)
+                                                       (33.5% logic, 66.5% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.318ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_right_button_conditioner/M_ctr_q_11 (FF)
+  Destination:          game/regfile/M_player_position_q_15 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.635ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.012ns (0.288 - 0.300)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_right_button_conditioner/M_ctr_q_11 to game/regfile/M_player_position_q_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y40.DQ      Tcko                  0.525   io_button_right_button_conditioner/M_ctr_q[11]
+                                                       io_button_right_button_conditioner/M_ctr_q_11
+    SLICE_X13Y38.A3      net (fanout=2)        0.609   io_button_right_button_conditioner/M_ctr_q[11]
+    SLICE_X13Y38.A       Tilo                  0.259   io_button_right_edge_detector/M_last_q
+                                                       io_button_right_button_conditioner/out3
+    SLICE_X15Y38.B3      net (fanout=3)        0.618   out2_2
+    SLICE_X15Y38.B       Tilo                  0.259   game/N36
+                                                       io_button_right_edge_detector/out1
+    SLICE_X23Y39.C4      net (fanout=15)       0.964   M_io_button_right_edge_detector_out
+    SLICE_X23Y39.C       Tilo                  0.259   out1_3
+                                                       game/Mmux_M_regfile_player_position_in<10>2101_SW0
+    SLICE_X14Y37.B3      net (fanout=1)        1.187   game/N25
+    SLICE_X14Y37.B       Tilo                  0.235   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.C4      net (fanout=1)        0.371   game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2104
+                                                       game/regfile/M_player_position_q_15
+    -------------------------------------------------  ---------------------------
+    Total                                      5.635ns (1.886ns logic, 3.749ns route)
+                                                       (33.5% logic, 66.5% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.327ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_12 (FF)
+  Destination:          game/regfile/M_player_position_q_15 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.618ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.020ns (0.288 - 0.308)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_12 to game/regfile/M_player_position_q_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y38.AQ      Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[15]
+                                                       io_button_centre_button_conditioner/M_ctr_q_12
+    SLICE_X22Y36.A1      net (fanout=2)        0.961   io_button_centre_button_conditioner/M_ctr_q[12]
+    SLICE_X22Y36.A       Tilo                  0.235   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out3
+    SLICE_X21Y36.A3      net (fanout=3)        0.576   out2_1
+    SLICE_X21Y36.A       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X16Y37.B2      net (fanout=5)        1.199   M_io_button_centre_edge_detector_out
+    SLICE_X16Y37.B       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>21011
+    SLICE_X14Y37.B4      net (fanout=4)        0.654   game/Mmux_M_regfile_player_position_in<10>2101
+    SLICE_X14Y37.B       Tilo                  0.235   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.C4      net (fanout=1)        0.371   game/Mmux_M_regfile_player_position_in<10>2103
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2104
+                                                       game/regfile/M_player_position_q_15
+    -------------------------------------------------  ---------------------------
+    Total                                      5.618ns (1.857ns logic, 3.761ns route)
+                                                       (33.1% logic, 66.9% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.333ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_up_button_conditioner/M_ctr_q_16 (FF)
+  Destination:          game/regfile/M_player_position_q_15 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.579ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.053ns (0.593 - 0.646)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_up_button_conditioner/M_ctr_q_16 to game/regfile/M_player_position_q_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X8Y42.AQ       Tcko                  0.525   io_button_up_button_conditioner/M_ctr_q[19]
+                                                       io_button_up_button_conditioner/M_ctr_q_16
+    SLICE_X9Y40.D2       net (fanout=2)        0.958   io_button_up_button_conditioner/M_ctr_q[16]
+    SLICE_X9Y40.D        Tilo                  0.259   io_button_up_edge_detector/M_last_q
+                                                       io_button_up_button_conditioner/out2
+    SLICE_X11Y38.B1      net (fanout=3)        1.021   out1_0
+    SLICE_X11Y38.B       Tilo                  0.259   game/N39
+                                                       io_button_up_edge_detector/out1
+    SLICE_X17Y37.B2      net (fanout=13)       1.506   M_io_button_up_edge_detector_out
+    SLICE_X17Y37.B       Tilo                  0.259   game/N31
+                                                       game/Mmux_M_regfile_player_position_in<10>2811
+    SLICE_X14Y37.C5      net (fanout=3)        0.443   game/Mmux_M_regfile_player_position_in<10>281
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>2104
+                                                       game/regfile/M_player_position_q_15
+    -------------------------------------------------  ---------------------------
+    Total                                      5.579ns (1.651ns logic, 3.928ns route)
+                                                       (29.6% logic, 70.4% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.337ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_left_button_conditioner/M_ctr_q_11 (FF)
+  Destination:          game/regfile/M_player_position_q_14 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.610ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.018ns (0.288 - 0.306)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_left_button_conditioner/M_ctr_q_11 to game/regfile/M_player_position_q_14
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X22Y39.DQ      Tcko                  0.476   io_button_left_button_conditioner/M_ctr_q[11]
+                                                       io_button_left_button_conditioner/M_ctr_q_11
+    SLICE_X23Y40.A1      net (fanout=2)        0.767   io_button_left_button_conditioner/M_ctr_q[11]
+    SLICE_X23Y40.A       Tilo                  0.259   io_button_left_edge_detector/M_last_q
+                                                       io_button_left_button_conditioner/out3
+    SLICE_X23Y39.B5      net (fanout=3)        0.465   out2_3
+    SLICE_X23Y39.B       Tilo                  0.259   out1_3
+                                                       io_button_left_edge_detector/out1
+    SLICE_X11Y38.D3      net (fanout=11)       1.532   M_io_button_left_edge_detector_out
+    SLICE_X11Y38.D       Tilo                  0.259   game/N39
+                                                       game/Mmux_M_regfile_player_position_in<10>28_SW3
+    SLICE_X14Y37.A1      net (fanout=1)        1.244   game/N39
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>28
+                                                       game/regfile/M_player_position_q_14
+    -------------------------------------------------  ---------------------------
+    Total                                      5.610ns (1.602ns logic, 4.008ns route)
+                                                       (28.6% logic, 71.4% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.341ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_centre_button_conditioner/M_ctr_q_13 (FF)
+  Destination:          game/regfile/M_player_position_q_13 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.604ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.020ns (0.288 - 0.308)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_centre_button_conditioner/M_ctr_q_13 to game/regfile/M_player_position_q_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y38.BQ      Tcko                  0.525   io_button_centre_button_conditioner/M_ctr_q[15]
+                                                       io_button_centre_button_conditioner/M_ctr_q_13
+    SLICE_X22Y36.A5      net (fanout=2)        0.658   io_button_centre_button_conditioner/M_ctr_q[13]
+    SLICE_X22Y36.A       Tilo                  0.235   io_button_centre_edge_detector/M_last_q
+                                                       io_button_centre_button_conditioner/out3
+    SLICE_X21Y36.A3      net (fanout=3)        0.576   out2_1
+    SLICE_X21Y36.A       Tilo                  0.259   game/Mmux_M_regfile_player_position_in<10>210111
+                                                       io_button_centre_edge_detector/out1
+    SLICE_X16Y37.B2      net (fanout=5)        1.199   M_io_button_centre_edge_detector_out
+    SLICE_X16Y37.B       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>21011
+    SLICE_X16Y37.D3      net (fanout=4)        1.162   game/Mmux_M_regfile_player_position_in<10>2101
+    SLICE_X16Y37.D       Tilo                  0.254   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>2611
+    SLICE_X16Y37.C6      net (fanout=1)        0.143   game/Mmux_M_regfile_player_position_in<10>261
+    SLICE_X16Y37.CLK     Tas                   0.339   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>26
+                                                       game/regfile/M_player_position_q_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.604ns (1.866ns logic, 3.738ns route)
+                                                       (33.3% logic, 66.7% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.344ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_up_button_conditioner/M_ctr_q_15 (FF)
+  Destination:          game/regfile/M_player_position_q_13 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.571ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.050ns (0.593 - 0.643)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_up_button_conditioner/M_ctr_q_15 to game/regfile/M_player_position_q_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X8Y41.DQ       Tcko                  0.525   io_button_up_button_conditioner/M_ctr_q[15]
+                                                       io_button_up_button_conditioner/M_ctr_q_15
+    SLICE_X9Y40.D3       net (fanout=2)        0.585   io_button_up_button_conditioner/M_ctr_q[15]
+    SLICE_X9Y40.D        Tilo                  0.259   io_button_up_edge_detector/M_last_q
+                                                       io_button_up_button_conditioner/out2
+    SLICE_X11Y38.B1      net (fanout=3)        1.021   out1_0
+    SLICE_X11Y38.B       Tilo                  0.259   game/N39
+                                                       io_button_up_edge_detector/out1
+    SLICE_X17Y37.B2      net (fanout=13)       1.506   M_io_button_up_edge_detector_out
+    SLICE_X17Y37.B       Tilo                  0.259   game/N31
+                                                       game/Mmux_M_regfile_player_position_in<10>2811
+    SLICE_X16Y37.C1      net (fanout=3)        0.818   game/Mmux_M_regfile_player_position_in<10>281
+    SLICE_X16Y37.CLK     Tas                   0.339   M_game_player_position_out[13]
+                                                       game/Mmux_M_regfile_player_position_in<10>26
+                                                       game/regfile/M_player_position_q_13
+    -------------------------------------------------  ---------------------------
+    Total                                      5.571ns (1.641ns logic, 3.930ns route)
+                                                       (29.5% logic, 70.5% route)
+
+--------------------------------------------------------------------------------
+Slack:                  14.353ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               io_button_left_button_conditioner/M_ctr_q_12 (FF)
+  Destination:          game/regfile/M_player_position_q_14 (FF)
+  Requirement:          20.000ns
+  Data Path Delay:      5.594ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.018ns (0.288 - 0.306)
+  Source Clock:         clk_BUFGP rising at 0.000ns
+  Destination Clock:    clk_BUFGP rising at 20.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: io_button_left_button_conditioner/M_ctr_q_12 to game/regfile/M_player_position_q_14
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X22Y40.AQ      Tcko                  0.476   io_button_left_button_conditioner/M_ctr_q[15]
+                                                       io_button_left_button_conditioner/M_ctr_q_12
+    SLICE_X23Y40.A2      net (fanout=2)        0.751   io_button_left_button_conditioner/M_ctr_q[12]
+    SLICE_X23Y40.A       Tilo                  0.259   io_button_left_edge_detector/M_last_q
+                                                       io_button_left_button_conditioner/out3
+    SLICE_X23Y39.B5      net (fanout=3)        0.465   out2_3
+    SLICE_X23Y39.B       Tilo                  0.259   out1_3
+                                                       io_button_left_edge_detector/out1
+    SLICE_X11Y38.D3      net (fanout=11)       1.532   M_io_button_left_edge_detector_out
+    SLICE_X11Y38.D       Tilo                  0.259   game/N39
+                                                       game/Mmux_M_regfile_player_position_in<10>28_SW3
+    SLICE_X14Y37.A1      net (fanout=1)        1.244   game/N39
+    SLICE_X14Y37.CLK     Tas                   0.349   M_game_player_position_out[15]
+                                                       game/Mmux_M_regfile_player_position_in<10>28
+                                                       game/regfile/M_player_position_q_14
+    -------------------------------------------------  ---------------------------
+    Total                                      5.594ns (1.602ns logic, 3.992ns route)
+                                                       (28.6% logic, 71.4% route)
+
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH 50%;
+--------------------------------------------------------------------------------
+Slack: 17.334ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 2.666ns (375.094MHz) (Tbcper_I)
+  Physical resource: clk_BUFGP/BUFG/I0
+  Logical resource: clk_BUFGP/BUFG/I0
+  Location pin: BUFGMUX_X2Y11.I0
+  Clock network: clk_BUFGP/IBUFG
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: io_button_right_button_conditioner/M_sync_out/CLK
+  Logical resource: io_button_up_button_conditioner/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X12Y50.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: io_button_right_button_conditioner/M_sync_out/CLK
+  Logical resource: io_button_centre_button_conditioner/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X12Y50.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: io_button_right_button_conditioner/M_sync_out/CLK
+  Logical resource: io_button_down_button_conditioner/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X12Y50.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: io_button_right_button_conditioner/M_sync_out/CLK
+  Logical resource: io_button_left_button_conditioner/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X12Y50.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 18.601ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 1.399ns (714.796MHz) (Tcp)
+  Physical resource: io_button_right_button_conditioner/M_sync_out/CLK
+  Logical resource: io_button_right_button_conditioner/sync/Mshreg_M_pipe_q_1/CLK
+  Location pin: SLICE_X12Y50.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_0/CK
+  Location pin: SLICE_X8Y38.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_1/CK
+  Location pin: SLICE_X8Y38.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_2/CK
+  Location pin: SLICE_X8Y38.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_3/CK
+  Location pin: SLICE_X8Y38.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[7]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_4/CK
+  Location pin: SLICE_X8Y39.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[7]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_5/CK
+  Location pin: SLICE_X8Y39.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[7]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_6/CK
+  Location pin: SLICE_X8Y39.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[7]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_7/CK
+  Location pin: SLICE_X8Y39.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[11]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_8/CK
+  Location pin: SLICE_X8Y40.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[11]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_9/CK
+  Location pin: SLICE_X8Y40.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[11]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_10/CK
+  Location pin: SLICE_X8Y40.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[11]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_11/CK
+  Location pin: SLICE_X8Y40.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[15]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_12/CK
+  Location pin: SLICE_X8Y41.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[15]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_13/CK
+  Location pin: SLICE_X8Y41.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[15]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_14/CK
+  Location pin: SLICE_X8Y41.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[15]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_15/CK
+  Location pin: SLICE_X8Y41.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[19]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_16/CK
+  Location pin: SLICE_X8Y42.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[19]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_17/CK
+  Location pin: SLICE_X8Y42.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[19]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_18/CK
+  Location pin: SLICE_X8Y42.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_up_button_conditioner/M_ctr_q[19]/CLK
+  Logical resource: io_button_up_button_conditioner/M_ctr_q_19/CK
+  Location pin: SLICE_X8Y42.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_right_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_right_button_conditioner/M_ctr_q_0/CK
+  Location pin: SLICE_X12Y38.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_right_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_right_button_conditioner/M_ctr_q_1/CK
+  Location pin: SLICE_X12Y38.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_right_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_right_button_conditioner/M_ctr_q_2/CK
+  Location pin: SLICE_X12Y38.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: io_button_right_button_conditioner/M_ctr_q[3]/CLK
+  Logical resource: io_button_right_button_conditioner/M_ctr_q_3/CK
+  Location pin: SLICE_X12Y38.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+
+
+All constraints were met.
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Clock to Setup on destination clock clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk            |    6.402|         |         |         |
+---------------+---------+---------+---------+---------+
+
+
+Timing summary:
+---------------
+
+Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
+
+Constraints cover 4927 paths, 0 nets, and 539 connections
+
+Design statistics:
+   Minimum period:   6.402ns{1}   (Maximum frequency: 156.201MHz)
+
+
+------------------------------------Footnotes-----------------------------------
+1)  The minimum period statistic assumes all single cycle delays.
+
+Analysis completed Wed Nov 20 19:49:38 2019 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 211 MB
+
+
+
