@@ -2,11 +2,13 @@ module game (
     input clk,  // clock
     input rst,  // reset
 
-    input io_button_left, // left on IO Shield
-    input io_button_right, // right on IO Shield
-    input io_button_centre, // centre on IO Shield
-    input io_button_up, // up on IO Shield
-    input io_button_down, // down on IO Shield
+    input button_up,
+    input button_down,
+    input button_left,
+    input button_right,
+    input button_reset,
+    input button_stage_left,
+    input button_stage_right,
 
     output player_position_out[16]
 
@@ -26,24 +28,24 @@ module game (
 
 
 
-    if (io_button_centre == 1)
+    if (button_reset == 1)
     {
       regfile.player_position_in = 16b0;
     }
 
-    if (io_button_left == 1)
+    if (button_left == 1)
     {
       regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 1;
     }
-    if (io_button_right == 1)
+    if (button_right == 1)
     {
       regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 1;
     }
-    if (io_button_up == 1)
+    if (button_up == 1)
     {
       regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 16;
     }
-    if (io_button_down == 1)
+    if (button_down == 1)
     {
       regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 16;
     }
