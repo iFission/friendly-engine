@@ -16,15 +16,24 @@ def display_map():
     print("\x1b[2J\x1b[H")
     for y in range(len(map_1)):
         print("".join(map(str, map_1[y])))
+    print(f'PO: {portrait_orientation}')
+    print(f'VO: {vertical_orientation}')
+    print(f'HO: {horizontal_orientation}')
+    print(f'{player_x, player_y, player_x2, player_y2}')
 
 
-map_1 = load_map("bloxorz-python/map1.txt")
+map_1 = load_map("map1.txt")
 
 for y in range(len(map_1)):
     for x in range(len(map_1[0])):
+        portrait_orientation = True
+        horizontal_orientation = False
+        vertical_orientation = False
         if map_1[y][x] == 2:
             player_x = int(x)
             player_y = int(y)
+            player_x2 = 0
+            player_y2 = 0
         if map_1[y][x] == 3:
             target_x = int(x)
             target_y = int(y)
@@ -32,8 +41,10 @@ for y in range(len(map_1)):
 
 def update_map():
     global map_1
-    map_1 = load_map("bloxorz-python/map1.txt")
+    map_1 = load_map("map1.txt")
     map_1[player_y][player_x] = 4
+    if player_x2 is not 0 and player_y2 is not 0:
+        map_1[player_y2][player_x2] = 4
 
 
 def check_move():
@@ -49,27 +60,94 @@ def check_move():
         return False
 
 
-def move_left():
+def move(move_input):
     global player_x
-    player_x -= 1
-    check_move()
-
-
-def move_right():
-    global player_x
-    player_x += 1
-    check_move()
-
-
-def move_up():
     global player_y
-    player_y -= 1
-    check_move()
+    global player_x2
+    global player_y2
 
+    global portrait_orientation
+    global horizontal_orientation
+    global vertical_orientation
 
-def move_down():
-    global player_y
-    player_y += 1
+    if portrait_orientation:
+        if move_input == ",":
+            player_x = player_x
+            player_y = player_y - 2
+            player_x2 = player_x
+            player_y2 = player_y + 1
+            vertical_orientation = True
+        elif move_input == "o":
+            player_x = player_x
+            player_y = player_y + 1
+            player_x2 = player_x
+            player_y2 = player_y + 1
+            vertical_orientation = True
+        elif move_input == "a":
+            player_x = player_x - 2
+            player_y = player_y
+            player_x2 = player_x + 1
+            player_y2 = player_y
+            horizontal_orientation = True
+        elif move_input == "e":
+            player_x = player_x + 1
+            player_y = player_y
+            player_x2 = player_x + 1
+            player_y2 = player_y
+            horizontal_orientation = True
+        portrait_orientation = False
+
+    elif vertical_orientation:
+        if move_input == ",":
+            player_x = player_x
+            player_y = player_y - 1
+            player_x2 = 0
+            player_y2 = 0
+            vertical_orientation = False
+            portrait_orientation = True
+        elif move_input == "o":
+            player_x = player_x
+            player_y = player_y + 2
+            player_x2 = 0
+            player_y2 = 0
+            vertical_orientation = False
+            portrait_orientation = True
+        elif move_input == "a":
+            player_x = player_x - 1
+            player_y = player_y
+            player_x2 = player_x2 - 1
+            player_y2 = player_y2
+        elif move_input == "e":
+            player_x = player_x + 1
+            player_y = player_y
+            player_x2 = player_x2 + 1
+            player_y2 = player_y2
+
+    elif horizontal_orientation:
+        if move_input == ",":
+            player_x = player_x
+            player_y = player_y - 1
+            player_x2 = player_x2
+            player_y2 = player_y2 - 1
+        elif move_input == "o":
+            player_x = player_x
+            player_y = player_y + 1
+            player_x2 = player_x2
+            player_y2 = player_y2 + 1
+        elif move_input == "a":
+            player_x = player_x - 1
+            player_y = player_y
+            player_x2 = 0
+            player_y2 = 0
+            horizontal_orientation = False
+            portrait_orientation = True
+        elif move_input == "e":
+            player_x = player_x + 2
+            player_y = player_y
+            player_x2 = 0
+            player_y2 = 0
+            horizontal_orientation = False
+            portrait_orientation = True
     check_move()
 
 
@@ -77,14 +155,7 @@ while (True):
     # move_up()
     update_map()
     display_map()
-    move = input()
-    if move == ",":
-        move_up()
-    elif move == "o":
-        move_down()
-    elif move == "a":
-        move_left()
-    elif move == "e":
-        move_right()
+    move_input = input()
+    move(move_input)
     update_map()
     display_map()
