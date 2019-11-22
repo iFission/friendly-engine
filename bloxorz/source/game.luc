@@ -10,8 +10,10 @@ module game (
     input button_stage_left,
     input button_stage_right,
 
-    output player_position_out[16]
-
+    output player_position_out[16],
+    output portrait_orientation_output,
+    output horizontal_orientation_output,
+    output vertical_orientation_output
   ) 
 
 {
@@ -30,12 +32,16 @@ module game (
     regfile.player_position_in = regfile.player_position_out;
     player_position_out = regfile.player_position_out;
 
-      portrait_orientation.d = 1;
-      horizontal_orientation.d = 0;
-      vertical_orientation.d = 0;
+
+    portrait_orientation_output = portrait_orientation.q;
+    horizontal_orientation_output = horizontal_orientation.q;
+    vertical_orientation_output = vertical_orientation.q;
 
     if (button_reset == 1)
     {
+      portrait_orientation.d = 1;
+      horizontal_orientation.d = 0;
+      vertical_orientation.d = 0;
       regfile.player_position_in = 16b0;
     }
 
@@ -43,27 +49,32 @@ module game (
       if (button_left == 1)
       {
         regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 2;
-        regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 1;
+        regfile.player_position_in[7:0] = regfile.player_position_out[15:8] - 1;
         horizontal_orientation.d = 1;
+        portrait_orientation.d = 0;
       }
       if (button_right == 1)
       {
         regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 1;
-        regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 1;
+        regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 2;
         horizontal_orientation.d = 1;
+        portrait_orientation.d = 0;
       }
       if (button_up == 1)
       {
         regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 32;
-        regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 16;
+        regfile.player_position_in[7:0] = regfile.player_position_out[15:8] - 16;
         vertical_orientation.d = 1;
+        portrait_orientation.d = 0;
       }
       if (button_down == 1)
       {
         regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 16;
-        regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 16;
+        regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 32;
         vertical_orientation.d = 1;
-      }}
+        portrait_orientation.d = 0;
+      }
+      }
 
     if (vertical_orientation.q == 1){
       if (button_left == 1)
