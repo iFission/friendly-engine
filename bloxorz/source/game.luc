@@ -8,8 +8,16 @@ module game (
     input button_right,
     input button_reset,
     input button_stage_left,
-    input button_stage_right
+    input button_stage_right,
 
+    output map_out[256],
+    output player_position_out[16],
+    output win_position_out[8],
+    // output win_bool_out,
+    // output loss_bool_out,
+    output portrait_orientation_out,
+    output horizontal_orientation_out,
+    output vertical_orientation_out
   ) 
 
 {
@@ -21,14 +29,35 @@ module game (
   
   always {
     
+    map_out = regfile.map_out;
+    player_position_out = regfile.player_position_out;
+    win_position_out = regfile.win_position_out;
+    // win_bool_out = regfile.win_bool_out;
+    // loss_bool_out = regfile.loss_bool_out;
+    portrait_orientation_out = regfile.portrait_orientation_out;
+    horizontal_orientation_out = regfile.horizontal_orientation_out;
+    vertical_orientation_out = regfile.vertical_orientation_out;
+
+    regfile.map_in = 256b0000000000000000000000000000000000000000000000000000000000000000000000000000000000011100000000000001111110000000000111111111000000001111111110000000000011111000000000000111000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
     regfile.player_position_in = regfile.player_position_out;
+    regfile.win_position_in = regfile.win_position_out;
+    regfile.win_bool_in = regfile.win_bool_out;
+    regfile.loss_bool_in = regfile.loss_bool_out;
+    regfile.portrait_orientation_in = regfile.portrait_orientation_out;
+    regfile.horizontal_orientation_in = regfile.horizontal_orientation_out;
+    regfile.vertical_orientation_in = regfile.vertical_orientation_out;
 
     if (button_reset == 1)
     {
+      regfile.map_in = 256b0000000000000000000000000000000000000000000000000000000000000000000000000000000000011100000000000001111110000000000111111111000000001111111110000000000011111000000000000111000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
+      regfile.player_position_in = 16b0110010100000000;
+      regfile.win_position_in = 155;
+      regfile.win_bool_in = 0;
+      regfile.loss_bool_in = 0;
       regfile.portrait_orientation_in = 1;
       regfile.horizontal_orientation_in = 0;
       regfile.vertical_orientation_in = 0;
-      regfile.player_position_in = 16b0;
+
     }
 
     if (regfile.portrait_orientation_out == 1){

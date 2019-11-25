@@ -14,7 +14,7 @@ module regfile (
     input vertical_orientation_in,
 
     output map_out[256],
-    output player_position_out[16]
+    output player_position_out[16],
     output win_position_out[8],
     output win_bool_out,
     output loss_bool_out,
