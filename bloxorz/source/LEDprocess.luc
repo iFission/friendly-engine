@@ -174,8 +174,8 @@ module ledprocess #(
               pixel_ctr.d = pixel_ctr.q + 1;
                 
               if (pixel_ctr.q == PIXEL_COUNT-1) {
-                bit_ctr.d = 0;
-                pixel_ctr.d = pixel_ctr.q + 1;
+                pixel_ctr.d = 0;
+                state.d = state.RESET;
               }
             }
           }
