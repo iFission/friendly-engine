@@ -88,12 +88,27 @@ module ledprocess #(
     
     pixel = pixel_ctr.q;
     case (state.q) {
-      state.SEND_PIXEL:
-      
-        
+      state.SEND_PIXEL:             
+        if (player_back.q==0 && pixel_ctr.q==player_back.q){
+          if (bitsO[bit_ctr.q])
+            led = ctr.q < 44;
+          else
+            led = ctr.q < 15;
+          
+          ctr.d = ctr.q + 1;
+          if (ctr.q == 55){
+            ctr.d = 0;
+            
+            bit_ctr.d = bit_ctr.q + 1;
+            if (bit_ctr.q == 23) {
+              bit_ctr.d = 0;
+              pixel_ctr.d = pixel_ctr.q + 1;
+            }
+          }
+        }
       //Display player position
-        if(pixel_ctr.q==player_back.q||pixel_ctr.q==player_front.q){
-          maplayout[pixel_ctr.q]=0;
+        else if(pixel_ctr.q==player_back.q||pixel_ctr.q==player_front.q){
+          //maplayout[pixel_ctr.q]=0;
           if (bitsG[bit_ctr.q])
             led = ctr.q < 44;
           else
@@ -107,13 +122,24 @@ module ledprocess #(
             if (bit_ctr.q == 23) {
               bit_ctr.d = 0;
               pixel_ctr.d = pixel_ctr.q + 1;
+              if (pixel_ctr.q == PIXEL_COUNT-1) {
+                if(ret.q<15000){
+                  led=0;
+                  ret.d=ret.q+1;
+                }
+                if(ret.q==15000){
+                  pixel_ctr.d = 0;
+                  ret.d=0;
+                  state.d = state.RESET;
+                }
+              }
               }
             }
         }
         
         //Display win_pixel
-        if(pixel_ctr.q==win_pos_xy.q){
-          maplayout[pixel_ctr.q]=0;
+        else if(pixel_ctr.q==win_pos_xy.q){
+          //maplayout[pixel_ctr.q]=0;
           if (bitsB[bit_ctr.q])
             led = ctr.q < 44;
           else
@@ -127,12 +153,23 @@ module ledprocess #(
             if (bit_ctr.q == 23) {
               bit_ctr.d = 0;
               pixel_ctr.d = pixel_ctr.q + 1;
+              if (pixel_ctr.q == PIXEL_COUNT-1) {
+                if(ret.q<15000){
+                  led=0;
+                  ret.d=ret.q+1;
+                }
+                if(ret.q==15000){
+                  pixel_ctr.d = 0;
+                  ret.d=0;
+                  state.d = state.RESET;
+                }
+              }
               }
             }
         }
         
         //Display map pixels
-        if (maplayout[pixel_ctr.q]){
+        else if (maplayout[pixel_ctr.q]){
           if (bitsR[bit_ctr.q])
             led = ctr.q < 44;
           else
@@ -148,17 +185,54 @@ module ledprocess #(
               pixel_ctr.d = pixel_ctr.q + 1;
                 
               if (pixel_ctr.q == PIXEL_COUNT-1) {
-                pixel_ctr.d = 0;
-                state.d = state.RESET;
+                if(ret.q<15000){
+                  led=0;
+                  ret.d=ret.q+1;
+                }
+                if(ret.q==15000){
+                  pixel_ctr.d = 0;
+                  ret.d=0;
+                  state.d = state.RESET;
+                }
               }
             }
           }
+        }
+        else{
+          if (bitsO[bit_ctr.q])
+            led = ctr.q < 44;
+          else
+            led = ctr.q < 15;
+          
+          ctr.d = ctr.q + 1;
+          if (ctr.q == 55){
+            ctr.d = 0;
+            
+            bit_ctr.d = bit_ctr.q + 1;
+            if (bit_ctr.q == 23) {
+              bit_ctr.d = 0;
+              pixel_ctr.d = pixel_ctr.q + 1;
+              
+              if (pixel_ctr.q == PIXEL_COUNT-1) {
+                if(ret.q<15000){
+                  led=0;
+                  ret.d=ret.q+1;
+                }
+                if(ret.q==15000){
+                  pixel_ctr.d = 0;
+                  ret.d=0;
+                  state.d = state.RESET;
+                }
+              }
+              }
+            }
         }
       
       state.RESET:
         if (&rst_ctr.q) {
           if (update) {
             rst_ctr.d = 0;
+            //led=15000x{b0};
             state.d = state.SEND_PIXEL;
           }
         } else {
