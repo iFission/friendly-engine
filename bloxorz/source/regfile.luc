@@ -3,20 +3,63 @@ module regfile (
     input clk,  // clock
     input rst,  // reset
     
-    input player_position_in[16],
-    output player_position_out[16]
 
+    input map_in[256],
+    input player_position_in[16],
+    input win_position_in[8],
+    input win_bool_in,
+    input loss_bool_in,
+    input portrait_orientation_in,
+    input horizontal_orientation_in,
+    input vertical_orientation_in,
+
+    output map_out[256],
+    output player_position_out[16]
+    output win_position_out[8],
+    output win_bool_out,
+    output loss_bool_out,
+    output portrait_orientation_out,
+    output horizontal_orientation_out,
+    output vertical_orientation_out
   ) 
 
 {
   .clk(clk){
     .rst(rst){
+      dff map[256];
       dff player_position[16];
+      dff win_position[8];
+      dff win_bool;
+      dff loss_bool;
+      dff portrait_orientation;
+      dff horizontal_orientation;
+      dff vertical_orientation;
     }
   }
 
   always {
+      map.d = map_in;
+      map_out = map.q;
+
       player_position.d = player_position_in;
       player_position_out = player_position.q;
+
+      win_position.d = win_position_in;
+      win_position_out = win_position.q;
+
+      win_bool.d = win_bool_in;
+      win_bool_out = win_bool.q;
+
+      loss_bool.d = loss_bool_in;
+      loss_bool_out = loss_bool.q;
+
+      portrait_orientation.d = portrait_orientation_in;
+      portrait_orientation_out = portrait_orientation.q;
+
+      horizontal_orientation.d = horizontal_orientation_in;
+      horizontal_orientation_out = horizontal_orientation.q;
+
+      vertical_orientation.d = vertical_orientation_in;
+      vertical_orientation_out = vertical_orientation.q;
   }
 }

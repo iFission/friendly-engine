@@ -74,7 +74,7 @@ module mojo_top(
         {
             game game;
             ledprocess led_grid;
-
+            regfile regfile;
         }
     }
 
@@ -152,18 +152,18 @@ module mojo_top(
         game.button_stage_right = button_stage_right_edge_detector.out;
     
         // io led output
-        io_led[1] = game.player_position_out[15:8];
-        io_led[0] = game.player_position_out[7:0];
+        io_led[1] = regfile.player_position_out[15:8];
+        io_led[0] = regfile.player_position_out[7:0];
 
         // debug output
-        io_led[2][7] = game.portrait_orientation_output;
-        io_led[2][6] = game.horizontal_orientation_output;
-        io_led[2][5] = game.vertical_orientation_output;
+        io_led[2][7] = regfile.portrait_orientation_out;
+        io_led[2][6] = regfile.horizontal_orientation_out;
+        io_led[2][5] = regfile.vertical_orientation_out;
 
         // led grid output for map
         led_grid.update=1;
         led_grid.win_pos=8b01110101;        //x=7, y=5
-        led_grid.player_pos=game.player_position_out;    //8,8 and 8,9
+        led_grid.player_pos=regfile.player_position_out;    //8,8 and 8,9
         led_grid.map=256x{b1};
         outled=led_grid.led;
 
