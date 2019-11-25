@@ -10,13 +10,14 @@ module map (
 
     output map_out[256],
     output player_position_out[16],
-    output win_position_out[8]
+    output win_position_out[8],
+    output map_index[2]
   ) 
 
 {
   .clk(clk){
     .rst(rst){
-      fsm map_fsm = {MAP1, MAP2, MAP3};
+      fsm map_fsm = {MAP2, MAP1, MAP3};
     }
   }
   
@@ -25,9 +26,14 @@ module map (
     map_out = 0;
     player_position_out = 0;
     win_position_out = 0;
+    map_index = 0;
 
     if (button_reset){
         map_fsm.d = map_fsm.MAP1;
+    }
+
+    if(win_bool_in || button_stage_right){
+    map_fsm.d = map_fsm.MAP2;
     }
 
     case(map_fsm.q){
@@ -35,14 +41,15 @@ module map (
             map_out = 256b0000000000000000000000000000000000000000000000000000000000000000000000000000000000011100000000000001111110000000000111111111000000001111111110000000000011111000000000000111000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
             player_position_out = 16b0110010100000000;
             win_position_out = 155;
+            map_index = 1;
 
             if(win_bool_in || button_stage_right){
                 map_fsm.d = map_fsm.MAP2;
             }
 
-            else if(loss_bool_in){
-                map_fsm.d = map_fsm.MAP1;
-            }
+            // else if(loss_bool_in){
+            //     map_fsm.d = map_fsm.MAP1;
+            // }
 
 
 
@@ -50,14 +57,15 @@ module map (
             map_out = 256b0000000000000000000000000000000000000000000000000000011111110000000001001111000000000100111111001111110000001111000011100000111100001110000001110000001001100000000000111110000000000011111000000000000111000000000000000000000000000000000000000000000000000000;
             player_position_out = 16b0110000100000000;
             win_position_out = 127;
+            map_index = 2;
 
             if(win_bool_in || button_stage_right){
                 map_fsm.d = map_fsm.MAP1;
             }
 
-            else if(loss_bool_in || button_stage_left){
-                map_fsm.d = map_fsm.MAP2;
-            }
+            // else if(loss_bool_in || button_stage_left){
+            //     map_fsm.d = map_fsm.MAP2;
+            // }
     }
     
   }

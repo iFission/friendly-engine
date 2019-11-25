@@ -176,6 +176,7 @@ module mojo_top(
         io_led[2][5] = game.vertical_orientation_out;
         io_led[2][4] = game.win_bool_out;
         io_led[2][3] = game.loss_bool_out;
+        io_led[2][2:1] = game.map_index;
 
         // led grid output for map
         led_grid.update=1;
