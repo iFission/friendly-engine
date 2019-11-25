@@ -27,6 +27,7 @@ module ledprocess #(
       dff bit_ctr[5];
       dff ctr[6];
       dff rst_ctr [$clog2(2500)];
+      dff ret[$clog2(15000)];
       
       dff rel_front[8];
       dff rel_back[8];
@@ -40,6 +41,7 @@ module ledprocess #(
   sig bitsR[24];       
   sig bitsG[24];
   sig bitsB[24];
+  sig bitsO[24];
   sig maplayout[256];
   
   always {
@@ -68,6 +70,7 @@ module ledprocess #(
     bitsR = 24b111111110000000000000000;      //This is actually blue
     bitsG = 24b000000001111111100000000;      //This is actually red
     bitsB = 24b000000000000000011111111;      //This is actully green
+    bitsO = 24x{b0};
     
     maplayout=c{map[15], map[14], map[13], map[12], map[11], map[10], map[9], map[8], map[7], map[6], map[5], map[4], map[3], map[2], map[1], map[0],
                 map[31], map[30], map[29], map[28], map[27], map[26], map[25], map[24], map[23], map[22], map[21], map[20], map[19], map[18], map[17], map[16],
@@ -88,12 +91,27 @@ module ledprocess #(
     
     pixel = pixel_ctr.q;
     case (state.q) {
-      state.SEND_PIXEL:
-      
-        
+      state.SEND_PIXEL:             
+        if (player_back.q==0 && pixel_ctr.q==player_back.q){
+          if (bitsO[bit_ctr.q])
+            led = ctr.q < 44;
+          else
+            led = ctr.q < 15;
+          
+          ctr.d = ctr.q + 1;
+          if (ctr.q == 55){
+            ctr.d = 0;
+            
+            bit_ctr.d = bit_ctr.q + 1;
+            if (bit_ctr.q == 23) {
+              bit_ctr.d = 0;
+              pixel_ctr.d = pixel_ctr.q + 1;
+            }
+          }
+        }
       //Display player position
-        if(pixel_ctr.q==player_back.q||pixel_ctr.q==player_front.q){
-          maplayout[pixel_ctr.q]=0;
+        else if(pixel_ctr.q==player_back.q||pixel_ctr.q==player_front.q){
+          //maplayout[pixel_ctr.q]=0;
           if (bitsG[bit_ctr.q])
             led = ctr.q < 44;
           else
@@ -107,13 +125,24 @@ module ledprocess #(
             if (bit_ctr.q == 23) {
               bit_ctr.d = 0;
               pixel_ctr.d = pixel_ctr.q + 1;
+              if (pixel_ctr.q == PIXEL_COUNT-1) {
+                if(ret.q<15000){
+                  led=0;
+                  ret.d=ret.q+1;
+                }
+                if(ret.q==15000){
+                  pixel_ctr.d = 0;
+                  ret.d=0;
+                  state.d = state.RESET;
+                }
+              }
               }
             }
         }
         
         //Display win_pixel
-        if(pixel_ctr.q==win_pos_xy.q){
-          maplayout[pixel_ctr.q]=0;
+        else if(pixel_ctr.q==win_pos_xy.q){
+          //maplayout[pixel_ctr.q]=0;
           if (bitsB[bit_ctr.q])
             led = ctr.q < 44;
           else
@@ -127,12 +156,23 @@ module ledprocess #(
             if (bit_ctr.q == 23) {
               bit_ctr.d = 0;
               pixel_ctr.d = pixel_ctr.q + 1;
+              if (pixel_ctr.q == PIXEL_COUNT-1) {
+                if(ret.q<15000){
+                  led=0;
+                  ret.d=ret.q+1;
+                }
+                if(ret.q==15000){
+                  pixel_ctr.d = 0;
+                  ret.d=0;
+                  state.d = state.RESET;
+                }
+              }
               }
             }
         }
         
         //Display map pixels
-        if (maplayout[pixel_ctr.q]){
+        else if (maplayout[pixel_ctr.q]){
           if (bitsR[bit_ctr.q])
             led = ctr.q < 44;
           else
@@ -148,17 +188,54 @@ module ledprocess #(
               pixel_ctr.d = pixel_ctr.q + 1;
                 
               if (pixel_ctr.q == PIXEL_COUNT-1) {
-                pixel_ctr.d = 0;
-                state.d = state.RESET;
+                if(ret.q<15000){
+                  led=0;
+                  ret.d=ret.q+1;
+                }
+                if(ret.q==15000){
+                  pixel_ctr.d = 0;
+                  ret.d=0;
+                  state.d = state.RESET;
+                }
               }
             }
           }
+        }
+        else{
+          if (bitsO[bit_ctr.q])
+            led = ctr.q < 44;
+          else
+            led = ctr.q < 15;
+          
+          ctr.d = ctr.q + 1;
+          if (ctr.q == 55){
+            ctr.d = 0;
+            
+            bit_ctr.d = bit_ctr.q + 1;
+            if (bit_ctr.q == 23) {
+              bit_ctr.d = 0;
+              pixel_ctr.d = pixel_ctr.q + 1;
+              
+              if (pixel_ctr.q == PIXEL_COUNT-1) {
+                if(ret.q<15000){
+                  led=0;
+                  ret.d=ret.q+1;
+                }
+                if(ret.q==15000){
+                  pixel_ctr.d = 0;
+                  ret.d=0;
+                  state.d = state.RESET;
+                }
+              }
+              }
+            }
         }
       
       state.RESET:
         if (&rst_ctr.q) {
           if (update) {
             rst_ctr.d = 0;
+            //led=15000x{b0};
             state.d = state.SEND_PIXEL;
           }
         } else {
