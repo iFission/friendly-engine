@@ -93,63 +93,79 @@ module mojo_top(
         // io button up
         io_button_up_button_conditioner.in = io_button[0]; // to reduce the bouncing effects of your button
         io_button_up_edge_detector.in = io_button_up_button_conditioner.out; // get the edge of button press
-        game.button_up = io_button_up_edge_detector.out;
 
         // io button centre
         io_button_centre_button_conditioner.in = io_button[1];
         io_button_centre_edge_detector.in = io_button_centre_button_conditioner.out;
-        game.button_reset = io_button_centre_edge_detector.out;
 
         // io button down
         io_button_down_button_conditioner.in = io_button[2];
         io_button_down_edge_detector.in = io_button_down_button_conditioner.out;
-        // game.button_down = io_button_down_edge_detector.out;
 
         // io button left
         io_button_left_button_conditioner.in = io_button[3];
         io_button_left_edge_detector.in = io_button_left_button_conditioner.out;
-        // game.button_left = io_button_left_edge_detector.out;
 
         // io button right
         io_button_right_button_conditioner.in = io_button[4];
         io_button_right_edge_detector.in = io_button_right_button_conditioner.out;
-        // game.button_right = io_button_right_edge_detector.out;
         
         // arcade button up
         button_up_conditioner.in = button_up; // to reduce the bouncing effects of your button
         button_up_edge_detector.in = button_up_conditioner.out; // get the edge of button press
-        game.button_up = button_up_edge_detector.out;
 
         // arcade button down
         button_down_conditioner.in = button_down;
         button_down_edge_detector.in = button_down_conditioner.out;
-        game.button_down = button_down_edge_detector.out;
 
         // arcade button left
         button_left_conditioner.in = button_left;
         button_left_edge_detector.in = button_left_conditioner.out;
-        game.button_left = button_left_edge_detector.out;
 
         // arcade button right
         button_right_conditioner.in = button_right;
         button_right_edge_detector.in = button_right_conditioner.out;
-        game.button_right = button_right_edge_detector.out;
 
         // arcade button reset
         button_reset_conditioner.in = button_reset;
         button_reset_edge_detector.in = button_reset_conditioner.out;
-        // game.button_reset = button_reset_edge_detector.out;
 
         // arcade button stage left
         button_stage_left_conditioner.in = button_stage_left;
         button_stage_left_edge_detector.in = button_stage_left_conditioner.out;
-        game.button_stage_left = button_stage_left_edge_detector.out;
 
         // arcade button stage right
         button_stage_right_conditioner.in = button_stage_right;
         button_stage_right_edge_detector.in = button_stage_right_conditioner.out;
-        game.button_stage_right = button_stage_right_edge_detector.out;
     
+        case(io_dip[0][0]){ // debug switch
+            0: // if debug false, use arcade buttons
+                game.button_up = button_up_edge_detector.out;
+                game.button_down = button_down_edge_detector.out;
+                game.button_left = button_left_edge_detector.out;
+                game.button_right = button_right_edge_detector.out;
+                game.button_reset = button_reset_edge_detector.out;
+                game.button_stage_left = button_stage_left_edge_detector.out;
+                game.button_stage_right = button_stage_right_edge_detector.out;
+            1: // if debug true, use io buttons
+                game.button_up = io_button_up_edge_detector.out;
+                game.button_reset = io_button_centre_edge_detector.out;
+                game.button_down = io_button_down_edge_detector.out;
+                game.button_left = io_button_left_edge_detector.out;
+                game.button_right = io_button_right_edge_detector.out;
+                game.button_stage_left = button_stage_left_edge_detector.out;
+                game.button_stage_right = button_stage_right_edge_detector.out;
+            default: // default use arcade buttons
+                game.button_up = button_up_edge_detector.out;
+                game.button_down = button_down_edge_detector.out;
+                game.button_left = button_left_edge_detector.out;
+                game.button_right = button_right_edge_detector.out;
+                game.button_reset = button_reset_edge_detector.out;
+                game.button_stage_left = button_stage_left_edge_detector.out;
+                game.button_stage_right = button_stage_right_edge_detector.out;
+
+        }
+
         // io led output
         io_led[1] = game.player_position_out[15:8];
         io_led[0] = game.player_position_out[7:0];
@@ -164,7 +180,7 @@ module mojo_top(
         led_grid.win_pos = game.win_position_out;        //x=7, y=5
         led_grid.player_pos = game.player_position_out;    //8,8 and 8,9
         // led_grid.map=256x{b1};
-        led_grid.map = game.win_position_out;
+        led_grid.map = game.map_out;
         outled = led_grid.led;
 
     }
