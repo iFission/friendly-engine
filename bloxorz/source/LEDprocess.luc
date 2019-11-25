@@ -27,6 +27,7 @@ module ledprocess #(
       dff bit_ctr[5];
       dff ctr[6];
       dff rst_ctr [$clog2(2500)];
+      dff ret[$clog2(15000)];
       
       dff rel_front[8];
       dff rel_back[8];
@@ -40,6 +41,7 @@ module ledprocess #(
   sig bitsR[24];       
   sig bitsG[24];
   sig bitsB[24];
+  sig bitsO[24];
   sig maplayout[256];
   
   always {
@@ -68,32 +70,48 @@ module ledprocess #(
     bitsR = 24b111111110000000000000000;      //This is actually blue
     bitsG = 24b000000001111111100000000;      //This is actually red
     bitsB = 24b000000000000000011111111;      //This is actully green
+    bitsO = 24x{b0};
     
-    maplayout=c{map[15], map[14], map[13], map[12], map[11], map[10], map[9], map[8], map[7], map[6], map[5], map[4], map[3], map[2], map[1], map[0],
-                map[31], map[30], map[29], map[28], map[27], map[26], map[25], map[24], map[23], map[22], map[21], map[20], map[19], map[18], map[17], map[16],
-                map[47], map[46], map[45], map[44], map[43], map[42], map[41], map[40], map[39], map[38], map[37], map[36], map[35], map[34], map[33], map[32 ],
-                map[63], map[62], map[61], map[60], map[59], map[58], map[57], map[56], map[55], map[54], map[53], map[52], map[51], map[50], map[49], map[48],
-                map[79], map[78], map[77], map[76], map[75], map[74], map[73], map[72], map[71], map[70], map[69], map[68], map[67], map[66], map[65], map[64],
-                map[95], map[94], map[93], map[92], map[91], map[90], map[89], map[88], map[87], map[86], map[85], map[84], map[83], map[82], map[81], map[80],
-                map[111], map[110], map[109], map[108], map[107], map[106], map[105], map[104], map[103], map[102], map[101], map[100], map[99], map[98], map[97], map[96],
-                map[127], map[126], map[125], map[124], map[123], map[122], map[121], map[120], map[119], map[118], map[117], map[116], map[115], map[114], map[113], map[112],
-                map[143], map[142], map[141], map[140], map[139], map[138], map[137], map[136], map[135], map[134], map[133], map[132], map[131], map[130], map[129], map[128],
-                map[159], map[158], map[157], map[156], map[155], map[154], map[153], map[152], map[151], map[150], map[149], map[148], map[147], map[146], map[145], map[144],
-                map[175], map[174], map[173], map[172], map[171], map[170], map[169], map[168], map[167], map[166], map[165], map[164], map[163], map[162], map[161], map[160],
-                map[191], map[190], map[189], map[188], map[187], map[186], map[185], map[184], map[183], map[182], map[181], map[180], map[179], map[178], map[177], map[176],
-                map[207], map[206], map[205], map[204], map[203], map[202], map[201], map[200], map[199], map[198], map[197], map[196], map[195], map[194], map[193], map[192],
-                map[223], map[222], map[221], map[220], map[219], map[218], map[217], map[216], map[215], map[214], map[213], map[212], map[211], map[210], map[209], map[208],
-                map[239], map[238], map[237], map[236], map[235], map[234], map[233], map[232], map[231], map[230], map[229], map[228], map[227], map[226], map[225], map[224],
-                map[255], map[254], map[253], map[252], map[251], map[250], map[250], map[248], map[247], map[246], map[245], map[244], map[243], map[242], map[241], map[240]};
+    maplayout=c{map[0],map[1],map[2],map[3],map[4],map[5],map[6],map[7],map[8],map[9],map[10],map[11],map[12],map[13],map[14],map[15],
+                map[31],map[30],map[29],map[28],map[27],map[26],map[25],map[24],map[23],map[22],map[21],map[20],map[19],map[18],map[17],map[16],
+                map[32],map[33],map[34],map[35],map[36],map[37],map[38],map[39],map[40],map[41],map[42],map[43],map[44],map[45],map[46],map[47],
+                map[63],map[62],map[61],map[60],map[59],map[58],map[57],map[56],map[55],map[54],map[53],map[52],map[51],map[50],map[49],map[48],
+                map[64],map[65],map[66],map[67],map[68],map[69],map[70],map[71],map[72],map[73],map[74],map[75],map[76],map[77],map[78],map[79],
+                map[95],map[94],map[93],map[92],map[91],map[90],map[89],map[88],map[87],map[86],map[85],map[84],map[83],map[82],map[81],map[80],
+                map[96],map[97],map[98],map[99],map[100],map[101],map[102],map[103],map[104],map[105],map[106],map[107],map[108],map[109],map[110],map[111],
+                map[127],map[126],map[125],map[124],map[123],map[122],map[121],map[120],map[119],map[118],map[117],map[116],map[115],map[114],map[113],map[112],
+                map[128],map[129],map[130],map[131],map[132],map[133],map[134],map[135],map[136],map[137],map[138],map[139],map[140],map[141],map[142],map[143],
+                map[159],map[158],map[157],map[156],map[155],map[154],map[153],map[152],map[151],map[150],map[149],map[148],map[147],map[146],map[145],map[144],
+                map[160],map[161],map[162],map[163],map[164],map[165],map[166],map[167],map[168],map[169],map[170],map[171],map[172],map[173],map[174],map[175],
+                map[191],map[190],map[189],map[188],map[187],map[186],map[185],map[184],map[183],map[182],map[181],map[180],map[179],map[178],map[177],map[176],
+                map[192],map[193],map[194],map[195],map[196],map[197],map[198],map[199],map[200],map[201],map[202],map[203],map[204],map[205],map[206],map[207],
+                map[223],map[222],map[221],map[220],map[219],map[218],map[217],map[216],map[215],map[214],map[213],map[212],map[211],map[210],map[209],map[208],
+                map[224],map[225],map[226],map[227],map[228],map[229],map[230],map[231],map[232],map[233],map[234],map[235],map[236],map[237],map[238],map[239],
+                map[255],map[254],map[253],map[252],map[251],map[250],map[250],map[248],map[247],map[246],map[245],map[244],map[243],map[242],map[241],map[240]};
     
     pixel = pixel_ctr.q;
     case (state.q) {
-      state.SEND_PIXEL:
-      
-        
+      state.SEND_PIXEL:             
+        if (player_back.q==0 && pixel_ctr.q==player_back.q){
+          if (bitsO[bit_ctr.q])
+            led = ctr.q < 44;
+          else
+            led = ctr.q < 15;
+          
+          ctr.d = ctr.q + 1;
+          if (ctr.q == 55){
+            ctr.d = 0;
+            
+            bit_ctr.d = bit_ctr.q + 1;
+            if (bit_ctr.q == 23) {
+              bit_ctr.d = 0;
+              pixel_ctr.d = pixel_ctr.q + 1;
+            }
+          }
+        }
       //Display player position
-        if(pixel_ctr.q==player_back.q||pixel_ctr.q==player_front.q){
-          maplayout[pixel_ctr.q]=0;
+        else if(pixel_ctr.q==player_back.q||pixel_ctr.q==player_front.q){
+          //maplayout[pixel_ctr.q]=0;
           if (bitsG[bit_ctr.q])
             led = ctr.q < 44;
           else
@@ -107,13 +125,17 @@ module ledprocess #(
             if (bit_ctr.q == 23) {
               bit_ctr.d = 0;
               pixel_ctr.d = pixel_ctr.q + 1;
+              if (pixel_ctr.q == PIXEL_COUNT-1) {
+                bit_ctr.d = 0;
+                pixel_ctr.d = pixel_ctr.q + 1;
+              }
               }
             }
         }
         
         //Display win_pixel
-        if(pixel_ctr.q==win_pos_xy.q){
-          maplayout[pixel_ctr.q]=0;
+        else if(pixel_ctr.q==win_pos_xy.q){
+          //maplayout[pixel_ctr.q]=0;
           if (bitsB[bit_ctr.q])
             led = ctr.q < 44;
           else
@@ -127,12 +149,16 @@ module ledprocess #(
             if (bit_ctr.q == 23) {
               bit_ctr.d = 0;
               pixel_ctr.d = pixel_ctr.q + 1;
+              if (pixel_ctr.q == PIXEL_COUNT-1) {
+                bit_ctr.d = 0;
+                pixel_ctr.d = pixel_ctr.q + 1;
+              }
               }
             }
         }
         
         //Display map pixels
-        if (maplayout[pixel_ctr.q]){
+        else if (maplayout[pixel_ctr.q]){
           if (bitsR[bit_ctr.q])
             led = ctr.q < 44;
           else
@@ -148,17 +174,40 @@ module ledprocess #(
               pixel_ctr.d = pixel_ctr.q + 1;
                 
               if (pixel_ctr.q == PIXEL_COUNT-1) {
-                pixel_ctr.d = 0;
-                state.d = state.RESET;
+                bit_ctr.d = 0;
+                pixel_ctr.d = pixel_ctr.q + 1;
               }
             }
           }
+        }
+        else{
+          if (bitsO[bit_ctr.q])
+            led = ctr.q < 44;
+          else
+            led = ctr.q < 15;
+          
+          ctr.d = ctr.q + 1;
+          if (ctr.q == 55){
+            ctr.d = 0;
+            
+            bit_ctr.d = bit_ctr.q + 1;
+            if (bit_ctr.q == 23) {
+              bit_ctr.d = 0;
+              pixel_ctr.d = pixel_ctr.q + 1;
+              
+              if (pixel_ctr.q == PIXEL_COUNT-1) {
+                bit_ctr.d = 0;
+                pixel_ctr.d = pixel_ctr.q + 1;
+              }
+              }
+            }
         }
       
       state.RESET:
         if (&rst_ctr.q) {
           if (update) {
             rst_ctr.d = 0;
+            //led=15000x{b0};
             state.d = state.SEND_PIXEL;
           }
         } else {
