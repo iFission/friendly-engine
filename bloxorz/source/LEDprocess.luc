@@ -27,6 +27,7 @@ module ledprocess #(
       dff bit_ctr[5];
       dff ctr[6];
       dff rst_ctr [$clog2(2500)];
+      dff ret[$clog2(15000)];
       
       dff rel_front[8];
       dff rel_back[8];
@@ -40,6 +41,7 @@ module ledprocess #(
   sig bitsR[24];       
   sig bitsG[24];
   sig bitsB[24];
+  sig bitsO[24];
   sig maplayout[256];
   
   always {
@@ -68,6 +70,7 @@ module ledprocess #(
     bitsR = 24b111111110000000000000000;      //This is actually blue
     bitsG = 24b000000001111111100000000;      //This is actually red
     bitsB = 24b000000000000000011111111;      //This is actully green
+    bitsO = 24x{b0};
     
     maplayout=c{map[15], map[14], map[13], map[12], map[11], map[10], map[9], map[8], map[7], map[6], map[5], map[4], map[3], map[2], map[1], map[0],
                 map[31], map[30], map[29], map[28], map[27], map[26], map[25], map[24], map[23], map[22], map[21], map[20], map[19], map[18], map[17], map[16],
