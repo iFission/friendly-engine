@@ -119,9 +119,23 @@ module lookup (
       205: outvalue=194;
       206: outvalue=193;
       207: outvalue=192;
-      
+      224: outvalue = 239;
+      225: outvalue = 238;
+      226: outvalue = 237;
+      227: outvalue = 236;
+      228: outvalue = 235;
+      229: outvalue = 234;
+      230: outvalue = 233;
+      231: outvalue = 232;
+      232: outvalue = 231;
+      233: outvalue = 230;
+      234: outvalue = 229;
+      235: outvalue = 228;
+      236: outvalue = 227;
+      237: outvalue = 226;
+      238: outvalue = 225;
+      239: outvalue = 224;
       default: outvalue=value;
     }
   }
 }
-

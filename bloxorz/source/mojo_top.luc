@@ -179,8 +179,8 @@ module mojo_top(
         led_grid.update=1;
         led_grid.win_pos = game.win_position_out;        //x=7, y=5
         led_grid.player_pos = game.player_position_out;    //8,8 and 8,9
-        // led_grid.map=256x{b1};
-        led_grid.map = game.map_out;
+        led_grid.map=256x{b1};
+        //led_grid.map = game.map_out;
         outled = led_grid.led;
 
     }
