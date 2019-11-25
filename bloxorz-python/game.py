@@ -22,7 +22,8 @@ def display_map():
     print(f'{player_x, player_y, player_x2, player_y2}')
 
 
-map_1 = load_map("map1.txt")
+map_1 = load_map(
+    "/Users/ALEX/Documents/friendly-engine/bloxorz-python/map1.txt")
 
 for y in range(len(map_1)):
     for x in range(len(map_1[0])):
@@ -41,7 +42,8 @@ for y in range(len(map_1)):
 
 def update_map():
     global map_1
-    map_1 = load_map("map1.txt")
+    map_1 = load_map(
+        "/Users/ALEX/Documents/friendly-engine/bloxorz-python/map1.txt")
     map_1[player_y][player_x] = 4
     if player_x2 is not 0 and player_y2 is not 0:
         map_1[player_y2][player_x2] = 4

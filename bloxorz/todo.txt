@@ -15,5 +15,10 @@ alu
 // write buttons
 // move in map 16x16 grid
 // display grid number in io_led
-complex movement with orientation
-write arcade buttons
+// complex movement with orientation
+// write arcade buttons
+
+20191124 plan
+fsm registers for movement
+map switch
+map selector fsm
