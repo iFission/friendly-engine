@@ -24,6 +24,7 @@ module game (
   .clk(clk){
     .rst(rst){
       regfile regfile;
+      map map;
     }
   }
   
@@ -38,7 +39,15 @@ module game (
     horizontal_orientation_out = regfile.horizontal_orientation_out;
     vertical_orientation_out = regfile.vertical_orientation_out;
 
-    regfile.map_in = 256b0000000000000000000000000000000000000000000000000000000000000000000000000000000000011100000000000001111110000000000111111111000000001111111110000000000011111000000000000111000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
+
+    // input to map fsm
+    map.button_reset = button_reset;
+    map.button_stage_left = button_stage_left;
+    map.button_stage_right = button_stage_right;
+    map.win_bool_in = regfile.win_bool_out;
+    map.loss_bool_in = regfile.loss_bool_out;
+
+    regfile.map_in = regfile.map_out;
     regfile.player_position_in = regfile.player_position_out;
     regfile.win_position_in = regfile.win_position_out;
     regfile.win_bool_in = regfile.win_bool_out;
@@ -49,9 +58,10 @@ module game (
 
     if (button_reset == 1)
     {
-      regfile.map_in = 256b0000000000000000000000000000000000000000000000000000000000000000000000000000000000011100000000000001111110000000000111111111000000001111111110000000000011111000000000000111000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
-      regfile.player_position_in = 16b0110010100000000;
-      regfile.win_position_in = 155;
+      // assign map from map fsm
+      regfile.map_in = map.map_out;
+      regfile.player_position_in = map.player_position_out;
+      regfile.win_position_in = map.win_position_out;
       regfile.win_bool_in = 0;
       regfile.loss_bool_in = 0;
       regfile.portrait_orientation_in = 1;
