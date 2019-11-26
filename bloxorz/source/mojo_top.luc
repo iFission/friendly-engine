@@ -138,7 +138,7 @@ module mojo_top(
         button_stage_right_conditioner.in = button_stage_right;
         button_stage_right_edge_detector.in = button_stage_right_conditioner.out;
     
-        case(io_dip[0][0]){ // debug switch
+        case(io_dip[0][0]){ // debug switch for button input
             0: // if debug false, use arcade buttons
                 game.button_up = button_up_edge_detector.out;
                 game.button_down = button_down_edge_detector.out;
@@ -166,18 +166,33 @@ module mojo_top(
 
         }
 
-        // io led output
-        io_led[1] = game.player_position_out[15:8];
-        io_led[0] = game.player_position_out[7:0];
+        case(io_dip[0][1]){ // debug switch to show player position loss
+            0:
+                // led output to show position
+                io_led[1] = game.player_position_out[15:8];
+                io_led[0] = game.player_position_out[7:0];
 
-        // debug output
-        io_led[2][7] = game.portrait_orientation_out;
-        io_led[2][6] = game.horizontal_orientation_out;
-        io_led[2][5] = game.vertical_orientation_out;
-        io_led[2][4] = game.win_bool_out;
-        io_led[2][3] = game.loss_bool_out;
-        io_led[2][2:1] = game.map_index;
+                io_led[2][7] = game.portrait_orientation_out;
+                io_led[2][6] = game.horizontal_orientation_out;
+                io_led[2][5] = game.vertical_orientation_out;
+                io_led[2][4] = game.win_bool_out;
+                io_led[2][3] = game.loss_bool_out;
+                io_led[2][2:1] = game.map_index;
+            1:
+                io_led[2][2] = game.map_out[game.player_position_out[15:8]];
+                io_led[2][1] = game.map_out[game.player_position_out[7:0]];
+            default:
+                // led output to show position
+                io_led[1] = game.player_position_out[15:8];
+                io_led[0] = game.player_position_out[7:0];
 
+                io_led[2][7] = game.portrait_orientation_out;
+                io_led[2][6] = game.horizontal_orientation_out;
+                io_led[2][5] = game.vertical_orientation_out;
+                io_led[2][4] = game.win_bool_out;
+                io_led[2][3] = game.loss_bool_out;
+                io_led[2][2:1] = game.map_index;
+    }
         // led grid output for map
         led_grid.update=1;
         led_grid.win_pos = game.win_position_out;        //x=7, y=5

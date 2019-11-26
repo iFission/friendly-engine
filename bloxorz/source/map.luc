@@ -17,7 +17,7 @@ module map (
 {
   .clk(clk){
     .rst(rst){
-      fsm map_fsm = {MAP1, MAP2, MAP3};
+      fsm map_fsm = {MAP2, MAP1, MAP3};
     }
   }
   
