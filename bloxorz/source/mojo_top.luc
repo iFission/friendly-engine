@@ -74,6 +74,8 @@ module mojo_top(
         {
             game game;
             ledprocess led_grid;
+            dff map[256];
+            dff player_position[8];
         }
     }
 
@@ -137,6 +139,8 @@ module mojo_top(
         // arcade button stage right
         button_stage_right_conditioner.in = button_stage_right;
         button_stage_right_edge_detector.in = button_stage_right_conditioner.out;
+
+        map.d = 256b0000000000000000000000000000000000000000000000000000000000000000000000000000000000011000000000000001111110000000000111111111000000001111111110000000000011111000000000000111000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
     
         case(io_dip[0][0]){ // debug switch for button input
             0: // if debug false, use arcade buttons
@@ -151,10 +155,13 @@ module mojo_top(
                 game.button_up = io_button_up_edge_detector.out;
                 game.button_reset = io_button_centre_edge_detector.out;
                 game.button_down = io_button_down_edge_detector.out;
-                game.button_left = io_button_left_edge_detector.out;
-                game.button_right = io_button_right_edge_detector.out;
+                player_position.d = player_position.q - io_button_left_edge_detector.out;
+                player_position.d = player_position.q + io_button_right_edge_detector.out;
                 game.button_stage_left = button_stage_left_edge_detector.out;
                 game.button_stage_right = button_stage_right_edge_detector.out;
+                game.button_left = button_stage_left_edge_detector.out;
+                game.button_right = button_stage_left_edge_detector.out;
+
             default: // default use arcade buttons
                 game.button_up = button_up_edge_detector.out;
                 game.button_down = button_down_edge_detector.out;
@@ -163,6 +170,7 @@ module mojo_top(
                 game.button_reset = button_reset_edge_detector.out;
                 game.button_stage_left = button_stage_left_edge_detector.out;
                 game.button_stage_right = button_stage_right_edge_detector.out;
+                player_position.d = 0;
 
         }
 
@@ -179,8 +187,7 @@ module mojo_top(
                 io_led[2][3] = game.loss_bool_out;
                 io_led[2][2:1] = game.map_index;
             1:
-                io_led[2][2] = game.map_out[game.player_position_out[15:8]];
-                io_led[2][1] = game.map_out[game.player_position_out[7:0]];
+                io_led[2][2] = map.q[255-player_position.q];
             default:
                 // led output to show position
                 io_led[1] = game.player_position_out[15:8];
@@ -196,9 +203,9 @@ module mojo_top(
         // led grid output for map
         led_grid.update=1;
         led_grid.win_pos = game.win_position_out;        //x=7, y=5
-        led_grid.player_pos = game.player_position_out;    //8,8 and 8,9
+        led_grid.player_pos = player_position.q;    //8,8 and 8,9
         // led_grid.map=256x{b1};
-        led_grid.map = game.map_out;
+        led_grid.map = map.q;
         outled = led_grid.led;
 
     }
