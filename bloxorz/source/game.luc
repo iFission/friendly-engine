@@ -159,42 +159,42 @@ module game (
     if (regfile.player_position_out[15:8] == regfile.win_position_out && regfile.portrait_orientation_out){
       regfile.win_bool_in = 1;
 
-      // assign map from map fsm
-      regfile.player_position_in = map.player_position_out;
-      regfile.win_position_in = map.win_position_out;
-      regfile.win_bool_in = 0;
-      regfile.loss_bool_in = 0;
-      regfile.portrait_orientation_in = 1;
-      regfile.horizontal_orientation_in = 0;
-      regfile.vertical_orientation_in = 0;
+      // // assign map from map fsm
+      // regfile.player_position_in = map.player_position_out;
+      // regfile.win_position_in = map.win_position_out;
+      // regfile.win_bool_in = 0;
+      // regfile.loss_bool_in = 0;
+      // regfile.portrait_orientation_in = 1;
+      // regfile.horizontal_orientation_in = 0;
+      // regfile.vertical_orientation_in = 0;
     }
 
     // check position is out to determine LOSS
     if (regfile.map_out[regfile.player_position_out[15:8]] == 0){
       regfile.loss_bool_in = 1;
 
-      // assign map from map fsm
-      regfile.player_position_in = map.player_position_out;
-      regfile.win_position_in = map.win_position_out;
-      regfile.win_bool_in = 0;
-      regfile.loss_bool_in = 0;
-      regfile.portrait_orientation_in = 1;
-      regfile.horizontal_orientation_in = 0;
-      regfile.vertical_orientation_in = 0;
+      // // assign map from map fsm
+      // regfile.player_position_in = map.player_position_out;
+      // regfile.win_position_in = map.win_position_out;
+      // regfile.win_bool_in = 0;
+      // regfile.loss_bool_in = 0;
+      // regfile.portrait_orientation_in = 1;
+      // regfile.horizontal_orientation_in = 0;
+      // regfile.vertical_orientation_in = 0;
     }
 
     // check position of last 8 bits is out, and not portrait to determine OUT
     if (regfile.map_out[regfile.player_position_out[7:0]] == 0 && ~regfile.portrait_orientation_out){
       regfile.loss_bool_in = 1;
 
-      // assign map from map fsm
-      regfile.player_position_in = map.player_position_out;
-      regfile.win_position_in = map.win_position_out;
-      regfile.win_bool_in = 0;
-      regfile.loss_bool_in = 0;
-      regfile.portrait_orientation_in = 1;
-      regfile.horizontal_orientation_in = 0;
-      regfile.vertical_orientation_in = 0;
+      // // assign map from map fsm
+      // regfile.player_position_in = map.player_position_out;
+      // regfile.win_position_in = map.win_position_out;
+      // regfile.win_bool_in = 0;
+      // regfile.loss_bool_in = 0;
+      // regfile.portrait_orientation_in = 1;
+      // regfile.horizontal_orientation_in = 0;
+      // regfile.vertical_orientation_in = 0;
     }
   }
 }

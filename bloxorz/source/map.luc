@@ -17,7 +17,7 @@ module map (
 {
   .clk(clk){
     .rst(rst){
-      fsm map_fsm = {MAP2, MAP1, MAP3};
+      fsm map_fsm = {MAP1, MAP2, MAP3};
     }
   }
   
@@ -47,9 +47,9 @@ module map (
                 map_fsm.d = map_fsm.MAP2;
             }
 
-            // else if(loss_bool_in){
-            //     map_fsm.d = map_fsm.MAP1;
-            // }
+            else if(loss_bool_in){
+                map_fsm.d = map_fsm.MAP1;
+            }
 
 
 
@@ -63,9 +63,9 @@ module map (
                 map_fsm.d = map_fsm.MAP1;
             }
 
-            // else if(loss_bool_in || button_stage_left){
-            //     map_fsm.d = map_fsm.MAP2;
-            // }
+            else if(loss_bool_in || button_stage_left){
+                map_fsm.d = map_fsm.MAP2;
+            }
     }
     
   }
