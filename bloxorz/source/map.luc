@@ -16,7 +16,7 @@ module map (
 {
   .clk(clk){
     .rst(rst){
-      fsm map_fsm = {MAP1, MAP2, MAP3, MAP4, MAP5};
+      fsm map_fsm = {MAP1, MAP2, MAP3, MAP4, MAP5, MAPWIN};
     }
   }
   
@@ -87,11 +87,21 @@ module map (
             map_index = 5;
 
             if(win_bool_in || button_stage_right){
-                map_fsm.d = map_fsm.MAP5;
+                map_fsm.d = map_fsm.MAPWIN;
             }
 
             if(button_stage_left){
                 map_fsm.d = map_fsm.MAP4;
+            }
+
+        map_fsm.MAPWIN:
+            map_out = 256b0000000000000000000000000000000000000000000000000000000000000000000000000000000001000101110100100100010010011010010001001001101001000100100101100101010010010110001010011101001000000000000000000000000000000000000000000000000000000000000000000000000000000000;
+            player_position_out[15:8] = 0;
+            win_position_out = 0;
+            map_index = 6;
+
+            if(button_stage_left){
+                map_fsm.d = map_fsm.MAP5;
             }
 
 
