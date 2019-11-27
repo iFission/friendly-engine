@@ -34,11 +34,7 @@ module map (
             win_position_out = 154;
             map_index = 1;
 
-            if(win_bool_in){
-                map_fsm.d = map_fsm.MAP2;
-            }
-
-            if(button_stage_right){
+            if(win_bool_in || button_stage_right){
                 map_fsm.d = map_fsm.MAP2;
             }
 
@@ -48,12 +44,12 @@ module map (
             win_position_out = 125;
             map_index = 2;
 
-            if(win_bool_in){
+            if(win_bool_in || button_stage_right){
                 map_fsm.d = map_fsm.MAP3;
             }
 
-            if(button_stage_right){
-                map_fsm.d = map_fsm.MAP3;
+            if(button_stage_left){
+                map_fsm.d = map_fsm.MAP1;
             }
 
         map_fsm.MAP3:
@@ -62,12 +58,12 @@ module map (
             win_position_out = 141;
             map_index = 3;
 
-            if(win_bool_in){
-                map_fsm.d = map_fsm.MAP1;
+            if(win_bool_in || button_stage_right){
+                map_fsm.d = map_fsm.MAP3;
             }
 
-            if(button_stage_right){
-                map_fsm.d = map_fsm.MAP1;
+            if(button_stage_left){
+                map_fsm.d = map_fsm.MAP2;
             }
 
 
