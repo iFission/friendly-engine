@@ -6,7 +6,6 @@ module game (
     input button_down,
     input button_left,
     input button_right,
-    input button_reset,
     input button_stage_left,
     input button_stage_right,
 
@@ -44,7 +43,6 @@ module game (
     map_index = map.map_index;
 
     // input to map fsm
-    map.button_reset = button_reset;
     map.button_stage_left = button_stage_left;
     map.button_stage_right = button_stage_right;
     map.win_bool_in = regfile.win_bool_out;
@@ -174,20 +172,6 @@ module game (
           regfile.loss_bool_in = 1;
           movement_fsm.d = movement_fsm.START;
         }
-
-
-    }
-    if (button_reset == 1)
-    {
-      // assign map from map fsm
-      regfile.map_in = map.map_out;
-      regfile.player_position_in = map.player_position_out;
-      regfile.win_position_in = map.win_position_out;
-      regfile.win_bool_in = 0;
-      regfile.loss_bool_in = 0;
-      regfile.portrait_orientation_in = 1;
-      regfile.horizontal_orientation_in = 0;
-      regfile.vertical_orientation_in = 0;
     }
 
   }

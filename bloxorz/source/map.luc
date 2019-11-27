@@ -2,7 +2,6 @@ module map (
     input clk,  // clock
     input rst,  // reset
 
-    input button_reset,
     input button_stage_left,
     input button_stage_right,
     input win_bool_in,
@@ -28,11 +27,7 @@ module map (
     win_position_out = 0;
     map_index = 0;
 
-    if (button_reset){
-        map_fsm.d = map_fsm.MAP1;
-    }
-
-    if(win_bool_in || button_stage_right){
+    if(button_stage_right){
     map_fsm.d = map_fsm.MAP2;
     }
 
@@ -53,7 +48,8 @@ module map (
 
         map_fsm.MAP2:
             map_out = 256b0000000000000000000000000000000000000000000000000000011111110000000001001111000000000100111111000111110000001111000011100000111100001110000001110000001001100000000000111110000000000011111000000000000111000000000000000000000000000000000000000000000000000000;
-            player_position_out = 16b0110000100000000;
+            player_position_out = 16b0110010000000000;
+            // player_position_out = 16b0110000100000000;
             win_position_out = 126;
             map_index = 2;
 
@@ -67,7 +63,8 @@ module map (
 
         map_fsm.MAP2:
             map_out = 256b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111110001111001110011000111111111001111011110000000111101111000000011110000000000000111000000000000000000000000000000000000000000000000000000000000000000000000000000000;
-            player_position_out = 16b1000000100000000;
+            // player_position_out = 16b1000000100000000;
+            player_position_out = 16b0110000100000000;
             win_position_out = 141;
             map_index = 3;
 

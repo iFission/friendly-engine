@@ -24,7 +24,6 @@ module mojo_top(
     input button_down,
     input button_left,
     input button_right,
-    input button_reset,
     input button_stage_left,
     input button_stage_right
 )
@@ -50,7 +49,6 @@ module mojo_top(
         button_conditioner button_down_conditioner;
         button_conditioner button_left_conditioner;
         button_conditioner button_right_conditioner;
-        button_conditioner button_reset_conditioner;
         button_conditioner button_stage_left_conditioner;
         button_conditioner button_stage_right_conditioner;
 
@@ -66,7 +64,6 @@ module mojo_top(
         edge_detector button_down_edge_detector(#RISE(1), #FALL(0));
         edge_detector button_left_edge_detector(#RISE(1), #FALL(0));
         edge_detector button_right_edge_detector(#RISE(1), #FALL(0));
-        edge_detector button_reset_edge_detector(#RISE(1), #FALL(0));
         edge_detector button_stage_left_edge_detector(#RISE(1), #FALL(0));
         edge_detector button_stage_right_edge_detector(#RISE(1), #FALL(0));
 
@@ -126,10 +123,6 @@ module mojo_top(
         button_right_conditioner.in = button_right;
         button_right_edge_detector.in = button_right_conditioner.out;
 
-        // arcade button reset
-        button_reset_conditioner.in = button_reset;
-        button_reset_edge_detector.in = button_reset_conditioner.out;
-
         // arcade button stage left
         button_stage_left_conditioner.in = button_stage_left;
         button_stage_left_edge_detector.in = button_stage_left_conditioner.out;
@@ -144,12 +137,10 @@ module mojo_top(
                 game.button_down = button_down_edge_detector.out;
                 game.button_left = button_left_edge_detector.out;
                 game.button_right = button_right_edge_detector.out;
-                game.button_reset = button_reset_edge_detector.out;
                 game.button_stage_left = button_stage_left_edge_detector.out;
                 game.button_stage_right = button_stage_right_edge_detector.out;
             1: // if debug true, use io buttons
                 game.button_up = io_button_up_edge_detector.out;
-                game.button_reset = io_button_centre_edge_detector.out;
                 game.button_down = io_button_down_edge_detector.out;
                 game.button_left = io_button_left_edge_detector.out;
                 game.button_right = io_button_right_edge_detector.out;
@@ -160,7 +151,6 @@ module mojo_top(
                 game.button_down = button_down_edge_detector.out;
                 game.button_left = button_left_edge_detector.out;
                 game.button_right = button_right_edge_detector.out;
-                game.button_reset = button_reset_edge_detector.out;
                 game.button_stage_left = button_stage_left_edge_detector.out;
                 game.button_stage_right = button_stage_right_edge_detector.out;
 
