@@ -12,6 +12,32 @@ NET "outled" LOC = P51;
 NET "outled" IOSTANDARD = LVTTL;
 
 ####################################################################################
+# Constraints from file : 'buttons.ucf'
+####################################################################################
+
+NET "button_up" LOC = P58;
+NET "button_up" IOSTANDARD = LVTTL;
+NET "button_up" PULLDOWN;
+NET "button_down" LOC = P67;
+NET "button_down" IOSTANDARD = LVTTL;
+NET "button_down" PULLDOWN;
+NET "button_left" LOC = P75;
+NET "button_left" IOSTANDARD = LVTTL;
+NET "button_left" PULLDOWN;
+NET "button_right" LOC = P79;
+NET "button_right" IOSTANDARD = LVTTL;
+NET "button_right" PULLDOWN;
+NET "button_reset" LOC = P81;
+NET "button_reset" IOSTANDARD = LVTTL;
+NET "button_reset" PULLDOWN;
+NET "button_stage_left" LOC = P83;
+NET "button_stage_left" IOSTANDARD = LVTTL;
+NET "button_stage_left" PULLDOWN;
+NET "button_stage_right" LOC = P85;
+NET "button_stage_right" IOSTANDARD = LVTTL;
+NET "button_stage_right" PULLDOWN;
+
+####################################################################################
 # Constraints from file : 'io_shield.ucf'
 ####################################################################################
 
@@ -34,15 +60,12 @@ NET "io_led[7]" IOSTANDARD = LVTTL;
 
 NET "io_led[8]" LOC = P84;
 NET "io_led[8]" IOSTANDARD = LVTTL;
-NET "io_led[9]" LOC = P85;
 NET "io_led[9]" IOSTANDARD = LVTTL;
 NET "io_led[10]" LOC = P82;
 NET "io_led[10]" IOSTANDARD = LVTTL;
-NET "io_led[11]" LOC = P83;
 NET "io_led[11]" IOSTANDARD = LVTTL;
 NET "io_led[12]" LOC = P80;
 NET "io_led[12]" IOSTANDARD = LVTTL;
-NET "io_led[13]" LOC = P81;
 NET "io_led[13]" IOSTANDARD = LVTTL;
 NET "io_led[14]" LOC = P11;
 NET "io_led[14]" IOSTANDARD = LVTTL;
@@ -112,25 +135,21 @@ NET "io_button[4]" PULLDOWN;
 NET "io_dip[23]" LOC = P57;
 NET "io_dip[23]" IOSTANDARD = LVTTL;
 NET "io_dip[23]" PULLDOWN;
-NET "io_dip[22]" LOC = P58;
 NET "io_dip[22]" IOSTANDARD = LVTTL;
 NET "io_dip[22]" PULLDOWN;
 NET "io_dip[21]" LOC = P66;
 NET "io_dip[21]" IOSTANDARD = LVTTL;
 NET "io_dip[21]" PULLDOWN;
-NET "io_dip[20]" LOC = P67;
 NET "io_dip[20]" IOSTANDARD = LVTTL;
 NET "io_dip[20]" PULLDOWN;
 NET "io_dip[19]" LOC = P74;
 NET "io_dip[19]" IOSTANDARD = LVTTL;
 NET "io_dip[19]" PULLDOWN;
-NET "io_dip[18]" LOC = P75;
 NET "io_dip[18]" IOSTANDARD = LVTTL;
 NET "io_dip[18]" PULLDOWN;
 NET "io_dip[17]" LOC = P78;
 NET "io_dip[17]" IOSTANDARD = LVTTL;
 NET "io_dip[17]" PULLDOWN;
-NET "io_dip[16]" LOC = P79;
 NET "io_dip[16]" IOSTANDARD = LVTTL;
 NET "io_dip[16]" PULLDOWN;
 

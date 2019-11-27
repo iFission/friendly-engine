@@ -1,1 +1,7 @@
 NET "button_up" LOC = P58 | IOSTANDARD = LVTTL | PULLDOWN;
+NET "button_down" LOC = P67 | IOSTANDARD = LVTTL | PULLDOWN;
+NET "button_left" LOC = P75 | IOSTANDARD = LVTTL | PULLDOWN;
+NET "button_right" LOC = P79 | IOSTANDARD = LVTTL | PULLDOWN;
+NET "button_reset" LOC = P81 | IOSTANDARD = LVTTL | PULLDOWN;
+NET "button_stage_left" LOC = P83 | IOSTANDARD = LVTTL | PULLDOWN;
+NET "button_stage_right" LOC = P85 | IOSTANDARD = LVTTL | PULLDOWN;

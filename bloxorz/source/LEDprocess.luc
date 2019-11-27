@@ -94,7 +94,7 @@ module ledprocess #(
     pixel = pixel_ctr.q;
     case (state.q) {
       state.SEND_PIXEL:             
-        if (player_back.q==0 && pixel_ctr.q==player_back.q){
+        if (pixel_ctr.q==0||pixel_ctr.q==15||pixel_ctr.q==255||pixel_ctr.q==240){
           if (bitsO[bit_ctr.q])
             led = ctr.q < 44;
           else
@@ -108,13 +108,42 @@ module ledprocess #(
             if (bit_ctr.q == 23) {
               bit_ctr.d = 0;
               pixel_ctr.d = pixel_ctr.q + 1;
+              if (pixel_ctr.q == PIXEL_COUNT-1) {
+                pixel_ctr.d = 0;
+                state.d = state.RESET;
+              }
             }
           }
         }
-      //Display player position
-        else if(pixel_ctr.q==player_back.q||pixel_ctr.q==player_front.q){
+
+        //Display Vertical player position
+        else if(player_back.q==15 & pixel_ctr.q==player_front.q){
           //maplayout[pixel_ctr.q]=0;
           if (bitsY[bit_ctr.q])
+            led = ctr.q < 44;
+          else
+            led = ctr.q < 15;
+          
+          ctr.d = ctr.q + 1;
+          if (ctr.q == 55){
+            ctr.d = 0;
+            
+            bit_ctr.d = bit_ctr.q + 1;
+            if (bit_ctr.q == 23) {
+              bit_ctr.d = 0;
+              pixel_ctr.d = pixel_ctr.q + 1;
+              if (pixel_ctr.q == PIXEL_COUNT-1) {
+                pixel_ctr.d = 0;
+                state.d = state.RESET;
+              }
+              }
+            }
+        }
+
+      //Display Horizontaol player position
+        else if(pixel_ctr.q==player_back.q||pixel_ctr.q==player_front.q){
+          //maplayout[pixel_ctr.q]=0;
+          if (bitsG[bit_ctr.q])
             led = ctr.q < 44;
           else
             led = ctr.q < 15;

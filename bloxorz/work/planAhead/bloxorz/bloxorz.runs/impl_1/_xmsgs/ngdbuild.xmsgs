@@ -5,5 +5,17 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
+<msg type="warning" file="ConstraintSystem" num="119" delta="new" >Constraint <arg fmt="%s" index="1">&lt;NET &quot;io_dip[22]&quot; IOSTANDARD = LVTTL;&gt; [mojo_top_0.ucf(138)]</arg>: This constraint cannot be distributed from the design objects matching &apos;<arg fmt="%s" index="2">NET &quot;io_dip[22]&quot;</arg>&apos; because those design objects do not contain or drive any instances of the correct type.
+</msg>
+
+<msg type="warning" file="ConstraintSystem" num="119" delta="new" >Constraint <arg fmt="%s" index="1">&lt;NET &quot;io_dip[20]&quot; IOSTANDARD = LVTTL;&gt; [mojo_top_0.ucf(143)]</arg>: This constraint cannot be distributed from the design objects matching &apos;<arg fmt="%s" index="2">NET &quot;io_dip[20]&quot;</arg>&apos; because those design objects do not contain or drive any instances of the correct type.
+</msg>
+
+<msg type="warning" file="ConstraintSystem" num="119" delta="new" >Constraint <arg fmt="%s" index="1">&lt;NET &quot;io_dip[18]&quot; IOSTANDARD = LVTTL;&gt; [mojo_top_0.ucf(148)]</arg>: This constraint cannot be distributed from the design objects matching &apos;<arg fmt="%s" index="2">NET &quot;io_dip[18]&quot;</arg>&apos; because those design objects do not contain or drive any instances of the correct type.
+</msg>
+
+<msg type="warning" file="ConstraintSystem" num="119" delta="new" >Constraint <arg fmt="%s" index="1">&lt;NET &quot;io_dip[16]&quot; IOSTANDARD = LVTTL;&gt; [mojo_top_0.ucf(153)]</arg>: This constraint cannot be distributed from the design objects matching &apos;<arg fmt="%s" index="2">NET &quot;io_dip[16]&quot;</arg>&apos; because those design objects do not contain or drive any instances of the correct type.
+</msg>
+
 </messages>
 
