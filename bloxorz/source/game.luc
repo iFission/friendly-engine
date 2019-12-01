@@ -25,7 +25,7 @@ module game (
     .rst(rst){
       regfile regfile;
       map map;
-      fsm movement_fsm = {START, NOTSTART};
+      fsm movement_fsm = {START, CHECK_MOVE, CHECK_WIN, PORTRAIT_ORIENTATION, HORIZONTAL_ORIENTATION, VERTICAL_ORIENTATION};
     }
   }
   
@@ -68,16 +68,16 @@ module game (
         regfile.horizontal_orientation_in = 0;
         regfile.vertical_orientation_in = 0;
 
-        movement_fsm.d = movement_fsm.NOTSTART;
+        movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION;
 
-      movement_fsm.NOTSTART:
-        if (regfile.portrait_orientation_out == 1){
+      movement_fsm.PORTRAIT_ORIENTATION:
           if (button_left == 1)
           {
             regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 2;
             regfile.player_position_in[7:0] = regfile.player_position_out[15:8] - 1;
             regfile.horizontal_orientation_in = 1;
             regfile.portrait_orientation_in = 0;
+            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
           }
           if (button_right == 1)
           {
@@ -85,6 +85,7 @@ module game (
             regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 2;
             regfile.horizontal_orientation_in = 1;
             regfile.portrait_orientation_in = 0;
+            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
           }
           if (button_up == 1)
           {
@@ -92,6 +93,7 @@ module game (
             regfile.player_position_in[7:0] = regfile.player_position_out[15:8] - 16;
             regfile.vertical_orientation_in = 1;
             regfile.portrait_orientation_in = 0;
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION;
           }
           if (button_down == 1)
           {
@@ -99,19 +101,31 @@ module game (
             regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 32;
             regfile.vertical_orientation_in = 1;
             regfile.portrait_orientation_in = 0;
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION;
           }
+          // check orientation is portrait and is on win position to determine WIN
+          if (regfile.player_position_out[15:8] == regfile.win_position_out){
+            regfile.win_bool_in = 1;
+            movement_fsm.d = movement_fsm.START;
           }
-
-        if (regfile.vertical_orientation_out == 1){
+          // check position is out to determine LOSS
+          if (regfile.map_out[255 - regfile.player_position_out[15:8]] == 0){
+            regfile.loss_bool_in = 1;
+            movement_fsm.d = movement_fsm.START;
+          }
+          
+      movement_fsm.VERTICAL_ORIENTATION:
           if (button_left == 1)
           {
             regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 1;
             regfile.player_position_in[7:0] = regfile.player_position_out[7:0] - 1;
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION;
           }
           if (button_right == 1)
           {
             regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 1;
             regfile.player_position_in[7:0] = regfile.player_position_out[7:0] + 1;
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION;
           }
           if (button_up == 1)
           {
@@ -119,6 +133,7 @@ module game (
             regfile.player_position_in[7:0] = 0;
             regfile.vertical_orientation_in = 0;
             regfile.portrait_orientation_in = 1;
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION;
           }
           if (button_down == 1)
           {
@@ -126,15 +141,22 @@ module game (
             regfile.player_position_in[7:0] = 0;
             regfile.vertical_orientation_in = 0;
             regfile.portrait_orientation_in = 1;
-          }}
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION;
+          }
+          // check position of first and last 8 bits is out to determine OUT
+          if (regfile.map_out[255 - regfile.player_position_out[15:8]] == 0 || regfile.map_out[255 - regfile.player_position_out[7:0]] == 0){
+            regfile.loss_bool_in = 1;
+            movement_fsm.d = movement_fsm.START;
+          }
 
-        if (regfile.horizontal_orientation_out == 1){
+      movement_fsm.HORIZONTAL_ORIENTATION:
           if (button_left == 1)
           {
             regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 1;
             regfile.player_position_in[7:0] = 0;
             regfile.horizontal_orientation_in = 0;
             regfile.portrait_orientation_in = 1;
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION;
           }
           if (button_right == 1)
           {
@@ -142,36 +164,26 @@ module game (
             regfile.player_position_in[7:0] = 0;
             regfile.horizontal_orientation_in = 0;
             regfile.portrait_orientation_in = 1;
-
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION;
           }
           if (button_up == 1)
           {
             regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 16;
             regfile.player_position_in[7:0] = regfile.player_position_out[7:0] - 16;
+            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
           }
           if (button_down == 1)
           {
             regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 16;
             regfile.player_position_in[7:0] = regfile.player_position_out[7:0] + 16;
-          }}
+            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
+          }
+          // check position of first and last 8 bits is out to determine OUT
+          if (regfile.map_out[255 - regfile.player_position_out[15:8]] == 0 || regfile.map_out[255 - regfile.player_position_out[7:0]] == 0){
+            regfile.loss_bool_in = 1;
+            movement_fsm.d = movement_fsm.START;
+          }
 
-        // check orientation is portrait and is on win position to determine WIN
-        if (regfile.player_position_out[15:8] == regfile.win_position_out && regfile.portrait_orientation_out){
-          regfile.win_bool_in = 1;
-          movement_fsm.d = movement_fsm.START;
-        }
-
-        // check position is out to determine LOSS
-        if (regfile.map_out[255 - regfile.player_position_out[15:8]] == 0){
-          regfile.loss_bool_in = 1;
-          movement_fsm.d = movement_fsm.START;
-        }
-
-        // check position of last 8 bits is out, and not portrait to determine OUT
-        if (regfile.map_out[255 - regfile.player_position_out[7:0]] == 0 && ~regfile.portrait_orientation_out){
-          regfile.loss_bool_in = 1;
-          movement_fsm.d = movement_fsm.START;
-        }
     }
 
   }
