@@ -3,7 +3,16 @@ module regfile (
     input clk,  // clock
     input rst,  // reset
     
+    // input write_address[3], // write address
+    // input we, // write enable
+    // input data[256], // data in
+    
+    // input read_address_a[3], //address port a 
+    // input read_address_b[3], //address port b
+    // output out_a[256], //read port a
+    // output out_b[256], //read port b
 
+    // debug
     input map_in[256],
     input player_position_in[16],
     input win_position_in[8],
@@ -27,13 +36,13 @@ module regfile (
   .clk(clk){
     .rst(rst){
       dff map[256];
-      dff player_position[16];
-      dff win_position[8];
-      dff win_bool;
-      dff loss_bool;
-      dff portrait_orientation;
-      dff horizontal_orientation;
-      dff vertical_orientation;
+      dff player_position[256];
+      dff win_position[256];
+      dff win_bool[256];
+      dff loss_bool[256];
+      dff portrait_orientation[256];
+      dff horizontal_orientation[256];
+      dff vertical_orientation[256];
     }
   }
 
@@ -42,24 +51,24 @@ module regfile (
       map_out = map.q;
 
       player_position.d = player_position_in;
-      player_position_out = player_position.q;
+      player_position_out = player_position.q[15-:16];
 
       win_position.d = win_position_in;
-      win_position_out = win_position.q;
+      win_position_out = win_position.q[7-:8];
 
       win_bool.d = win_bool_in;
-      win_bool_out = win_bool.q;
+      win_bool_out = win_bool.q[0];
 
       loss_bool.d = loss_bool_in;
-      loss_bool_out = loss_bool.q;
+      loss_bool_out = loss_bool.q[0];
 
       portrait_orientation.d = portrait_orientation_in;
-      portrait_orientation_out = portrait_orientation.q;
+      portrait_orientation_out = portrait_orientation.q[0];
 
       horizontal_orientation.d = horizontal_orientation_in;
-      horizontal_orientation_out = horizontal_orientation.q;
+      horizontal_orientation_out = horizontal_orientation.q[0];
 
       vertical_orientation.d = vertical_orientation_in;
-      vertical_orientation_out = vertical_orientation.q;
+      vertical_orientation_out = vertical_orientation.q[0];
   }
 }
