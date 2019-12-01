@@ -25,7 +25,28 @@ module game (
     .rst(rst){
       regfile regfile;
       map map;
-      fsm movement_fsm = {START, CHECK_MOVE, CHECK_WIN, PORTRAIT_ORIENTATION, HORIZONTAL_ORIENTATION, VERTICAL_ORIENTATION};
+      fsm movement_fsm = {
+        START,
+        PORTRAIT_ORIENTATION,
+        HORIZONTAL_ORIENTATION,
+        VERTICAL_ORIENTATION,
+        PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1,
+        PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2,
+        PORTRAIT_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION,
+        PORTRAIT_ORIENTATION_LEFT_UPDATE_HORIZONTAL_ORIENTATION,
+        PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1,
+        PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2,
+        PORTRAIT_ORIENTATION_RIGHT_UPDATE_PORTRAIT_ORIENTATION,
+        PORTRAIT_ORIENTATION_RIGHT_UPDATE_HORIZONTAL_ORIENTATION,
+        PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1,
+        PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2,
+        PORTRAIT_ORIENTATION_UP_UPDATE_PORTRAIT_ORIENTATION,
+        PORTRAIT_ORIENTATION_UP_UPDATE_HORIZONTAL_ORIENTATION,
+        PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1,
+        PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2,
+        PORTRAIT_ORIENTATION_DOWN_UPDATE_PORTRAIT_ORIENTATION,
+        PORTRAIT_ORIENTATION_DOWN_UPDATE_HORIZONTAL_ORIENTATION
+        };
     }
   }
   
@@ -36,7 +57,7 @@ module game (
     regfile.input_data = 0;
     regfile.read_address_a = 0;
     regfile.read_address_b = 0;
-        
+
     map_out = regfile.map_out;
     player_position_out = regfile.player_position_out;
     win_position_out = regfile.win_position_out;
@@ -79,19 +100,10 @@ module game (
       movement_fsm.PORTRAIT_ORIENTATION:
           if (button_left == 1)
           {
-            regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 2;
-            regfile.player_position_in[7:0] = regfile.player_position_out[15:8] - 1;
-            regfile.horizontal_orientation_in = 1;
-            regfile.portrait_orientation_in = 0;
-            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1;
           }
           if (button_right == 1)
           {
-            regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 1;
-            regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 2;
-            regfile.horizontal_orientation_in = 1;
-            regfile.portrait_orientation_in = 0;
-            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
           }
           if (button_up == 1)
           {
@@ -119,7 +131,39 @@ module game (
             regfile.loss_bool_in = 1;
             movement_fsm.d = movement_fsm.START;
           }
-          
+
+      movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1:
+          regfile.player_position_in[15:8] = regfile.player_position_out[15:8] - 2;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2;
+
+      movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2:
+          regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 1;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION;
+
+      movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION:
+          regfile.portrait_orientation_in = 0;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_HORIZONTAL_ORIENTATION;
+
+      movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_HORIZONTAL_ORIENTATION:
+          regfile.horizontal_orientation_in = 1;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
+
+      movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1:
+          regfile.player_position_in[15:8] = regfile.player_position_out[15:8] + 1;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2;
+
+      movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2:
+          regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 2;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PORTRAIT_ORIENTATION;
+
+      movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PORTRAIT_ORIENTATION:
+          regfile.portrait_orientation_in = 0;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_HORIZONTAL_ORIENTATION;
+
+      movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_HORIZONTAL_ORIENTATION:
+          regfile.horizontal_orientation_in = 1;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
+
       movement_fsm.VERTICAL_ORIENTATION:
           if (button_left == 1)
           {
@@ -189,8 +233,6 @@ module game (
             regfile.loss_bool_in = 1;
             movement_fsm.d = movement_fsm.START;
           }
-
     }
-
   }
 }
