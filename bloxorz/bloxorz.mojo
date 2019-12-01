@@ -16,8 +16,8 @@
     <src>bool16.luc</src>
     <src>bitshift.luc</src>
     <src>seven_seg.luc</src>
-    <src>regfile.luc</src>
     <src>map.luc</src>
+    <src>regfile.luc</src>
     <ucf>LED.ucf</ucf>
     <ucf>buttons.ucf</ucf>
     <ucf lib="true">io_shield.ucf</ucf>

@@ -27,7 +27,6 @@ module mojo_top_0 (
     input button_down,
     input button_left,
     input button_right,
-    input button_reset,
     input button_stage_left,
     input button_stage_right
   );
@@ -106,13 +105,6 @@ module mojo_top_0 (
     .in(M_button_right_conditioner_in),
     .out(M_button_right_conditioner_out)
   );
-  wire [1-1:0] M_button_reset_conditioner_out;
-  reg [1-1:0] M_button_reset_conditioner_in;
-  button_conditioner_2 button_reset_conditioner (
-    .clk(clk),
-    .in(M_button_reset_conditioner_in),
-    .out(M_button_reset_conditioner_out)
-  );
   wire [1-1:0] M_button_stage_left_conditioner_out;
   reg [1-1:0] M_button_stage_left_conditioner_in;
   button_conditioner_2 button_stage_left_conditioner (
@@ -129,84 +121,77 @@ module mojo_top_0 (
   );
   wire [1-1:0] M_io_button_up_edge_detector_out;
   reg [1-1:0] M_io_button_up_edge_detector_in;
-  edge_detector_14 io_button_up_edge_detector (
+  edge_detector_13 io_button_up_edge_detector (
     .clk(clk),
     .in(M_io_button_up_edge_detector_in),
     .out(M_io_button_up_edge_detector_out)
   );
   wire [1-1:0] M_io_button_down_edge_detector_out;
   reg [1-1:0] M_io_button_down_edge_detector_in;
-  edge_detector_14 io_button_down_edge_detector (
+  edge_detector_13 io_button_down_edge_detector (
     .clk(clk),
     .in(M_io_button_down_edge_detector_in),
     .out(M_io_button_down_edge_detector_out)
   );
   wire [1-1:0] M_io_button_left_edge_detector_out;
   reg [1-1:0] M_io_button_left_edge_detector_in;
-  edge_detector_14 io_button_left_edge_detector (
+  edge_detector_13 io_button_left_edge_detector (
     .clk(clk),
     .in(M_io_button_left_edge_detector_in),
     .out(M_io_button_left_edge_detector_out)
   );
   wire [1-1:0] M_io_button_right_edge_detector_out;
   reg [1-1:0] M_io_button_right_edge_detector_in;
-  edge_detector_14 io_button_right_edge_detector (
+  edge_detector_13 io_button_right_edge_detector (
     .clk(clk),
     .in(M_io_button_right_edge_detector_in),
     .out(M_io_button_right_edge_detector_out)
   );
   wire [1-1:0] M_io_button_centre_edge_detector_out;
   reg [1-1:0] M_io_button_centre_edge_detector_in;
-  edge_detector_14 io_button_centre_edge_detector (
+  edge_detector_13 io_button_centre_edge_detector (
     .clk(clk),
     .in(M_io_button_centre_edge_detector_in),
     .out(M_io_button_centre_edge_detector_out)
   );
   wire [1-1:0] M_button_up_edge_detector_out;
   reg [1-1:0] M_button_up_edge_detector_in;
-  edge_detector_14 button_up_edge_detector (
+  edge_detector_13 button_up_edge_detector (
     .clk(clk),
     .in(M_button_up_edge_detector_in),
     .out(M_button_up_edge_detector_out)
   );
   wire [1-1:0] M_button_down_edge_detector_out;
   reg [1-1:0] M_button_down_edge_detector_in;
-  edge_detector_14 button_down_edge_detector (
+  edge_detector_13 button_down_edge_detector (
     .clk(clk),
     .in(M_button_down_edge_detector_in),
     .out(M_button_down_edge_detector_out)
   );
   wire [1-1:0] M_button_left_edge_detector_out;
   reg [1-1:0] M_button_left_edge_detector_in;
-  edge_detector_14 button_left_edge_detector (
+  edge_detector_13 button_left_edge_detector (
     .clk(clk),
     .in(M_button_left_edge_detector_in),
     .out(M_button_left_edge_detector_out)
   );
   wire [1-1:0] M_button_right_edge_detector_out;
   reg [1-1:0] M_button_right_edge_detector_in;
-  edge_detector_14 button_right_edge_detector (
+  edge_detector_13 button_right_edge_detector (
     .clk(clk),
     .in(M_button_right_edge_detector_in),
     .out(M_button_right_edge_detector_out)
   );
-  wire [1-1:0] M_button_reset_edge_detector_out;
-  reg [1-1:0] M_button_reset_edge_detector_in;
-  edge_detector_14 button_reset_edge_detector (
-    .clk(clk),
-    .in(M_button_reset_edge_detector_in),
-    .out(M_button_reset_edge_detector_out)
-  );
   wire [1-1:0] M_button_stage_left_edge_detector_out;
   reg [1-1:0] M_button_stage_left_edge_detector_in;
-  edge_detector_14 button_stage_left_edge_detector (
+  edge_detector_13 button_stage_left_edge_detector (
     .clk(clk),
     .in(M_button_stage_left_edge_detector_in),
     .out(M_button_stage_left_edge_detector_out)
   );
   wire [1-1:0] M_button_stage_right_edge_detector_out;
   reg [1-1:0] M_button_stage_right_edge_detector_in;
-  edge_detector_14 button_stage_right_edge_detector (
+  edge_detector_13 button_stage_right_edge_detector (
     .clk(clk),
     .in(M_button_stage_right_edge_detector_in),
     .out(M_button_stage_right_edge_detector_out)
@@ -224,17 +209,15 @@ module mojo_top_0 (
   reg [1-1:0] M_game_button_down;
   reg [1-1:0] M_game_button_left;
   reg [1-1:0] M_game_button_right;
-  reg [1-1:0] M_game_button_reset;
   reg [1-1:0] M_game_button_stage_left;
   reg [1-1:0] M_game_button_stage_right;
-  game_26 game (
+  game_24 game (
     .clk(clk),
     .rst(rst),
     .button_up(M_game_button_up),
     .button_down(M_game_button_down),
     .button_left(M_game_button_left),
     .button_right(M_game_button_right),
-    .button_reset(M_game_button_reset),
     .button_stage_left(M_game_button_stage_left),
     .button_stage_right(M_game_button_stage_right),
     .map_out(M_game_map_out),
@@ -253,7 +236,7 @@ module mojo_top_0 (
   reg [8-1:0] M_led_grid_win_pos;
   reg [16-1:0] M_led_grid_player_pos;
   reg [1-1:0] M_led_grid_update;
-  ledprocess_27 led_grid (
+  ledprocess_25 led_grid (
     .clk(clk),
     .rst(rst),
     .map(M_led_grid_map),
@@ -292,12 +275,12 @@ module mojo_top_0 (
     M_button_left_edge_detector_in = M_button_left_conditioner_out;
     M_button_right_conditioner_in = button_right;
     M_button_right_edge_detector_in = M_button_right_conditioner_out;
-    M_button_reset_conditioner_in = button_reset;
-    M_button_reset_edge_detector_in = M_button_reset_conditioner_out;
     M_button_stage_left_conditioner_in = button_stage_left;
     M_button_stage_left_edge_detector_in = M_button_stage_left_conditioner_out;
     M_button_stage_right_conditioner_in = button_stage_right;
     M_button_stage_right_edge_detector_in = M_button_stage_right_conditioner_out;
+    M_game_button_stage_left = M_button_stage_left_edge_detector_out;
+    M_game_button_stage_right = M_button_stage_right_edge_detector_out;
     
     case (io_dip[0+0+0-:1])
       1'h0: begin
@@ -305,27 +288,18 @@ module mojo_top_0 (
         M_game_button_down = M_button_down_edge_detector_out;
         M_game_button_left = M_button_left_edge_detector_out;
         M_game_button_right = M_button_right_edge_detector_out;
-        M_game_button_reset = M_button_reset_edge_detector_out;
-        M_game_button_stage_left = M_button_stage_left_edge_detector_out;
-        M_game_button_stage_right = M_button_stage_right_edge_detector_out;
       end
       1'h1: begin
         M_game_button_up = M_io_button_up_edge_detector_out;
-        M_game_button_reset = M_io_button_centre_edge_detector_out;
         M_game_button_down = M_io_button_down_edge_detector_out;
         M_game_button_left = M_io_button_left_edge_detector_out;
         M_game_button_right = M_io_button_right_edge_detector_out;
-        M_game_button_stage_left = M_button_stage_left_edge_detector_out;
-        M_game_button_stage_right = M_button_stage_right_edge_detector_out;
       end
       default: begin
         M_game_button_up = M_button_up_edge_detector_out;
         M_game_button_down = M_button_down_edge_detector_out;
         M_game_button_left = M_button_left_edge_detector_out;
         M_game_button_right = M_button_right_edge_detector_out;
-        M_game_button_reset = M_button_reset_edge_detector_out;
-        M_game_button_stage_left = M_button_stage_left_edge_detector_out;
-        M_game_button_stage_right = M_button_stage_right_edge_detector_out;
       end
     endcase
     

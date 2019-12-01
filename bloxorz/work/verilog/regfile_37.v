@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module regfile_40 (
+module regfile_37 (
     input clk,
     input rst,
     input [255:0] map_in,

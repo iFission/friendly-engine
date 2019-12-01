@@ -96,7 +96,7 @@ module ledprocess #(
       state.SEND_PIXEL:             
         if (pixel_ctr.q==0||pixel_ctr.q==15||pixel_ctr.q==255||pixel_ctr.q==240){
           if (bitsO[bit_ctr.q])
-            led = ctr.q < 44;
+            led = ctr.q <40;
           else
             led = ctr.q < 15;
           
@@ -120,7 +120,7 @@ module ledprocess #(
         else if(player_back.q==15 & pixel_ctr.q==player_front.q){
           //maplayout[pixel_ctr.q]=0;
           if (bitsY[bit_ctr.q])
-            led = ctr.q < 44;
+            led = ctr.q <40;
           else
             led = ctr.q < 15;
           
@@ -144,7 +144,7 @@ module ledprocess #(
         else if(pixel_ctr.q==player_back.q||pixel_ctr.q==player_front.q){
           //maplayout[pixel_ctr.q]=0;
           if (bitsG[bit_ctr.q])
-            led = ctr.q < 44;
+            led = ctr.q <40;
           else
             led = ctr.q < 15;
           
@@ -168,7 +168,7 @@ module ledprocess #(
         else if(pixel_ctr.q==win_pos_xy.q){
           //maplayout[pixel_ctr.q]=0;
           if (bitsB[bit_ctr.q])
-            led = ctr.q < 44;
+            led = ctr.q <40;
           else
             led = ctr.q < 15;
           
@@ -191,7 +191,7 @@ module ledprocess #(
         //Display map pixels
         else if (maplayout[pixel_ctr.q]){
           if (bitsR[bit_ctr.q])
-            led = ctr.q < 44;
+            led = ctr.q <40;
           else
             led = ctr.q < 15;
           
@@ -213,7 +213,7 @@ module ledprocess #(
         }
         else{
           if (bitsO[bit_ctr.q])
-            led = ctr.q < 44;
+            led = ctr.q <40;
           else
             led = ctr.q < 15;
           

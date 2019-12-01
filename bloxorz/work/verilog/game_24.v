@@ -4,14 +4,13 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module game_26 (
+module game_24 (
     input clk,
     input rst,
     input button_up,
     input button_down,
     input button_left,
     input button_right,
-    input button_reset,
     input button_stage_left,
     input button_stage_right,
     output reg [255:0] map_out,
@@ -43,7 +42,7 @@ module game_26 (
   reg [1-1:0] M_regfile_portrait_orientation_in;
   reg [1-1:0] M_regfile_horizontal_orientation_in;
   reg [1-1:0] M_regfile_vertical_orientation_in;
-  regfile_40 regfile (
+  regfile_37 regfile (
     .clk(clk),
     .rst(rst),
     .map_in(M_regfile_map_in),
@@ -67,15 +66,13 @@ module game_26 (
   wire [16-1:0] M_map_player_position_out;
   wire [8-1:0] M_map_win_position_out;
   wire [2-1:0] M_map_map_index;
-  reg [1-1:0] M_map_button_reset;
   reg [1-1:0] M_map_button_stage_left;
   reg [1-1:0] M_map_button_stage_right;
   reg [1-1:0] M_map_win_bool_in;
   reg [1-1:0] M_map_loss_bool_in;
-  map_41 map (
+  map_38 map (
     .clk(clk),
     .rst(rst),
-    .button_reset(M_map_button_reset),
     .button_stage_left(M_map_button_stage_left),
     .button_stage_right(M_map_button_stage_right),
     .win_bool_in(M_map_win_bool_in),
@@ -102,7 +99,6 @@ module game_26 (
     horizontal_orientation_out = M_regfile_horizontal_orientation_out;
     vertical_orientation_out = M_regfile_vertical_orientation_out;
     map_index = M_map_map_index;
-    M_map_button_reset = button_reset;
     M_map_button_stage_left = button_stage_left;
     M_map_button_stage_right = button_stage_right;
     M_map_win_bool_in = M_regfile_win_bool_out;
@@ -213,16 +209,6 @@ module game_26 (
         end
       end
     endcase
-    if (button_reset == 1'h1) begin
-      M_regfile_map_in = M_map_map_out;
-      M_regfile_player_position_in = M_map_player_position_out;
-      M_regfile_win_position_in = M_map_win_position_out;
-      M_regfile_win_bool_in = 1'h0;
-      M_regfile_loss_bool_in = 1'h0;
-      M_regfile_portrait_orientation_in = 1'h1;
-      M_regfile_horizontal_orientation_in = 1'h0;
-      M_regfile_vertical_orientation_in = 1'h0;
-    end
   end
   
   always @(posedge clk) begin

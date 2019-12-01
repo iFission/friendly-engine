@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module lookup_42 (
+module lookup_39 (
     input clk,
     input rst,
     input [7:0] value,

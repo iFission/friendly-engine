@@ -7,22 +7,22 @@ Reading design: mojo_top_0.prj
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/regfile_40.v" into library work
-Parsing module <regfile_40>.
-Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/pipeline_28.v" into library work
-Parsing module <pipeline_28>.
-Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/map_41.v" into library work
-Parsing module <map_41>.
-Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/lookup_42.v" into library work
-Parsing module <lookup_42>.
+Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/regfile_37.v" into library work
+Parsing module <regfile_37>.
+Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/pipeline_26.v" into library work
+Parsing module <pipeline_26>.
+Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/map_38.v" into library work
+Parsing module <map_38>.
+Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/lookup_39.v" into library work
+Parsing module <lookup_39>.
 Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/reset_conditioner_1.v" into library work
 Parsing module <reset_conditioner_1>.
-Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/LEDprocess_27.v" into library work
-Parsing module <ledprocess_27>.
-Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/game_26.v" into library work
-Parsing module <game_26>.
-Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/edge_detector_14.v" into library work
-Parsing module <edge_detector_14>.
+Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/LEDprocess_25.v" into library work
+Parsing module <ledprocess_25>.
+Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/game_24.v" into library work
+Parsing module <game_24>.
+Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/edge_detector_13.v" into library work
+Parsing module <edge_detector_13>.
 Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/button_conditioner_2.v" into library work
 Parsing module <button_conditioner_2>.
 Analyzing Verilog file "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/mojo_top_0.v" into library work
@@ -38,21 +38,27 @@ Elaborating module <reset_conditioner_1>.
 
 Elaborating module <button_conditioner_2>.
 
-Elaborating module <pipeline_28>.
+Elaborating module <pipeline_26>.
 
-Elaborating module <edge_detector_14>.
+Elaborating module <edge_detector_13>.
+WARNING:HDLCompiler:1127 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/mojo_top_0.v" Line 155: Assignment to M_io_button_centre_edge_detector_out ignored, since the identifier is never used
 
-Elaborating module <game_26>.
+Elaborating module <game_24>.
 
-Elaborating module <regfile_40>.
+Elaborating module <regfile_37>.
 
-Elaborating module <map_41>.
+Elaborating module <map_38>.
+WARNING:HDLCompiler:413 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/map_38.v" Line 77: Result of 3-bit expression is truncated to fit in 2-bit target.
+WARNING:HDLCompiler:413 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/map_38.v" Line 89: Result of 3-bit expression is truncated to fit in 2-bit target.
+WARNING:HDLCompiler:413 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/map_38.v" Line 101: Result of 3-bit expression is truncated to fit in 2-bit target.
 
-Elaborating module <ledprocess_27>.
+Elaborating module <ledprocess_25>.
 
-Elaborating module <lookup_42>.
-WARNING:HDLCompiler:1127 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/LEDprocess_27.v" Line 246: Assignment to M_player_front_x_q ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/mojo_top_0.v" Line 263: Assignment to M_led_grid_pixel ignored, since the identifier is never used
+Elaborating module <lookup_39>.
+WARNING:HDLCompiler:1127 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/LEDprocess_25.v" Line 246: Assignment to M_player_front_x_q ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/mojo_top_0.v" Line 246: Assignment to M_led_grid_pixel ignored, since the identifier is never used
+WARNING:Xst:2972 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/mojo_top_0.v" line 61. All outputs of instance <io_button_centre_button_conditioner> of block <button_conditioner_2> are unconnected in block <mojo_top_0>. Underlying logic will be removed.
+WARNING:Xst:2972 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/mojo_top_0.v" line 152. All outputs of instance <io_button_centre_edge_detector> of block <edge_detector_13> are unconnected in block <mojo_top_0>. Underlying logic will be removed.
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -67,20 +73,21 @@ WARNING:Xst:647 - Input <spi_mosi> is never used. This port will be preserved an
 WARNING:Xst:647 - Input <spi_sck> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <avr_tx> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <avr_rx_busy> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-INFO:Xst:3210 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/mojo_top_0.v" line 256: Output port <pixel> of the instance <led_grid> is unconnected or connected to loadless signal.
-    Found 8-bit subtractor for signal <GND_1_o_GND_1_o_sub_1_OUT<7:0>> created at line 344.
-    Found 8-bit subtractor for signal <GND_1_o_GND_1_o_sub_3_OUT<7:0>> created at line 345.
-    Found 511-bit shifter logical right for signal <n0067> created at line 344
-    Found 511-bit shifter logical right for signal <n0069> created at line 345
-    Found 1-bit tristate buffer for signal <spi_miso> created at line 267
-    Found 1-bit tristate buffer for signal <spi_channel<3>> created at line 267
-    Found 1-bit tristate buffer for signal <spi_channel<2>> created at line 267
-    Found 1-bit tristate buffer for signal <spi_channel<1>> created at line 267
-    Found 1-bit tristate buffer for signal <spi_channel<0>> created at line 267
-    Found 1-bit tristate buffer for signal <avr_rx> created at line 267
+INFO:Xst:3210 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/mojo_top_0.v" line 152: Output port <out> of the instance <io_button_centre_edge_detector> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/mojo_top_0.v" line 239: Output port <pixel> of the instance <led_grid> is unconnected or connected to loadless signal.
+    Found 8-bit subtractor for signal <GND_1_o_GND_1_o_sub_1_OUT<7:0>> created at line 318.
+    Found 8-bit subtractor for signal <GND_1_o_GND_1_o_sub_3_OUT<7:0>> created at line 319.
+    Found 511-bit shifter logical right for signal <n0064> created at line 318
+    Found 511-bit shifter logical right for signal <n0066> created at line 319
+    Found 1-bit tristate buffer for signal <spi_miso> created at line 250
+    Found 1-bit tristate buffer for signal <spi_channel<3>> created at line 250
+    Found 1-bit tristate buffer for signal <spi_channel<2>> created at line 250
+    Found 1-bit tristate buffer for signal <spi_channel<1>> created at line 250
+    Found 1-bit tristate buffer for signal <spi_channel<0>> created at line 250
+    Found 1-bit tristate buffer for signal <avr_rx> created at line 250
     Summary:
 	inferred   2 Adder/Subtractor(s).
-	inferred   6 Multiplexer(s).
+	inferred   5 Multiplexer(s).
 	inferred   2 Combinational logic shifter(s).
 	inferred   6 Tristate(s).
 Unit <mojo_top_0> synthesized.
@@ -101,50 +108,50 @@ Synthesizing Unit <button_conditioner_2>.
 	inferred  20 D-type flip-flop(s).
 Unit <button_conditioner_2> synthesized.
 
-Synthesizing Unit <pipeline_28>.
-    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/pipeline_28.v".
+Synthesizing Unit <pipeline_26>.
+    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/pipeline_26.v".
     Found 2-bit register for signal <M_pipe_q>.
     Summary:
 	inferred   2 D-type flip-flop(s).
-Unit <pipeline_28> synthesized.
+Unit <pipeline_26> synthesized.
 
-Synthesizing Unit <edge_detector_14>.
-    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/edge_detector_14.v".
+Synthesizing Unit <edge_detector_13>.
+    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/edge_detector_13.v".
     Found 1-bit register for signal <M_last_q>.
     Summary:
 	inferred   1 D-type flip-flop(s).
-Unit <edge_detector_14> synthesized.
+Unit <edge_detector_13> synthesized.
 
-Synthesizing Unit <game_26>.
-    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/game_26.v".
+Synthesizing Unit <game_24>.
+    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/game_24.v".
     Found 1-bit register for signal <M_movement_fsm_q>.
-    Found 8-bit subtractor for signal <M_regfile_player_position_out[15]_GND_6_o_sub_3_OUT> created at line 134.
-    Found 8-bit subtractor for signal <M_regfile_player_position_out[15]_GND_6_o_sub_4_OUT> created at line 135.
-    Found 8-bit subtractor for signal <M_regfile_player_position_out[15]_GND_6_o_sub_11_OUT> created at line 146.
-    Found 8-bit subtractor for signal <M_regfile_player_position_out[15]_GND_6_o_sub_12_OUT> created at line 147.
-    Found 8-bit subtractor for signal <M_regfile_player_position_out[7]_GND_6_o_sub_22_OUT> created at line 161.
-    Found 8-bit subtractor for signal <M_regfile_player_position_out[7]_GND_6_o_sub_44_OUT> created at line 195.
-    Found 8-bit adder for signal <M_regfile_player_position_out[15]_GND_6_o_add_6_OUT> created at line 140.
-    Found 8-bit adder for signal <M_regfile_player_position_out[15]_GND_6_o_add_7_OUT> created at line 141.
-    Found 8-bit adder for signal <M_regfile_player_position_out[15]_GND_6_o_add_14_OUT> created at line 152.
-    Found 8-bit adder for signal <M_regfile_player_position_out[15]_GND_6_o_add_15_OUT> created at line 153.
-    Found 8-bit adder for signal <M_regfile_player_position_out[7]_GND_6_o_add_25_OUT> created at line 165.
-    Found 8-bit adder for signal <M_regfile_player_position_out[7]_GND_6_o_add_47_OUT> created at line 199.
-    Found 8-bit subtractor for signal <GND_6_o_GND_6_o_sub_52_OUT<7:0>> created at line 206.
-    Found 8-bit subtractor for signal <GND_6_o_GND_6_o_sub_55_OUT<7:0>> created at line 210.
-    Found 511-bit shifter logical right for signal <n0146> created at line 206
-    Found 511-bit shifter logical right for signal <n0148> created at line 210
-    Found 8-bit comparator equal for signal <M_regfile_player_position_out[15]_M_regfile_win_position_out[7]_equal_51_o> created at line 202
+    Found 8-bit subtractor for signal <M_regfile_player_position_out[15]_GND_6_o_sub_3_OUT> created at line 130.
+    Found 8-bit subtractor for signal <M_regfile_player_position_out[15]_GND_6_o_sub_4_OUT> created at line 131.
+    Found 8-bit subtractor for signal <M_regfile_player_position_out[15]_GND_6_o_sub_11_OUT> created at line 142.
+    Found 8-bit subtractor for signal <M_regfile_player_position_out[15]_GND_6_o_sub_12_OUT> created at line 143.
+    Found 8-bit subtractor for signal <M_regfile_player_position_out[7]_GND_6_o_sub_22_OUT> created at line 157.
+    Found 8-bit subtractor for signal <M_regfile_player_position_out[7]_GND_6_o_sub_44_OUT> created at line 191.
+    Found 8-bit adder for signal <M_regfile_player_position_out[15]_GND_6_o_add_6_OUT> created at line 136.
+    Found 8-bit adder for signal <M_regfile_player_position_out[15]_GND_6_o_add_7_OUT> created at line 137.
+    Found 8-bit adder for signal <M_regfile_player_position_out[15]_GND_6_o_add_14_OUT> created at line 148.
+    Found 8-bit adder for signal <M_regfile_player_position_out[15]_GND_6_o_add_15_OUT> created at line 149.
+    Found 8-bit adder for signal <M_regfile_player_position_out[7]_GND_6_o_add_25_OUT> created at line 161.
+    Found 8-bit adder for signal <M_regfile_player_position_out[7]_GND_6_o_add_47_OUT> created at line 195.
+    Found 8-bit subtractor for signal <GND_6_o_GND_6_o_sub_52_OUT<7:0>> created at line 202.
+    Found 8-bit subtractor for signal <GND_6_o_GND_6_o_sub_55_OUT<7:0>> created at line 206.
+    Found 511-bit shifter logical right for signal <n0138> created at line 202
+    Found 511-bit shifter logical right for signal <n0140> created at line 206
+    Found 8-bit comparator equal for signal <M_regfile_player_position_out[15]_M_regfile_win_position_out[7]_equal_51_o> created at line 198
     Summary:
 	inferred  14 Adder/Subtractor(s).
 	inferred   1 D-type flip-flop(s).
 	inferred   1 Comparator(s).
-	inferred  53 Multiplexer(s).
+	inferred  47 Multiplexer(s).
 	inferred   2 Combinational logic shifter(s).
-Unit <game_26> synthesized.
+Unit <game_24> synthesized.
 
-Synthesizing Unit <regfile_40>.
-    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/regfile_40.v".
+Synthesizing Unit <regfile_37>.
+    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/regfile_37.v".
     Found 16-bit register for signal <M_player_position_q>.
     Found 8-bit register for signal <M_win_position_q>.
     Found 1-bit register for signal <M_win_bool_q>.
@@ -155,31 +162,32 @@ Synthesizing Unit <regfile_40>.
     Found 256-bit register for signal <M_map_q>.
     Summary:
 	inferred 285 D-type flip-flop(s).
-Unit <regfile_40> synthesized.
+Unit <regfile_37> synthesized.
 
-Synthesizing Unit <map_41>.
-    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/map_41.v".
-    Found 2-bit register for signal <M_map_fsm_q>.
+Synthesizing Unit <map_38>.
+    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/map_38.v".
+WARNING:Xst:647 - Input <loss_bool_in> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 3-bit register for signal <M_map_fsm_q>.
     Found finite state machine <FSM_0> for signal <M_map_fsm_q>.
     -----------------------------------------------------------------------
-    | States             | 3                                              |
-    | Transitions        | 9                                              |
-    | Inputs             | 4                                              |
-    | Outputs            | 91                                             |
+    | States             | 6                                              |
+    | Transitions        | 16                                             |
+    | Inputs             | 2                                              |
+    | Outputs            | 129                                            |
     | Clock              | clk (rising_edge)                              |
     | Reset              | rst (positive)                                 |
     | Reset type         | synchronous                                    |
-    | Reset State        | 00                                             |
-    | Power Up State     | 00                                             |
+    | Reset State        | 000                                            |
+    | Power Up State     | 000                                            |
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
     Summary:
 	inferred   1 Finite State Machine(s).
-Unit <map_41> synthesized.
+Unit <map_38> synthesized.
 
-Synthesizing Unit <ledprocess_27>.
-    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/LEDprocess_27.v".
+Synthesizing Unit <ledprocess_25>.
+    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/LEDprocess_25.v".
 WARNING:Xst:647 - Input <map<249:249>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 8-bit register for signal <M_player_front_q>.
     Found 8-bit register for signal <M_player_back_q>.
@@ -210,17 +218,17 @@ WARNING:Xst:647 - Input <map<249:249>> is never used. This port will be preserve
 	inferred   5 Comparator(s).
 	inferred  16 Multiplexer(s).
 	inferred   6 Combinational logic shifter(s).
-Unit <ledprocess_27> synthesized.
+Unit <ledprocess_25> synthesized.
 
-Synthesizing Unit <lookup_42>.
-    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/lookup_42.v".
+Synthesizing Unit <lookup_39>.
+    Related source file is "C:/Users/Jose Johnson/Desktop/friendly-engine/bloxorz/work/planAhead/bloxorz/bloxorz.srcs/sources_1/imports/verilog/lookup_39.v".
 WARNING:Xst:647 - Input <clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 128x8-bit Read Only RAM for signal <_n0648>
     Summary:
 	inferred   1 RAM(s).
 	inferred   1 Multiplexer(s).
-Unit <lookup_42> synthesized.
+Unit <lookup_39> synthesized.
 
 =========================================================================
 HDL Synthesis Report
@@ -228,19 +236,19 @@ HDL Synthesis Report
 Macro Statistics
 # RAMs                                                 : 3
  128x8-bit single-port Read Only RAM                   : 3
-# Adders/Subtractors                                   : 32
+# Adders/Subtractors                                   : 30
  12-bit adder                                          : 1
- 20-bit adder                                          : 12
+ 20-bit adder                                          : 10
  5-bit adder                                           : 1
  6-bit adder                                           : 1
  8-bit adder                                           : 7
  8-bit subtractor                                      : 10
-# Registers                                            : 54
- 1-bit register                                        : 19
+# Registers                                            : 48
+ 1-bit register                                        : 17
  12-bit register                                       : 1
  16-bit register                                       : 1
- 2-bit register                                        : 12
- 20-bit register                                       : 12
+ 2-bit register                                        : 10
+ 20-bit register                                       : 10
  256-bit register                                      : 1
  4-bit register                                        : 1
  5-bit register                                        : 1
@@ -249,10 +257,10 @@ Macro Statistics
 # Comparators                                          : 6
  6-bit comparator greater                              : 2
  8-bit comparator equal                                : 4
-# Multiplexers                                         : 78
- 1-bit 2-to-1 multiplexer                              : 53
+# Multiplexers                                         : 71
+ 1-bit 2-to-1 multiplexer                              : 47
  12-bit 2-to-1 multiplexer                             : 1
- 16-bit 2-to-1 multiplexer                             : 17
+ 16-bit 2-to-1 multiplexer                             : 16
  24-bit 2-to-1 multiplexer                             : 1
  5-bit 2-to-1 multiplexer                              : 1
  6-bit 2-to-1 multiplexer                              : 1
@@ -275,12 +283,12 @@ Synthesizing (advanced) Unit <button_conditioner_2>.
 The following registers are absorbed into counter <M_ctr_q>: 1 register on signal <M_ctr_q>.
 Unit <button_conditioner_2> synthesized (advanced).
 
-Synthesizing (advanced) Unit <ledprocess_27>.
+Synthesizing (advanced) Unit <ledprocess_25>.
 The following registers are absorbed into counter <M_pixel_ctr_q>: 1 register on signal <M_pixel_ctr_q>.
 The following registers are absorbed into counter <M_bit_ctr_q>: 1 register on signal <M_bit_ctr_q>.
 The following registers are absorbed into counter <M_ctr_q>: 1 register on signal <M_ctr_q>.
 The following registers are absorbed into counter <M_rst_ctr_q>: 1 register on signal <M_rst_ctr_q>.
-Unit <ledprocess_27> synthesized (advanced).
+Unit <ledprocess_25> synthesized (advanced).
 
 Synthesizing (advanced) Unit <mojo_top_0>.
 INFO:Xst:3226 - The RAM <led_grid/lookupback/Mram__n0648> will be implemented as a BLOCK RAM, absorbing the following register(s): <game/regfile/M_player_position_q>
@@ -339,20 +347,20 @@ Macro Statistics
 # Adders/Subtractors                                   : 16
  8-bit adder                                           : 6
  8-bit subtractor                                      : 10
-# Counters                                             : 16
+# Counters                                             : 14
  12-bit up counter                                     : 1
- 20-bit up counter                                     : 12
+ 20-bit up counter                                     : 10
  5-bit up counter                                      : 1
  6-bit up counter                                      : 1
  8-bit up counter                                      : 1
-# Registers                                            : 351
- Flip-Flops                                            : 351
+# Registers                                            : 345
+ Flip-Flops                                            : 345
 # Comparators                                          : 6
  6-bit comparator greater                              : 2
  8-bit comparator equal                                : 4
-# Multiplexers                                         : 74
- 1-bit 2-to-1 multiplexer                              : 53
- 16-bit 2-to-1 multiplexer                             : 17
+# Multiplexers                                         : 67
+ 1-bit 2-to-1 multiplexer                              : 47
+ 16-bit 2-to-1 multiplexer                             : 16
  24-bit 2-to-1 multiplexer                             : 1
  8-bit 2-to-1 multiplexer                              : 3
 # Logic shifters                                       : 10
@@ -365,51 +373,70 @@ Macro Statistics
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
-INFO:Xst:2261 - The FF/Latch <game/regfile/M_win_position_q_0> in Unit <mojo_top_0> is equivalent to the following 178 FFs/Latches, which will be removed : <game/regfile/M_map_q_0> <game/regfile/M_map_q_1> <game/regfile/M_map_q_2> <game/regfile/M_map_q_3> <game/regfile/M_map_q_4> <game/regfile/M_map_q_5> <game/regfile/M_map_q_6> <game/regfile/M_map_q_7> <game/regfile/M_map_q_8> <game/regfile/M_map_q_9> <game/regfile/M_map_q_10> <game/regfile/M_map_q_11> <game/regfile/M_map_q_12> <game/regfile/M_map_q_13> <game/regfile/M_map_q_14> <game/regfile/M_map_q_15> <game/regfile/M_map_q_16> <game/regfile/M_map_q_17> <game/regfile/M_map_q_18> <game/regfile/M_map_q_19> <game/regfile/M_map_q_20> <game/regfile/M_map_q_21> <game/regfile/M_map_q_22> <game/regfile/M_map_q_23> <game/regfile/M_map_q_24> <game/regfile/M_map_q_25> <game/regfile/M_map_q_26> <game/regfile/M_map_q_27> <game/regfile/M_map_q_28> <game/regfile/M_map_q_29> <game/regfile/M_map_q_30> <game/regfile/M_map_q_31> <game/regfile/M_map_q_32>
-   <game/regfile/M_map_q_33> <game/regfile/M_map_q_34> <game/regfile/M_map_q_35> <game/regfile/M_map_q_36> <game/regfile/M_map_q_37> <game/regfile/M_map_q_38> <game/regfile/M_map_q_39> <game/regfile/M_map_q_40> <game/regfile/M_map_q_41> <game/regfile/M_map_q_42> <game/regfile/M_map_q_43> <game/regfile/M_map_q_44> <game/regfile/M_map_q_45> <game/regfile/M_map_q_46> <game/regfile/M_map_q_47> <game/regfile/M_map_q_48> <game/regfile/M_map_q_49> <game/regfile/M_map_q_50> <game/regfile/M_map_q_51> <game/regfile/M_map_q_52> <game/regfile/M_map_q_53> <game/regfile/M_map_q_57> <game/regfile/M_map_q_58> <game/regfile/M_map_q_59> <game/regfile/M_map_q_60> <game/regfile/M_map_q_61> <game/regfile/M_map_q_62> <game/regfile/M_map_q_63> <game/regfile/M_map_q_64> <game/regfile/M_map_q_65> <game/regfile/M_map_q_66> <game/regfile/M_map_q_67> <game/regfile/M_map_q_68> <game/regfile/M_map_q_74> <game/regfile/M_map_q_75> <game/regfile/M_map_q_76> <game/regfile/M_map_q_77> <game/regfile/M_map_q_78> <game/regfile/M_map_q_79>
-   <game/regfile/M_map_q_80> <game/regfile/M_map_q_81> <game/regfile/M_map_q_82> <game/regfile/M_map_q_83> <game/regfile/M_map_q_90> <game/regfile/M_map_q_91> <game/regfile/M_map_q_92> <game/regfile/M_map_q_93> <game/regfile/M_map_q_94> <game/regfile/M_map_q_95> <game/regfile/M_map_q_96> <game/regfile/M_map_q_97> <game/regfile/M_map_q_98> <game/regfile/M_map_q_104> <game/regfile/M_map_q_106> <game/regfile/M_map_q_107> <game/regfile/M_map_q_108> <game/regfile/M_map_q_109> <game/regfile/M_map_q_110> <game/regfile/M_map_q_111> <game/regfile/M_map_q_124> <game/regfile/M_map_q_125> <game/regfile/M_map_q_126> <game/regfile/M_map_q_127> <game/regfile/M_map_q_141> <game/regfile/M_map_q_142> <game/regfile/M_map_q_143> <game/regfile/M_map_q_148> <game/regfile/M_map_q_149> <game/regfile/M_map_q_150> <game/regfile/M_map_q_159> <game/regfile/M_map_q_160> <game/regfile/M_map_q_161> <game/regfile/M_map_q_168> <game/regfile/M_map_q_169> <game/regfile/M_map_q_173> <game/regfile/M_map_q_174> <game/regfile/M_map_q_175>
-   <game/regfile/M_map_q_176> <game/regfile/M_map_q_177> <game/regfile/M_map_q_178> <game/regfile/M_map_q_179> <game/regfile/M_map_q_184> <game/regfile/M_map_q_185> <game/regfile/M_map_q_187> <game/regfile/M_map_q_188> <game/regfile/M_map_q_189> <game/regfile/M_map_q_190> <game/regfile/M_map_q_191> <game/regfile/M_map_q_192> <game/regfile/M_map_q_193> <game/regfile/M_map_q_194> <game/regfile/M_map_q_195> <game/regfile/M_map_q_203> <game/regfile/M_map_q_204> <game/regfile/M_map_q_205> <game/regfile/M_map_q_206> <game/regfile/M_map_q_207> <game/regfile/M_map_q_208> <game/regfile/M_map_q_209> <game/regfile/M_map_q_210> <game/regfile/M_map_q_211> <game/regfile/M_map_q_212> <game/regfile/M_map_q_213> <game/regfile/M_map_q_214> <game/regfile/M_map_q_215> <game/regfile/M_map_q_216> <game/regfile/M_map_q_217> <game/regfile/M_map_q_218> <game/regfile/M_map_q_219> <game/regfile/M_map_q_220> <game/regfile/M_map_q_221> <game/regfile/M_map_q_222> <game/regfile/M_map_q_223> <game/regfile/M_map_q_224>
-   <game/regfile/M_map_q_225> <game/regfile/M_map_q_226> <game/regfile/M_map_q_227> <game/regfile/M_map_q_228> <game/regfile/M_map_q_229> <game/regfile/M_map_q_230> <game/regfile/M_map_q_231> <game/regfile/M_map_q_232> <game/regfile/M_map_q_233> <game/regfile/M_map_q_234> <game/regfile/M_map_q_235> <game/regfile/M_map_q_236> <game/regfile/M_map_q_237> <game/regfile/M_map_q_238> <game/regfile/M_map_q_239> <game/regfile/M_map_q_240> <game/regfile/M_map_q_241> <game/regfile/M_map_q_242> <game/regfile/M_map_q_243> <game/regfile/M_map_q_244> <game/regfile/M_map_q_245> <game/regfile/M_map_q_246> <game/regfile/M_map_q_247> <game/regfile/M_map_q_248> <game/regfile/M_map_q_249> <game/regfile/M_map_q_250> <game/regfile/M_map_q_251> <game/regfile/M_map_q_252> <game/regfile/M_map_q_253> <game/regfile/M_map_q_254> <game/regfile/M_map_q_255>
-WARNING:Xst:1293 - FF/Latch <game/regfile/M_win_position_q_0> has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_0> in Unit <mojo_top_0> is equivalent to the following 142 FFs/Latches, which will be removed : <game/regfile/M_map_q_1> <game/regfile/M_map_q_2> <game/regfile/M_map_q_3> <game/regfile/M_map_q_4> <game/regfile/M_map_q_5> <game/regfile/M_map_q_6> <game/regfile/M_map_q_7> <game/regfile/M_map_q_8> <game/regfile/M_map_q_9> <game/regfile/M_map_q_10> <game/regfile/M_map_q_11> <game/regfile/M_map_q_12> <game/regfile/M_map_q_13> <game/regfile/M_map_q_14> <game/regfile/M_map_q_15> <game/regfile/M_map_q_16> <game/regfile/M_map_q_17> <game/regfile/M_map_q_18> <game/regfile/M_map_q_19> <game/regfile/M_map_q_20> <game/regfile/M_map_q_21> <game/regfile/M_map_q_22> <game/regfile/M_map_q_23> <game/regfile/M_map_q_24> <game/regfile/M_map_q_25> <game/regfile/M_map_q_26> <game/regfile/M_map_q_27> <game/regfile/M_map_q_28> <game/regfile/M_map_q_29> <game/regfile/M_map_q_30> <game/regfile/M_map_q_31> <game/regfile/M_map_q_32> <game/regfile/M_map_q_33> <game/regfile/M_map_q_34>
+   <game/regfile/M_map_q_35> <game/regfile/M_map_q_36> <game/regfile/M_map_q_37> <game/regfile/M_map_q_38> <game/regfile/M_map_q_39> <game/regfile/M_map_q_40> <game/regfile/M_map_q_41> <game/regfile/M_map_q_42> <game/regfile/M_map_q_43> <game/regfile/M_map_q_44> <game/regfile/M_map_q_45> <game/regfile/M_map_q_46> <game/regfile/M_map_q_47> <game/regfile/M_map_q_48> <game/regfile/M_map_q_49> <game/regfile/M_map_q_50> <game/regfile/M_map_q_51> <game/regfile/M_map_q_52> <game/regfile/M_map_q_53> <game/regfile/M_map_q_57> <game/regfile/M_map_q_58> <game/regfile/M_map_q_59> <game/regfile/M_map_q_60> <game/regfile/M_map_q_61> <game/regfile/M_map_q_62> <game/regfile/M_map_q_63> <game/regfile/M_map_q_64> <game/regfile/M_map_q_65> <game/regfile/M_map_q_66> <game/regfile/M_map_q_67> <game/regfile/M_map_q_68> <game/regfile/M_map_q_78> <game/regfile/M_map_q_79> <game/regfile/M_map_q_80> <game/regfile/M_map_q_90> <game/regfile/M_map_q_96> <game/regfile/M_map_q_149> <game/regfile/M_map_q_160> <game/regfile/M_map_q_173>
+   <game/regfile/M_map_q_175> <game/regfile/M_map_q_176> <game/regfile/M_map_q_177> <game/regfile/M_map_q_178> <game/regfile/M_map_q_179> <game/regfile/M_map_q_184> <game/regfile/M_map_q_185> <game/regfile/M_map_q_187> <game/regfile/M_map_q_188> <game/regfile/M_map_q_189> <game/regfile/M_map_q_190> <game/regfile/M_map_q_191> <game/regfile/M_map_q_192> <game/regfile/M_map_q_193> <game/regfile/M_map_q_194> <game/regfile/M_map_q_195> <game/regfile/M_map_q_203> <game/regfile/M_map_q_204> <game/regfile/M_map_q_205> <game/regfile/M_map_q_206> <game/regfile/M_map_q_207> <game/regfile/M_map_q_208> <game/regfile/M_map_q_209> <game/regfile/M_map_q_210> <game/regfile/M_map_q_211> <game/regfile/M_map_q_212> <game/regfile/M_map_q_213> <game/regfile/M_map_q_214> <game/regfile/M_map_q_215> <game/regfile/M_map_q_216> <game/regfile/M_map_q_217> <game/regfile/M_map_q_218> <game/regfile/M_map_q_219> <game/regfile/M_map_q_220> <game/regfile/M_map_q_221> <game/regfile/M_map_q_222> <game/regfile/M_map_q_223>
+   <game/regfile/M_map_q_224> <game/regfile/M_map_q_225> <game/regfile/M_map_q_226> <game/regfile/M_map_q_227> <game/regfile/M_map_q_228> <game/regfile/M_map_q_229> <game/regfile/M_map_q_230> <game/regfile/M_map_q_231> <game/regfile/M_map_q_232> <game/regfile/M_map_q_233> <game/regfile/M_map_q_234> <game/regfile/M_map_q_235> <game/regfile/M_map_q_236> <game/regfile/M_map_q_237> <game/regfile/M_map_q_238> <game/regfile/M_map_q_239> <game/regfile/M_map_q_240> <game/regfile/M_map_q_241> <game/regfile/M_map_q_242> <game/regfile/M_map_q_243> <game/regfile/M_map_q_244> <game/regfile/M_map_q_245> <game/regfile/M_map_q_246> <game/regfile/M_map_q_247> <game/regfile/M_map_q_248> <game/regfile/M_map_q_249> <game/regfile/M_map_q_250> <game/regfile/M_map_q_251> <game/regfile/M_map_q_252> <game/regfile/M_map_q_253> <game/regfile/M_map_q_254> <game/regfile/M_map_q_255> 
+WARNING:Xst:1293 - FF/Latch <game/regfile/M_map_q_0> has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
 INFO:Xst:2697 - Unit <MTP_> : the RAMs <led_grid/lookupwin/Mram__n0648>, <led_grid/lookupback/Mram__n0648> are packed into the single block RAM <led_grid/lookupwin/Mram__n06481>
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <FSM_0> on signal <M_map_fsm_q[1:3]> with one-hot encoding.
+Optimizing FSM <FSM_0> on signal <M_map_fsm_q[1:6]> with one-hot encoding.
 -------------------
  State | Encoding
 -------------------
- 00    | 001
- 01    | 010
- 10    | 100
+ 000   | 000001
+ 001   | 000010
+ 010   | 000100
+ 011   | 001000
+ 100   | 010000
+ 101   | 100000
 -------------------
-INFO:Xst:2261 - The FF/Latch <game/regfile/M_win_position_q_2> in Unit <mojo_top_0> is equivalent to the following 45 FFs/Latches, which will be removed : <game/regfile/M_win_position_q_5> <game/regfile/M_win_position_q_6> <game/regfile/M_map_q_54> <game/regfile/M_map_q_55> <game/regfile/M_map_q_56> <game/regfile/M_map_q_69> <game/regfile/M_map_q_70> <game/regfile/M_map_q_71> <game/regfile/M_map_q_72> <game/regfile/M_map_q_73> <game/regfile/M_map_q_87> <game/regfile/M_map_q_88> <game/regfile/M_map_q_89> <game/regfile/M_map_q_105> <game/regfile/M_map_q_112> <game/regfile/M_map_q_113> <game/regfile/M_map_q_114> <game/regfile/M_map_q_128> <game/regfile/M_map_q_129> <game/regfile/M_map_q_130> <game/regfile/M_map_q_131> <game/regfile/M_map_q_144> <game/regfile/M_map_q_145> <game/regfile/M_map_q_146> <game/regfile/M_map_q_147> <game/regfile/M_map_q_157> <game/regfile/M_map_q_158> <game/regfile/M_map_q_162> <game/regfile/M_map_q_163> <game/regfile/M_map_q_164> <game/regfile/M_map_q_165> <game/regfile/M_map_q_166>
-   <game/regfile/M_map_q_167> <game/regfile/M_map_q_180> <game/regfile/M_map_q_181> <game/regfile/M_map_q_182> <game/regfile/M_map_q_183> <game/regfile/M_map_q_186> <game/regfile/M_map_q_196> <game/regfile/M_map_q_197> <game/regfile/M_map_q_198> <game/regfile/M_map_q_199> <game/regfile/M_map_q_200> <game/regfile/M_map_q_201> <game/regfile/M_map_q_202> 
-INFO:Xst:2261 - The FF/Latch <game/regfile/M_win_position_q_7> in Unit <mojo_top_0> is equivalent to the following 21 FFs/Latches, which will be removed : <game/regfile/M_map_q_84> <game/regfile/M_map_q_99> <game/regfile/M_map_q_100> <game/regfile/M_map_q_103> <game/regfile/M_map_q_115> <game/regfile/M_map_q_116> <game/regfile/M_map_q_117> <game/regfile/M_map_q_118> <game/regfile/M_map_q_119> <game/regfile/M_map_q_120> <game/regfile/M_map_q_132> <game/regfile/M_map_q_133> <game/regfile/M_map_q_134> <game/regfile/M_map_q_135> <game/regfile/M_map_q_136> <game/regfile/M_map_q_140> <game/regfile/M_map_q_151> <game/regfile/M_map_q_152> <game/regfile/M_map_q_153> <game/regfile/M_map_q_171> <game/regfile/M_map_q_172> 
-INFO:Xst:2261 - The FF/Latch <game/regfile/M_win_position_q_1> in Unit <mojo_top_0> is equivalent to the following 16 FFs/Latches, which will be removed : <game/regfile/M_win_position_q_3> <game/regfile/M_win_position_q_4> <game/regfile/M_map_q_85> <game/regfile/M_map_q_86> <game/regfile/M_map_q_101> <game/regfile/M_map_q_102> <game/regfile/M_map_q_121> <game/regfile/M_map_q_122> <game/regfile/M_map_q_123> <game/regfile/M_map_q_137> <game/regfile/M_map_q_138> <game/regfile/M_map_q_139> <game/regfile/M_map_q_154> <game/regfile/M_map_q_155> <game/regfile/M_map_q_156> <game/regfile/M_map_q_170> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_74> in Unit <mojo_top_0> is equivalent to the following 3 FFs/Latches, which will be removed : <game/regfile/M_map_q_75> <game/regfile/M_map_q_76> <game/regfile/M_map_q_77> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_89> in Unit <mojo_top_0> is equivalent to the following 2 FFs/Latches, which will be removed : <game/regfile/M_map_q_105> <game/regfile/M_map_q_162> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_97> in Unit <mojo_top_0> is equivalent to the following 4 FFs/Latches, which will be removed : <game/regfile/M_map_q_98> <game/regfile/M_map_q_110> <game/regfile/M_map_q_126> <game/regfile/M_map_q_142> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_116> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_132> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_103> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_119> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_win_position_q_0> in Unit <mojo_top_0> is equivalent to the following 7 FFs/Latches, which will be removed : <game/regfile/M_map_q_109> <game/regfile/M_map_q_111> <game/regfile/M_map_q_125> <game/regfile/M_map_q_127> <game/regfile/M_map_q_141> <game/regfile/M_map_q_143> <game/regfile/M_map_q_159> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_win_position_q_2> in Unit <mojo_top_0> is equivalent to the following 2 FFs/Latches, which will be removed : <game/regfile/M_map_q_130> <game/regfile/M_map_q_157> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_82> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_83> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_54> in Unit <mojo_top_0> is equivalent to the following 16 FFs/Latches, which will be removed : <game/regfile/M_map_q_55> <game/regfile/M_map_q_56> <game/regfile/M_map_q_69> <game/regfile/M_map_q_70> <game/regfile/M_map_q_71> <game/regfile/M_map_q_112> <game/regfile/M_map_q_128> <game/regfile/M_map_q_144> <game/regfile/M_map_q_186> <game/regfile/M_map_q_196> <game/regfile/M_map_q_197> <game/regfile/M_map_q_198> <game/regfile/M_map_q_199> <game/regfile/M_map_q_200> <game/regfile/M_map_q_201> <game/regfile/M_map_q_202> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_95> in Unit <mojo_top_0> is equivalent to the following 2 FFs/Latches, which will be removed : <game/regfile/M_map_q_107> <game/regfile/M_map_q_150> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_152> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_153> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_win_position_q_1> in Unit <mojo_top_0> is equivalent to the following 3 FFs/Latches, which will be removed : <game/regfile/M_map_q_85> <game/regfile/M_map_q_123> <game/regfile/M_map_q_155> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_118> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_120> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_106> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_161> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_91> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_174> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_88> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_145> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_117> in Unit <mojo_top_0> is equivalent to the following 3 FFs/Latches, which will be removed : <game/regfile/M_map_q_133> <game/regfile/M_map_q_171> <game/regfile/M_map_q_172> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_122> in Unit <mojo_top_0> is equivalent to the following 2 FFs/Latches, which will be removed : <game/regfile/M_map_q_154> <game/regfile/M_map_q_170> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_92> in Unit <mojo_top_0> is equivalent to the following 2 FFs/Latches, which will be removed : <game/regfile/M_map_q_94> <game/regfile/M_map_q_104> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_99> in Unit <mojo_top_0> is equivalent to the following 3 FFs/Latches, which will be removed : <game/regfile/M_map_q_115> <game/regfile/M_map_q_136> <game/regfile/M_map_q_140> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_win_position_q_3> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_137> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_108> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_168> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_113> in Unit <mojo_top_0> is equivalent to the following 7 FFs/Latches, which will be removed : <game/regfile/M_map_q_114> <game/regfile/M_map_q_129> <game/regfile/M_map_q_131> <game/regfile/M_map_q_147> <game/regfile/M_map_q_158> <game/regfile/M_map_q_166> <game/regfile/M_map_q_167> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_124> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_169> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_101> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_121> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_135> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/regfile/M_map_q_151> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_map_q_72> in Unit <mojo_top_0> is equivalent to the following 5 FFs/Latches, which will be removed : <game/regfile/M_map_q_73> <game/regfile/M_map_q_180> <game/regfile/M_map_q_181> <game/regfile/M_map_q_182> <game/regfile/M_map_q_183> 
+INFO:Xst:2261 - The FF/Latch <game/regfile/M_win_position_q_5> in Unit <mojo_top_0> is equivalent to the following 2 FFs/Latches, which will be removed : <game/regfile/M_win_position_q_6> <game/regfile/M_map_q_146> 
 
 Optimizing unit <mojo_top_0> ...
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 15.
-FlipFlop game/regfile/M_horizontal_orientation_q has been replicated 1 time(s)
-FlipFlop game/regfile/M_player_position_q_4 has been replicated 1 time(s)
-FlipFlop game/regfile/M_player_position_q_5 has been replicated 1 time(s)
-FlipFlop game/regfile/M_player_position_q_8 has been replicated 1 time(s)
-FlipFlop game/regfile/M_vertical_orientation_q has been replicated 1 time(s)
+Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 16.
 
 Final Macro Processing ...
 
 Processing Unit <mojo_top_0> :
 	Found 2-bit shift register for signal <io_button_left_button_conditioner/sync/M_pipe_q_1>.
 	Found 2-bit shift register for signal <io_button_right_button_conditioner/sync/M_pipe_q_1>.
-	Found 2-bit shift register for signal <io_button_centre_button_conditioner/sync/M_pipe_q_1>.
 	Found 2-bit shift register for signal <io_button_up_button_conditioner/sync/M_pipe_q_1>.
 	Found 2-bit shift register for signal <io_button_down_button_conditioner/sync/M_pipe_q_1>.
 	Found 2-bit shift register for signal <button_up_conditioner/sync/M_pipe_q_1>.
 	Found 2-bit shift register for signal <button_down_conditioner/sync/M_pipe_q_1>.
 	Found 2-bit shift register for signal <button_left_conditioner/sync/M_pipe_q_1>.
 	Found 2-bit shift register for signal <button_right_conditioner/sync/M_pipe_q_1>.
-	Found 2-bit shift register for signal <button_reset_conditioner/sync/M_pipe_q_1>.
 	Found 2-bit shift register for signal <button_stage_left_conditioner/sync/M_pipe_q_1>.
 	Found 2-bit shift register for signal <button_stage_right_conditioner/sync/M_pipe_q_1>.
 INFO:Xst:741 - HDL ADVISOR - A 4-bit shift register was found for signal <reset_cond/M_stage_q_3> and currently occupies 4 logic cells (2 slices). Removing the set/reset logic would take advantage of SRL32 (and derived) primitives and reduce this to 1 logic cells (1 slices). Evaluate if the set/reset can be removed for this simple shift register. The majority of simple pipeline structures do not need to be set/reset operationally.
@@ -419,10 +446,10 @@ Unit <mojo_top_0> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 345
- Flip-Flops                                            : 345
-# Shift Registers                                      : 12
- 2-bit shift register                                  : 12
+# Registers                                            : 343
+ Flip-Flops                                            : 343
+# Shift Registers                                      : 10
+ 2-bit shift register                                  : 10
 
 =========================================================================
 
@@ -446,7 +473,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 371   |
+clk                                | BUFGP                  | 365   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -457,9 +484,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 9.120ns (Maximum Frequency: 109.649MHz)
-   Minimum input arrival time before clock: 8.502ns
-   Maximum output required time after clock: 11.777ns
-   Maximum combinational path delay: 6.742ns
+   Minimum period: 10.067ns (Maximum Frequency: 99.337MHz)
+   Minimum input arrival time before clock: 9.549ns
+   Maximum output required time after clock: 12.948ns
+   Maximum combinational path delay: 6.963ns
 
 =========================================================================

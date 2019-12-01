@@ -8,7 +8,7 @@
    Parameters:
      PIXEL_COUNT = 256
 */
-module ledprocess_27 (
+module ledprocess_25 (
     input clk,
     input rst,
     input [255:0] map,
@@ -44,7 +44,7 @@ module ledprocess_27 (
   reg [7:0] M_rel_back_d, M_rel_back_q = 1'h0;
   wire [8-1:0] M_lookupfront_outvalue;
   reg [8-1:0] M_lookupfront_value;
-  lookup_42 lookupfront (
+  lookup_39 lookupfront (
     .clk(clk),
     .rst(rst),
     .value(M_lookupfront_value),
@@ -52,7 +52,7 @@ module ledprocess_27 (
   );
   wire [8-1:0] M_lookupback_outvalue;
   reg [8-1:0] M_lookupback_value;
-  lookup_42 lookupback (
+  lookup_39 lookupback (
     .clk(clk),
     .rst(rst),
     .value(M_lookupback_value),
@@ -60,7 +60,7 @@ module ledprocess_27 (
   );
   wire [8-1:0] M_lookupwin_outvalue;
   reg [8-1:0] M_lookupwin_value;
-  lookup_42 lookupwin (
+  lookup_39 lookupwin (
     .clk(clk),
     .rst(rst),
     .value(M_lookupwin_value),
@@ -108,7 +108,7 @@ module ledprocess_27 (
       SEND_PIXEL_state: begin
         if (M_pixel_ctr_q == 1'h0 || M_pixel_ctr_q == 4'hf || M_pixel_ctr_q == 8'hff || M_pixel_ctr_q == 8'hf0) begin
           if (bitsO[(M_bit_ctr_q)*1+0-:1]) begin
-            led = M_ctr_q < 6'h2c;
+            led = M_ctr_q < 6'h28;
           end else begin
             led = M_ctr_q < 4'hf;
           end
@@ -128,7 +128,7 @@ module ledprocess_27 (
         end else begin
           if (M_player_back_q == 4'hf & M_pixel_ctr_q == M_player_front_q) begin
             if (bitsY[(M_bit_ctr_q)*1+0-:1]) begin
-              led = M_ctr_q < 6'h2c;
+              led = M_ctr_q < 6'h28;
             end else begin
               led = M_ctr_q < 4'hf;
             end
@@ -148,7 +148,7 @@ module ledprocess_27 (
           end else begin
             if (M_pixel_ctr_q == M_player_back_q || M_pixel_ctr_q == M_player_front_q) begin
               if (bitsG[(M_bit_ctr_q)*1+0-:1]) begin
-                led = M_ctr_q < 6'h2c;
+                led = M_ctr_q < 6'h28;
               end else begin
                 led = M_ctr_q < 4'hf;
               end
@@ -168,7 +168,7 @@ module ledprocess_27 (
             end else begin
               if (M_pixel_ctr_q == M_win_pos_xy_q) begin
                 if (bitsB[(M_bit_ctr_q)*1+0-:1]) begin
-                  led = M_ctr_q < 6'h2c;
+                  led = M_ctr_q < 6'h28;
                 end else begin
                   led = M_ctr_q < 4'hf;
                 end
@@ -188,7 +188,7 @@ module ledprocess_27 (
               end else begin
                 if (maplayout[(M_pixel_ctr_q)*1+0-:1]) begin
                   if (bitsR[(M_bit_ctr_q)*1+0-:1]) begin
-                    led = M_ctr_q < 6'h2c;
+                    led = M_ctr_q < 6'h28;
                   end else begin
                     led = M_ctr_q < 4'hf;
                   end
@@ -207,7 +207,7 @@ module ledprocess_27 (
                   end
                 end else begin
                   if (bitsO[(M_bit_ctr_q)*1+0-:1]) begin
-                    led = M_ctr_q < 6'h2c;
+                    led = M_ctr_q < 6'h28;
                   end else begin
                     led = M_ctr_q < 4'hf;
                   end
