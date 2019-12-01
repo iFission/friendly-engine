@@ -1,0 +1,1 @@
+NET "speaker" LOC = P58 | IOSTANDARD = LVTTL;
