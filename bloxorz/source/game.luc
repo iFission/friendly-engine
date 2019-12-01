@@ -30,7 +30,13 @@ module game (
   }
   
   always {
-    
+    // initialise default input to regfile
+    regfile.write_address = 0;
+    regfile.write_enable = 0;
+    regfile.input_data = 0;
+    regfile.read_address_a = 0;
+    regfile.read_address_b = 0;
+        
     map_out = regfile.map_out;
     player_position_out = regfile.player_position_out;
     win_position_out = regfile.win_position_out;
