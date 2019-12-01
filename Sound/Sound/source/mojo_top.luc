@@ -1,0 +1,46 @@
+module mojo_top (
+    input clk,              // 50MHz clock
+    input rst_n,            // reset button (active low)
+    output speaker,         // speaker
+    output led[8],
+    input button,
+    input usb_rx,
+    output usb_tx
+  ) {
+  
+  sig rst;                  // reset signal
+  
+  .clk(clk) {
+    // The reset conditioner is used to synchronize the reset signal to the FPGA
+    // clock. This ensures the entire FPGA comes out of reset at the same time.
+    reset_conditioner reset_cond;
+       
+    .rst(rst) {
+      #BAUD(22050), #CLK_FREQ(50000000) {
+        uart_rx rx;
+        uart_tx tx;
+      }
+         
+      block block; // instance of block sound
+    }
+  }
+  
+  always {
+    reset_cond.in = ~rst_n; // input raw inverted reset signal
+    rst = reset_cond.out;   // conditioned reset
+    
+    rx.rx = usb_rx;         // connect rx input
+    usb_tx = tx.tx;         // connect tx output
+\
+        
+    block.new_rx = rx.new_data;
+    block.rx_data = rx.data;
+    tx.new_data = block.new_tx;
+    tx.data = block.tx_data;
+    block.tx_busy = tx.busy;
+    tx.block = 0;
+    
+    speaker = 8h00;         
+
+  }
+}
