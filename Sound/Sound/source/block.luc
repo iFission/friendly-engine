@@ -1,0 +1,36 @@
+module block (
+    input clk,         // clock
+    input rst,         // reset
+    input new_rx,      // new RX flag
+    input rx_data[8],  // RX data
+    output new_tx,     // new TX flag
+    output tx_data[8], // TX data
+    input tx_busy      // TX is busy flag
+  ) {
+  const NUM_FRAMES1 = 2136; //2136 frames in block.wav
+  .clk(clk){
+    .rst(rst){
+      fsm state = {IDLE, PLAY};
+    }
+    dff count[$clog2(NUM_FRAMES1)]; // bits of information from 2136 8-bit values
+  }
+  block_rom rom;
+  always {
+    rom.address = count.q;
+    tx_data = rom.out;
+    new_tx = 0;
+    case (state.q){
+      state.IDLE:
+        count.d = 0;
+        if (new_rx && rx_data == "h")
+          state.d = state.PLAY;
+      state.PLAY:
+        if (!tx_busy){
+          count.d = count.q + 1;
+          new_tx = 1;
+          if (count.q == NUM_FRAMES1 - 1)
+            state.d = state.IDLE;
+        }
+    }
+  }
+}

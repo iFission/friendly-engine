@@ -1,0 +1,19 @@
+
+
+
+
+
+NET "dac[0]" LOC = P2;
+NET "dac[1]" LOC = P6;
+NET "dac[2]" LOC = P8;
+NET "dac[3]" LOC = P10;
+NET "dac[4]" LOC = P12;
+NET "dac[5]" LOC = P15;
+NET "dac[6]" LOC = P17;
+NET "dac[7]" LOC = P22;
+
+NET "button[0]" LOC = P58;
+NET "button[1]" LOC = P74;
+NET "button[2]" LOC = P78;
+NET "button[3]" LOC = P80;
+NET "button[4]" LOC = P82;
