@@ -134,6 +134,9 @@ module mojo_top(
         game.button_stage_left = button_stage_left_edge_detector.out;
         game.button_stage_right = button_stage_right_edge_detector.out;
 
+
+        // debug input to select regfile
+        game.io_dip = io_dip[0];
         case(io_dip[0][0]){ // debug switch for button input
             0: // if debug false, use arcade buttons
                 game.button_up = button_up_edge_detector.out;
@@ -166,8 +169,10 @@ module mojo_top(
                 io_led[2][3] = game.loss_bool_out;
                 io_led[2][2:1] = game.map_index;
             1:
-                io_led[2][2] = game.map_out[255-game.player_position_out[15:8]];
-                io_led[2][1] = game.map_out[255-game.player_position_out[7:0]];
+                io_led[0][2] = game.map_out[255-game.player_position_out[15:8]];
+                io_led[0][1] = game.map_out[255-game.player_position_out[7:0]];
+                io_led[2] = game.regfile_output[15-:8];
+                io_led[1] = game.regfile_output[7-:8];
             default:
                 // led output to show position
                 io_led[1] = game.player_position_out[15:8];
