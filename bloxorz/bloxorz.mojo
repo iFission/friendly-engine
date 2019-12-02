@@ -12,8 +12,9 @@
     <src>led_grid.luc</src>
     <src>led_lookup.luc</src>
     <src>game.luc</src>
-    <src>map.luc</src>
-    <src>regfile.luc</src>
+    <src>game_control_unit.luc</src>
+    <src>game_map.luc</src>
+    <src>game_regfile.luc</src>
     <ucf>led.ucf</ucf>
     <ucf>buttons.ucf</ucf>
     <ucf lib="true">io_shield.ucf</ucf>
