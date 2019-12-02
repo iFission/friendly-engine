@@ -3,18 +3,19 @@ module regfile (
   input clk,  // clock
   input rst,  // reset
   
-  input write_address[3], // write address
+  input write_address[4], // write address
   input write_enable, // write enable
   input input_data[256], // data in
   
-  input read_address_a[3], //address port a 
-  input read_address_b[3], //address port b
+  input read_address_a[4], //address port a 
+  input read_address_b[4], //address port b
   output output_a[256], //read port a
   output output_b[256], //read port b
 
   // debug
   input map_in[256],
-  input player_position_in[16],
+  input player_position_1_in[8],
+  input player_position_2_in[8],
   input win_position_in[8],
   input win_bool_in,
   input loss_bool_in,
@@ -23,7 +24,8 @@ module regfile (
   input vertical_orientation_in,
 
   output map_out[256],
-  output player_position_out[16],
+  output player_position_1_out[8],
+  output player_position_2_out[8],
   output win_position_out[8],
   output win_bool_out,
   output loss_bool_out,
@@ -35,14 +37,15 @@ module regfile (
 {
   .clk(clk){
     .rst(rst){
-      dff map[256];                       // address = 3b000
-      dff player_position[256];           // address = 3b001 
-      dff win_position[256];              // address = 3b010
-      dff win_bool[256];                  // address = 3b011
-      dff loss_bool[256];                 // address = 3b100
-      dff portrait_orientation[256];      // address = 3b101
-      dff horizontal_orientation[256];    // address = 3b110
-      dff vertical_orientation[256];      // address = 3b111
+      dff map[256];                       // address = 4b0000
+      dff player_position_1[256];         // address = 4b0001 
+      dff player_position_2[256];         // address = 4b0010 
+      dff win_position[256];              // address = 4b0011
+      dff win_bool[256];                  // address = 4b0100
+      dff loss_bool[256];                 // address = 4b0101
+      dff portrait_orientation[256];      // address = 4b0110
+      dff horizontal_orientation[256];    // address = 4b0111
+      dff vertical_orientation[256];      // address = 4b1000
     }
   }
 
@@ -51,49 +54,55 @@ module regfile (
     // write port
     if (write_enable){
       case(write_address){
-        3b000: map.d = input_data;
-        3b001: player_position.d = input_data;
-        3b010: win_position.d = input_data;
-        3b011: win_bool.d = input_data;
-        3b100: loss_bool.d = input_data;
-        3b101: portrait_orientation.d = input_data;
-        3b110: horizontal_orientation.d = input_data;
-        3b111: vertical_orientation.d = input_data;
+        4b0000: map.d = input_data;
+        4b0001: player_position_1.d = input_data;
+        4b0010: player_position_2.d = input_data;
+        4b0011: win_position.d = input_data;
+        4b0100: win_bool.d = input_data;
+        4b0101: loss_bool.d = input_data;
+        4b0110: portrait_orientation.d = input_data;
+        4b0111: horizontal_orientation.d = input_data;
+        4b1000: vertical_orientation.d = input_data;
       }
     }
 
     // read port a
     case(read_address_a){
       default: output_a = 0;
-      3b000: output_a = map.q;
-      3b001: output_a = player_position.q;
-      3b010: output_a = win_position.q;
-      3b011: output_a = win_bool.q;
-      3b100: output_a = loss_bool.q;
-      3b101: output_a = portrait_orientation.q;
-      3b110: output_a = horizontal_orientation.q;
-      3b111: output_a = vertical_orientation.q;
+      4b0000: output_a = map.q;
+      4b0001: output_a = player_position_1.q;
+      4b0010: output_a = player_position_2.q;
+      4b0011: output_a = win_position.q;
+      4b0100: output_a = win_bool.q;
+      4b0101: output_a = loss_bool.q;
+      4b0110: output_a = portrait_orientation.q;
+      4b0111: output_a = horizontal_orientation.q;
+      4b1000: output_a = vertical_orientation.q;
     }
 
-    // write port
-    case(write_address){
+    // read port b
+    case(read_address_b){
       default: output_b = 0;
-      3b000: output_b = map.q;
-      3b001: output_b = player_position.q;
-      3b010: output_b = win_position.q;
-      3b011: output_b = win_bool.q;
-      3b100: output_b = loss_bool.q;
-      3b101: output_b = portrait_orientation.q;
-      3b110: output_b = horizontal_orientation.q;
-      3b111: output_b = vertical_orientation.q;
+      4b0000: output_b = map.q;
+      4b0001: output_b = player_position_1.q;
+      4b0010: output_b = player_position_2.q;
+      4b0011: output_b = win_position.q;
+      4b0100: output_b = win_bool.q;
+      4b0101: output_b = loss_bool.q;
+      4b0110: output_b = portrait_orientation.q;
+      4b0111: output_b = horizontal_orientation.q;
+      4b1000: output_b = vertical_orientation.q;
     }
 
     // debug
     map.d = map_in;
     map_out = map.q;
 
-    player_position.d = player_position_in;
-    player_position_out = player_position.q[15-:16];
+    player_position_1.d = player_position_1_in;
+    player_position_1_out = player_position_1.q[7-:8];
+
+    player_position_2.d = player_position_2_in;
+    player_position_2_out = player_position_2.q[7-:8];
 
     win_position.d = win_position_in;
     win_position_out = win_position.q[7-:8];
