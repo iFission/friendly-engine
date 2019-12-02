@@ -66,7 +66,6 @@ module game (
     // io between regfile and control_unit
     regfile.write_address = control_unit.write_address;
     regfile.write_enable = control_unit.write_enable;
-    regfile.input_data = control_unit.input_data;
     regfile.read_address_a = control_unit.read_address_a;
     regfile.read_address_b = control_unit.read_address_b;
 
@@ -95,7 +94,7 @@ module game (
       2b00: regfile.input_data = alu16.alu;
       2b01: regfile.input_data = 0;
       2b10: regfile.input_data = 1;
-      default: data_a = 0;
+      default: regfile.input_data = 0;
     }
 
     // input to alu

@@ -10,7 +10,6 @@ module control_unit (
     // output to regfile
     output write_address[3],
     output write_enable,
-    output input_data[256],
     output read_address_a[3],
     output read_address_b[3],
 
@@ -81,7 +80,6 @@ module control_unit (
     // initialise default datapath output
     write_address = 0;
     write_enable = 0;
-    input_data = 0;
     read_address_a = io_dip;
     read_address_b = 0;
     alufn = 0;
@@ -152,7 +150,7 @@ module control_unit (
             win_bool_out = 1;
             write_enable = 1;
             write_address = 3b011;
-            input_data = 1b1;
+            wd_select = 2b10;
             movement_fsm.d = movement_fsm.START;
 
       movement_fsm.PORTRAIT_ORIENTATION_CHECK_LOSS:
@@ -161,7 +159,7 @@ module control_unit (
             // loss_bool_out = 1;
             write_enable = 1;
             write_address = 3b100;
-            input_data = 1b1;            
+            // input_data = 1b1;            
             movement_fsm.d = movement_fsm.START;
           }
           else {
@@ -235,7 +233,7 @@ module control_unit (
             // loss_bool_out = 1;
             write_enable = 1;
             write_address = 3b100;
-            input_data = 1b1;
+            // input_data = 1b1;
             }
 
       movement_fsm.HORIZONTAL_ORIENTATION:
