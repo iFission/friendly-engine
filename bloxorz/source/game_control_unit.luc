@@ -21,6 +21,7 @@ module control_unit (
 
     input map_in[256],
     input player_position_in[16],
+    input player_position_in_init[16],
     input win_position_in[8],
     input win_bool_in,
     input loss_bool_in,
@@ -84,7 +85,7 @@ module control_unit (
 
     case(movement_fsm.q){
       movement_fsm.START:
-        player_position_out = player_position_in;
+        player_position_out = player_position_in_init;
         win_bool_out = 0;
         loss_bool_out = 0;
         portrait_orientation_out = 1;

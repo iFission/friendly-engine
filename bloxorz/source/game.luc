@@ -34,6 +34,7 @@ module game (
   }
   
   always {
+
     // assign outputs to mojo_top for debugging
     map_out = regfile.map_out;
     player_position_out = regfile.player_position_out;
@@ -82,6 +83,7 @@ module game (
     control_unit.io_dip = io_dip;
     control_unit.map_in = map.map_out;
     control_unit.player_position_in = regfile.player_position_out;
+    control_unit.player_position_in_init = map.player_position_out;
     control_unit.win_position_in = map.win_position_out;
     control_unit.win_bool_in = regfile.win_bool_out;
     control_unit.loss_bool_in = regfile.loss_bool_out;
