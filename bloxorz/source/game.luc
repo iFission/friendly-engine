@@ -21,7 +21,9 @@ module game (
     output horizontal_orientation_out,
     output vertical_orientation_out,
     output map_index[2],
-    output regfile_output[16]
+    output regfile_output[16],
+    output data_a_output[8],
+    output data_b_output[8]
   ) 
 
 {
@@ -53,6 +55,8 @@ module game (
     vertical_orientation_out = regfile.vertical_orientation_out;
     map_index = map.map_index;
     regfile_output = regfile.output_a;
+    data_a_output = 0;
+    data_b_output = 0;
 
     // initialise default regfile values
     regfile.map_in = map.map_out;
@@ -89,6 +93,9 @@ module game (
       3b100: data_b = 32;
       default: data_b = 0;
     }
+
+    data_a_output = data_a;
+    data_b_output = data_b;
 
     // wd select mux
     case(control_unit.wd_select){

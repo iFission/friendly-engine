@@ -173,8 +173,14 @@ module control_unit (
 
       movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1:
           // player_position_1_out = player_position_1_in - 2;
-          
-          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2;
+          read_address_a = 4b0001;
+          write_address = 4b0001;
+          a_select = 1b0;
+          b_select = 3b010;
+          alufn = 6b000001;
+          wd_select = 2b00;
+
+          // movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2;
 
       movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2:
           player_position_2_out = player_position_1_in + 1;
