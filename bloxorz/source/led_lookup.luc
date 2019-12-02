@@ -1,4 +1,4 @@
-module lookup (
+module led_lookup (
     input clk,
     input rst,
     input value[8],  // clock

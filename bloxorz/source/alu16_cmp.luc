@@ -1,0 +1,19 @@
+module cmp16 (
+    input alufn[6],
+    input z,
+    input n,
+    input v,
+    output cmp[16]
+  ) {
+  
+  always {
+    cmp[15:1] = 15b0;
+    case(alufn[2:1]){
+      2b01: cmp[0] = z; 
+      2b10: cmp[0] = n ^ v;
+      2b11: cmp[0] = z | (n^v);
+      default: cmp[0] = 0;
+      
+    }
+  }
+}

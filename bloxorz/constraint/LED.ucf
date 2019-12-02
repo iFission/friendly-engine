@@ -1,1 +1,1 @@
-NET "outled" LOC = P51 | IOSTANDARD = LVTTL;
+NET "led_out" LOC = P51 | IOSTANDARD = LVTTL;

@@ -18,7 +18,7 @@ module mojo_top(
     input io_button[5],  // 5 buttons on IO Shield
     input io_dip[3][8],   // DIP switches on IO Shield
 
-    output outled,
+    output led_out,
     
     input button_up,
     input button_down,
@@ -70,7 +70,7 @@ module mojo_top(
         .rst(rst)
         {
             game game;
-            ledprocess led_grid;
+            led_grid led_grid;
         }
     }
 
@@ -191,7 +191,7 @@ module mojo_top(
         led_grid.player_pos = game.player_position_out;    //8,8 and 8,9
         // led_grid.map=256x{b1};
         led_grid.map = game.map_out;
-        outled = led_grid.led;
+        led_out = led_grid.led;
 
     }
 }

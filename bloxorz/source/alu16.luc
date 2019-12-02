@@ -12,10 +12,10 @@ module alu16(
     output n // n is true if the sum is negative)
 )
 {
-    sixteenbitadder add16;
-    alu_bool bool16;
-    comparator cmp16;
-    bitshift shift16;
+    add16 add16;
+    bool16 bool16;
+    cmp16 cmp16;
+    shift16 shift16;
 
     always
     {
