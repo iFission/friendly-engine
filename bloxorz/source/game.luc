@@ -152,7 +152,10 @@ module game (
       movement_fsm.PORTRAIT_ORIENTATION_CHECK_LOSS:
           // check position is out to determine LOSS
           if (regfile.map_out[255 - regfile.player_position_out[15:8]] == 0){
-            regfile.loss_bool_in = 1;
+            // regfile.loss_bool_in = 1;
+            regfile.write_enable = 1;
+            regfile.write_address = 3b100;
+            regfile.input_data = 1b1;            
             movement_fsm.d = movement_fsm.START;
           }
           else {
