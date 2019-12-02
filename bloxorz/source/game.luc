@@ -33,6 +33,7 @@ module game (
         START,
         PORTRAIT_ORIENTATION_IDLE,
         PORTRAIT_ORIENTATION_CHECK_WIN,
+        PORTRAIT_ORIENTATION_WRITE_WIN,
         PORTRAIT_ORIENTATION_CHECK_LOSS,
         HORIZONTAL_ORIENTATION,
         VERTICAL_ORIENTATION,
@@ -138,16 +139,19 @@ module game (
           // if (regfile.output_a[15-:8] == regfile.output_b[7-:8])
           if (regfile.player_position_out[15:8] == regfile.win_position_out)
           {
-            
-            regfile.win_bool_in = 1;
-            // regfile.write_enable = 1;
-            // regfile.write_address = 3b011;
-            // regfile.input_data = 1b1;
-            movement_fsm.d = movement_fsm.START;
+
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_WRITE_WIN;
           }
           else {
             movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_LOSS;
           }
+
+      movement_fsm.PORTRAIT_ORIENTATION_WRITE_WIN:
+            regfile.win_bool_in = 1;
+            regfile.write_enable = 1;
+            regfile.write_address = 3b011;
+            regfile.input_data = 1b1;
+            movement_fsm.d = movement_fsm.START;
 
       movement_fsm.PORTRAIT_ORIENTATION_CHECK_LOSS:
           // check position is out to determine LOSS
