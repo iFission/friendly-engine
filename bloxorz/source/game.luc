@@ -25,6 +25,13 @@ module game (
   ) 
 
 {
+
+  //temp variables for alu
+  sig data_a[16];
+  sig data_b[16];
+
+  alu16 alu16;
+  
   .clk(clk){
     .rst(rst){
       regfile regfile;
@@ -34,7 +41,6 @@ module game (
   }
   
   always {
-
     // assign outputs to mojo_top for debugging
     map_out = regfile.map_out;
     player_position_out = regfile.player_position_out;
@@ -57,7 +63,7 @@ module game (
     // regfile.horizontal_orientation_in = regfile.horizontal_orientation_out;
     // regfile.vertical_orientation_in = regfile.vertical_orientation_out;
 
-    // initialise io between regfile and control_unit
+    // io between regfile and control_unit
     regfile.write_address = control_unit.write_address;
     regfile.write_enable = control_unit.write_enable;
     regfile.input_data = control_unit.input_data;
@@ -66,6 +72,36 @@ module game (
 
     control_unit.output_a = regfile.output_a;
     control_unit.output_b = regfile.output_b;
+
+    // data path
+    // a select mux
+    case(control_unit.a_select){
+      1b0: data_a = regfile.output_a;
+      default: data_a = 0;
+    }
+
+    // b select mux
+    case(control_unit.b_select){
+      1b000: data_b = regfile.output_b;
+      1b001: data_b = 1;
+      1b010: data_b = 2;
+      1b011: data_b = 16;
+      1b100: data_b = 32;
+      default: data_b = 0;
+    }
+
+    // wd select mux
+    case(control_unit.wd_select){
+      2b00: regfile.input_data = alu16.alu;
+      2b01: regfile.input_data = 0;
+      2b10: regfile.input_data = 1;
+      default: data_a = 0;
+    }
+
+    // input to alu
+    alu16.alufn = control_unit.alufn;
+    alu16.a = data_a;
+    alu16.b = data_b;
 
     // input to map fsm
     map.button_stage_left = button_stage_left;

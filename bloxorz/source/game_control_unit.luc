@@ -7,11 +7,20 @@ module control_unit (
     input button_left,
     input button_right,
 
-    output write_address,
+    // output to regfile
+    output write_address[3],
     output write_enable,
-    output input_data,
-    output read_address_a,
-    output read_address_b,
+    output input_data[256],
+    output read_address_a[3],
+    output read_address_b[3],
+
+    // output to alu16
+    output alufn[6],
+
+    // output datapath
+    output a_select,
+    output b_select[3],
+    output wd_select[2],
 
     input output_a,
     input output_b,
@@ -69,12 +78,16 @@ module control_unit (
   }
   
   always {
-    // initialise default input to regfile
+    // initialise default datapath output
     write_address = 0;
     write_enable = 0;
     input_data = 0;
     read_address_a = io_dip;
     read_address_b = 0;
+    alufn = 0;
+    a_select = 0;
+    b_select = 0;
+    wd_select = 0;
 
     player_position_out = player_position_in;
     win_bool_out = win_bool_in;
