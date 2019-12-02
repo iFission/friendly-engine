@@ -132,11 +132,11 @@ module game (
 
       movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN:
           // check orientation is portrait and is on win position to determine WIN
-          // if (regfile.player_position_out[15:8] == regfile.win_position_out)
-          regfile.read_address_a = 3b001;
-          regfile.read_address_b = 3b010;
+          // regfile.read_address_a = 3b001;
+          // regfile.read_address_b = 3b010;
 
-          if (regfile.output_a[15-:8] == regfile.output_b[7-:8])
+          // if (regfile.output_a[15-:8] == regfile.output_b[7-:8])
+          if (regfile.player_position_out[15:8] == regfile.win_position_out)
           {
             
             regfile.win_bool_in = 1;
