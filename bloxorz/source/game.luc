@@ -104,6 +104,7 @@ module game (
           }
           if (button_right == 1)
           {
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1;
           }
           if (button_up == 1)
           {
@@ -153,7 +154,7 @@ module game (
           movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2;
 
       movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2:
-          regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 2;
+          regfile.player_position_in[7:0] = regfile.player_position_out[15:8] + 1;
           movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PORTRAIT_ORIENTATION;
 
       movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PORTRAIT_ORIENTATION:
