@@ -82,7 +82,7 @@ module control_unit (
     // initialise default datapath output
     write_address = 0;
     write_enable = 0;
-    read_address_a = io_dip;
+    read_address_a = io_dip[7-:4];
     read_address_b = 0;
     alufn = 0;
     a_select = 0;

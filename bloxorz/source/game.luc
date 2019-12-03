@@ -21,9 +21,9 @@ module game (
     output horizontal_orientation_out,
     output vertical_orientation_out,
     output map_index[2],
-    output regfile_output[16],
     output data_a_output[8],
-    output data_b_output[8]
+    output data_b_output[8],
+    output alu_output[8]
   ) 
 
 {
@@ -54,9 +54,9 @@ module game (
     horizontal_orientation_out = regfile.horizontal_orientation_out;
     vertical_orientation_out = regfile.vertical_orientation_out;
     map_index = map.map_index;
-    regfile_output = regfile.output_a;
     data_a_output = 0;
     data_b_output = 0;
+    alu_output = alu16.alu;
 
     // initialise default regfile values
     regfile.map_in = map.map_out;
