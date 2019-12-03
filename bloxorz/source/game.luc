@@ -127,7 +127,7 @@ module game (
     control_unit.button_down = button_down;
     control_unit.button_left = button_left;
     control_unit.button_right = button_right;
-    control_unit.button_centre = 1;
+    control_unit.button_centre = button_centre;
 
     // debug io for control_unit
     control_unit.io_dip = io_dip;

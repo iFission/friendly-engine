@@ -134,8 +134,6 @@ module mojo_top(
         game.button_stage_left = button_stage_left_edge_detector.out;
         game.button_stage_right = button_stage_right_edge_detector.out;
 
-        // debug centre button to step through states
-        game.button_centre = io_button_centre_edge_detector.out;
 
         game.io_dip = io_dip[0];
         case(io_dip[0][0]){ // debug switch for button input
@@ -144,16 +142,20 @@ module mojo_top(
                 game.button_down = button_down_edge_detector.out;
                 game.button_left = button_left_edge_detector.out;
                 game.button_right = button_right_edge_detector.out;
+                game.button_centre = 1;
             1: // if debug true, use io buttons
                 game.button_up = io_button_up_edge_detector.out;
                 game.button_down = io_button_down_edge_detector.out;
                 game.button_left = io_button_left_edge_detector.out;
                 game.button_right = io_button_right_edge_detector.out;
+                // debug centre button to step through states
+                game.button_centre = io_button_centre_edge_detector.out;
             default: // default use arcade buttons
                 game.button_up = button_up_edge_detector.out;
                 game.button_down = button_down_edge_detector.out;
                 game.button_left = button_left_edge_detector.out;
                 game.button_right = button_right_edge_detector.out;
+                game.button_centre = 1;
 
         }
 
