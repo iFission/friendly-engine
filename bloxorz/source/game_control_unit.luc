@@ -427,7 +427,7 @@ module control_unit (
           a_select = 1b0;
           b_select = 3b001; // select 1
           alufn = 6b000001; // subtract          
-          temp_var.d = 0;
+          temp_var.d = output_alu;
           if (button_centre){
           movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_WRITE;
           }
@@ -461,7 +461,7 @@ module control_unit (
           a_select = 1b0;
           b_select = 3b001; // select 1
           alufn = 6b000000; // add
-          temp_var.d = 0;
+          temp_var.d = output_alu;
           if (button_centre){
           movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_WRITE;
           }
