@@ -138,17 +138,19 @@ module control_unit (
 
       movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN:
           // check orientation is portrait and is on win position to determine WIN
-          // read_address_a = 3b001;
-          // read_address_b = 3b010;
+          read_address_a = 4b0001;
+          read_address_b = 4b0011;
 
-          // if (output_a[15-:8] == output_b[7-:8])
-          if (player_position_1_in == win_position_in)
+          if (button_centre){
+          if (output_a == output_b)
+          // if (player_position_1_in == win_position_in)
           {
 
             movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_WRITE_WIN;
           }
           else {
             movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_LOSS;
+          }
           }
 
       movement_fsm.PORTRAIT_ORIENTATION_WRITE_WIN:
@@ -189,7 +191,7 @@ module control_unit (
           if (button_centre){
             movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2;
           }
-          
+
       movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2:
           player_position_2_out = player_position_1_in + 1;
           movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION;
