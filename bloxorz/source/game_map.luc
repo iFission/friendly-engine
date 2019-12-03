@@ -114,7 +114,7 @@ module map (
             win_position_out = 0;
             map_index = 6;
 
-            if(win_bool_in || button_stage_right){
+            if(button_stage_right){
                 map_fsm.d = map_fsm.MAP1;
             }
 
