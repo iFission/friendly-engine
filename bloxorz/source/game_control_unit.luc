@@ -59,6 +59,7 @@ module control_unit (
       dff temp_var[16];
       fsm movement_fsm = {
         START,
+        START_INITIALISE,
         PORTRAIT_ORIENTATION_IDLE,
         PORTRAIT_ORIENTATION_CHECK_WIN,
         PORTRAIT_ORIENTATION_CHECK_WIN_2,
@@ -111,15 +112,17 @@ module control_unit (
 
     case(movement_fsm.q){
       movement_fsm.START:
-        player_position_1_out = player_position_in_init;
-        player_position_2_out = 0;
+        state_index = 1;
         win_bool_out = 0;
         loss_bool_out = 0;
         portrait_orientation_out = 1;
         horizontal_orientation_out = 0;
         vertical_orientation_out = 0;
+        movement_fsm.d = movement_fsm.START_INITIALISE;
 
-        state_index = 1;
+      movement_fsm.START_INITIALISE:
+        player_position_1_out = player_position_in_init;
+        player_position_2_out = 0;
 
         movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN;
 
@@ -285,10 +288,7 @@ module control_unit (
           }
           // check position of first and last 8 bits is out to determine OUT
           if (map_in[255 - player_position_1_in] == 0 || map_in[255 - player_position_2_in] == 0){
-            // loss_bool_out = 1;
-            write_enable = 1;
-            write_address = 3b100;
-            // input_data = 1b1;
+            loss_bool_out = 1;
             }
 
       movement_fsm.HORIZONTAL_ORIENTATION:
