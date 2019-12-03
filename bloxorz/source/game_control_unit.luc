@@ -6,6 +6,7 @@ module control_unit (
     input button_down,
     input button_left,
     input button_right,
+    input button_centre,
 
     // output to regfile
     output write_address[4],
@@ -59,7 +60,7 @@ module control_unit (
         HORIZONTAL_ORIENTATION,
         VERTICAL_ORIENTATION,
         PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1,
-        PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2,
+        PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2,PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_CHECK,
         PORTRAIT_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION,
         PORTRAIT_ORIENTATION_LEFT_UPDATE_HORIZONTAL_ORIENTATION,
         PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1,
@@ -179,9 +180,16 @@ module control_unit (
           b_select = 3b010;
           alufn = 6b000001;
           wd_select = 2b00;
+          if (button_centre){
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_CHECK;
+          }
 
-          // movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2;
-
+      movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_CHECK:
+      
+          if (button_centre){
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2;
+          }
+          
       movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2:
           player_position_2_out = player_position_1_in + 1;
           movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION;
