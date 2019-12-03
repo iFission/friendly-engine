@@ -1,8 +1,14 @@
+/*
+This is a lookup table that translates the intended position of a pixel to the actual pixel on the map
+e.g. if the input for win position is 163 in the programmed format (see led_grid documentation), 
+we need to translate this position to the equivalent value on the LED grid format, which is 172
+*/
+
 module led_lookup (
     input clk,
     input rst,
-    input value[8],  // clock
-    output outvalue[8]  // reset
+    input value[8],
+    output outvalue[8]
   ) {
 
   always {
