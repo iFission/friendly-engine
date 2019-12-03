@@ -203,8 +203,8 @@ module control_unit (
           read_address_a = 4b0001;
           // write_address = 4b0001;
           a_select = 1b0;
-          b_select = 3b010;
-          alufn = 6b000001;
+          b_select = 3b010; // select 2
+          alufn = 6b000001; // subtract
           // wd_select = 2b00;
           temp_var.d = output_alu;
           if (button_centre){
@@ -224,8 +224,8 @@ module control_unit (
           read_address_a = 4b0001;
           // write_address = 4b0001;
           a_select = 1b0;
-          b_select = 3b001;
-          alufn = 6b000000;
+          b_select = 3b001; // select 1
+          alufn = 6b000000; // add
           // wd_select = 2b00;
           temp_var.d = output_alu;
           if (button_centre){
