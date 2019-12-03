@@ -22,8 +22,10 @@ module control_unit (
     output b_select[3],
     output wd_select[2],
 
-    input output_a,
-    input output_b,
+    // input from regfile and alu
+    input output_a[16],
+    input output_b[16],
+    input output_alu[16],
 
     // debug io
     input io_dip[8],
@@ -47,12 +49,14 @@ module control_unit (
     output horizontal_orientation_out,
     output vertical_orientation_out,
 
-    output state_index[8]
+    output state_index[8],
+    output temp_var_out
   ) 
 
 {
   .clk(clk){
     .rst(rst){
+      dff temp_var[16];
       fsm movement_fsm = {
         START,
         PORTRAIT_ORIENTATION_IDLE,
@@ -87,7 +91,7 @@ module control_unit (
     write_address = 0;
     write_enable = 0;
     read_address_a = io_dip[7-:4];
-    read_address_b = 0;
+    read_address_b = io_dip[7-:4]+1;
     alufn = 0;
     a_select = 0;
     b_select = 0;
@@ -102,6 +106,7 @@ module control_unit (
     vertical_orientation_out = vertical_orientation_in;
 
     state_index = 0;
+    temp_var_out = temp_var.q;
 
     case(movement_fsm.q){
       movement_fsm.START:
@@ -154,39 +159,17 @@ module control_unit (
           write_address = 4b0100;
           wd_select = 2b00;
 
-          if (player_position_1_in == win_position_in){
-          win_bool_out = 1;
-          }
-          if (button_centre){
-          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN_2;
-          }
-        
-      movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN_2:
-          state_index = 4;
-          // check orientation is portrait and is on win position to determine WIN
-
-          if (button_centre){
-          if (win_bool_in == 1b1)
-          {
-
+          if (output_alu == 1b1){
+            win_bool_out = output_alu;
             movement_fsm.d = movement_fsm.START;
           }
           else {
             movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_LOSS;
           }
-          }
-
-      movement_fsm.PORTRAIT_ORIENTATION_WRITE_WIN:
-          state_index = 5;
-          // win_bool_out = 1;
-          if (button_centre){
-          movement_fsm.d = movement_fsm.START;
-          }
           
       movement_fsm.PORTRAIT_ORIENTATION_CHECK_LOSS:
           state_index = 6;
           // check position is out to determine LOSS
-          if (button_centre){
           if (map_in[255 - player_position_1_in] == 0){
             // loss_bool_out = 1;
             write_enable = 1;
@@ -197,40 +180,48 @@ module control_unit (
           else {
             movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_IDLE;
           }
-          }
 
 
       movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1:
           state_index = 7;
           // player_position_1_out = player_position_1_in - 2;
           read_address_a = 4b0001;
-          write_address = 4b0001;
+          // write_address = 4b0001;
           a_select = 1b0;
           b_select = 3b010;
           alufn = 6b000001;
-          wd_select = 2b00;
+          // wd_select = 2b00;
+          temp_var.d = output_alu;
           if (button_centre){
             movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_CHECK;
           }
 
       movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_CHECK:
-      
+          state_index = 8;
+          player_position_1_out = temp_var.q;
           if (button_centre){
             movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2;
           }
 
       movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2:
+          state_index = 9;
           player_position_2_out = player_position_1_in + 1;
+          if (button_centre){
           movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION;
-
+          }
       movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION:
+          state_index = 10;
           portrait_orientation_out = 0;
+          if (button_centre){
           movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_HORIZONTAL_ORIENTATION;
+          }
 
       movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_HORIZONTAL_ORIENTATION:
+          state_index = 11;
           horizontal_orientation_out = 1;
+          if (button_centre){
           movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
-
+          }
       movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1:
           player_position_1_out = player_position_1_in + 1;
           movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2;

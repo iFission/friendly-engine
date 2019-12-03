@@ -177,9 +177,10 @@ module mojo_top(
                 io_led[1] = game.data_b_output;
                 io_led[0] = game.alu_output;
 
-            2b10:
+            2b11:
                 // show state index
                 io_led[2] = game.state_index;
+                io_led[1] = game.temp_var_out;
             // 1:
             //     io_led[0][2] = game.map_out[255-game.player_position_out[15:8]];
             //     io_led[0][1] = game.map_out[255-game.player_position_out[7:0]];

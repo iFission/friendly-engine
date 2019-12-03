@@ -25,7 +25,8 @@ module game (
     output data_a_output[8],
     output data_b_output[8],
     output alu_output[8],
-    output state_index[8]
+    output state_index[8],
+    output temp_var_out[16]
   ) 
 
 {
@@ -60,6 +61,7 @@ module game (
     data_b_output = 0;
     alu_output = alu16.alu;
     state_index = control_unit.state_index;
+    temp_var_out = control_unit.temp_var_out;
 
     // initialise default regfile values
     regfile.map_in = map.map_out;
@@ -79,6 +81,7 @@ module game (
 
     control_unit.output_a = regfile.output_a;
     control_unit.output_b = regfile.output_b;
+    control_unit.output_alu = alu16.alu;
 
     // data path
     // a select mux
