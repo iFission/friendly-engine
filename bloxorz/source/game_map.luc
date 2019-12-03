@@ -16,7 +16,7 @@ module map (
 {
   .clk(clk){
     .rst(rst){
-      fsm map_fsm = {MAP1, MAP2, MAP3, MAP4, MAP5, MAPWIN};
+      fsm map_fsm = {MAP1, MAP2, MAP3, MAP4, MAP5, MAP6, MAPWIN};
     }
   }
   
@@ -81,17 +81,31 @@ module map (
             }
 
         map_fsm.MAP5:
+            map_out = 256b0000000000000000000000000000000000000000000000000000111111100000000011111110000001111000001110000111000000011000011100000001100001110011111111100111001111111110000000111001111000000011100111100000000000000000000000000000000000000000000000000000000000000000;
+            player_position_out = 130;
+            win_position_out = 167;
+            map_index = 5;
+
+            if(win_bool_in || button_stage_right){
+                map_fsm.d = map_fsm.MAP6;
+            }
+
+            if(button_stage_left){
+                map_fsm.d = map_fsm.MAP4;
+            }
+
+        map_fsm.MAP6:
             map_out = 256b0000000000000000000000000000000000000000000000000000000000000000000000001111000000000000111100001110000010011110111111111000111011100001110011101110000111001110011100010000000000111111000000000000000000000000000000000000000000000000000000000000000000000000;
             player_position_out = 113;
             win_position_out = 125;
-            map_index = 5;
+            map_index = 6;
 
             if(win_bool_in || button_stage_right){
                 map_fsm.d = map_fsm.MAPWIN;
             }
 
             if(button_stage_left){
-                map_fsm.d = map_fsm.MAP4;
+                map_fsm.d = map_fsm.MAP5;
             }
 
         map_fsm.MAPWIN:
