@@ -24,7 +24,8 @@ module game (
     output map_index[2],
     output data_a_output[8],
     output data_b_output[8],
-    output alu_output[8]
+    output alu_output[8],
+    output state_index[8]
   ) 
 
 {
@@ -58,6 +59,7 @@ module game (
     data_a_output = 0;
     data_b_output = 0;
     alu_output = alu16.alu;
+    state_index = control_unit.state_index;
 
     // initialise default regfile values
     regfile.map_in = map.map_out;

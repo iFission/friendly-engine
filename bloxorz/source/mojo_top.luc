@@ -137,7 +137,6 @@ module mojo_top(
         // debug centre button to step through states
         game.button_centre = io_button_centre_edge_detector.out;
 
-        // debug input to select regfile
         game.io_dip = io_dip[0];
         case(io_dip[0][0]){ // debug switch for button input
             0: // if debug false, use arcade buttons
@@ -158,8 +157,9 @@ module mojo_top(
 
         }
 
-        case(io_dip[0][1]){ // debug switch to show player position loss
-            0:
+        // debug input to select regfile
+        case(io_dip[0][2:1]){ // debug switch to show player position loss
+            2b00:
                 // led output to show position
                 io_led[1] = game.player_position_out[15:8];
                 io_led[0] = game.player_position_out[7:0];
@@ -170,10 +170,16 @@ module mojo_top(
                 io_led[2][4] = game.win_bool_out;
                 io_led[2][3] = game.loss_bool_out;
                 io_led[2][2:1] = game.map_index;
-            1:
+
+            2b01:
+                // show data path
                 io_led[2] = game.data_a_output;
                 io_led[1] = game.data_b_output;
                 io_led[0] = game.alu_output;
+
+            2b10:
+                // show state index
+                io_led[2] = game.state_index;
             // 1:
             //     io_led[0][2] = game.map_out[255-game.player_position_out[15:8]];
             //     io_led[0][1] = game.map_out[255-game.player_position_out[7:0]];
