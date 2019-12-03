@@ -1,3 +1,19 @@
+/*
+game control unit:
+the aim of the game is to get the block to fall into the square hole at the end of each stage
+to move the block around the world, use the left, right, up and down arrow keys. Be careful not to fall off the edges. the level will be restarted if this happens
+
+main fsm logic:
+keeps track of block's various orientations:
+  portrait
+  vertical
+  horizontal
+in various orientations:
+  upon each button press
+  goes through computing values using ALU, then update to regfile
+  update orientation, check win/loss
+*/
+
 module control_unit (
     input clk,  // clock
     input rst,  // reset
@@ -57,11 +73,6 @@ module control_unit (
   .clk(clk){
     .rst(rst){
       dff temp_var[16]; // temp var to store output from alu
-
-      // main fsm logic:
-      // upon each button press
-      // step through various states to compute value using ALU, then update to regfile
-      // update orientation, check win/loss
       fsm movement_fsm = { // main fsm for all states of the game movement
         START,
         START_INITIALISE,

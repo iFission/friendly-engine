@@ -1,3 +1,43 @@
+/*
+maps are created in 16x16 grid
+eg
+0000000000000000
+0000000000000000
+0000000000000000
+0001111000000000
+0001311000000000
+0001110000000000
+0001000111111000
+0001000110011000
+0021111110011000
+0000000110000100
+0000000111100100
+0000000111111100
+0000000000111000
+0000000000000000
+0000000000000000
+0000000000000000
+
+0 represent lose area
+1 represent valid map area
+3 represent win position
+2 represent start position
+
+the 16x16 grid is then flatten to a 256 bit array, consisting of only 0 and 1:
+0000000000000000000000000000000000000000000000000001111000000000000111100000000000011100000000000001000111111000000100011001100000111111100110000000000110000100000000011110010000000001111111000000000000111000000000000000000000000000000000000000000000000000
+
+player start position and win position are extracted and stored separately, based on their index in the array:
+start = 130
+end = 68
+
+each map has a set of map, start_position and win_position
+
+they are stored in different states of the map_fsm
+if a player wins at a certain map, it will auto advance to the next state, representing the next map
+
+dedicated button_stage_left and button_stage_right can also be used to jump in between different maps
+*/
+
 module map (
     input clk,  // clock
     input rst,  // reset
