@@ -134,26 +134,35 @@ module mojo_top(
         game.button_stage_left = button_stage_left_edge_detector.out;
         game.button_stage_right = button_stage_right_edge_detector.out;
 
-        // debug centre button to step through states
-        game.button_centre = io_button_centre_edge_detector.out;
+        // led grid output
+        led_grid.update = 1; // set update to true
+        led_grid.win_pos = game.win_position_out; // pass in win position to led grid
+        led_grid.player_pos = game.player_position_out; // pass in player position to led grid
+        led_grid.map = game.map_out;  // pass in map to led grid
+        led_out = led_grid.led; // output to led_out pin
 
-        game.io_dip = io_dip[0];
+        // debug switches, IO
+        game.io_dip = io_dip[0]; // debug input to manually inspect the content of register by their address
+
         case(io_dip[0][0]){ // debug switch for button input
             0: // if debug false, use arcade buttons
                 game.button_up = button_up_edge_detector.out;
                 game.button_down = button_down_edge_detector.out;
                 game.button_left = button_left_edge_detector.out;
                 game.button_right = button_right_edge_detector.out;
+                game.button_centre = 1;
             1: // if debug true, use io buttons
                 game.button_up = io_button_up_edge_detector.out;
                 game.button_down = io_button_down_edge_detector.out;
                 game.button_left = io_button_left_edge_detector.out;
                 game.button_right = io_button_right_edge_detector.out;
+                game.button_centre = io_button_centre_edge_detector.out; // centre button to step through states of control unit
             default: // default use arcade buttons
                 game.button_up = button_up_edge_detector.out;
                 game.button_down = button_down_edge_detector.out;
                 game.button_left = button_left_edge_detector.out;
                 game.button_right = button_right_edge_detector.out;
+                game.button_centre = 1;
 
         }
 
@@ -177,10 +186,11 @@ module mojo_top(
                 io_led[1] = game.data_b_output;
                 io_led[0] = game.alu_output;
 
-            2b10:
+            2b11:
                 // show state index
                 io_led[2] = game.state_index;
-            // 1:
+                io_led[1] = game.temp_var_out;
+            // 1: // show if the position is in the map
             //     io_led[0][2] = game.map_out[255-game.player_position_out[15:8]];
             //     io_led[0][1] = game.map_out[255-game.player_position_out[7:0]];
             default:
@@ -195,13 +205,5 @@ module mojo_top(
                 io_led[2][3] = game.loss_bool_out;
                 io_led[2][2:1] = game.map_index;
     }
-        // led grid output for map
-        led_grid.update=1;
-        led_grid.win_pos = game.win_position_out;        //x=7, y=5
-        led_grid.player_pos = game.player_position_out;    //8,8 and 8,9
-        // led_grid.map=256x{b1};
-        led_grid.map = game.map_out;
-        led_out = led_grid.led;
-
     }
 }

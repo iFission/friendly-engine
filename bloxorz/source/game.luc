@@ -10,9 +10,8 @@ module game (
     input button_stage_right,
     input button_centre,
 
-    // debug
+    // debug IO
     input io_dip[8],
-
     output map_out[256],
     output player_position_out[16],
     output win_position_out[8],
@@ -25,7 +24,8 @@ module game (
     output data_a_output[8],
     output data_b_output[8],
     output alu_output[8],
-    output state_index[8]
+    output state_index[8],
+    output temp_var_out[16]
   ) 
 
 {
@@ -45,40 +45,34 @@ module game (
   }
   
   always {
-    // assign outputs to mojo_top for debugging
-    map_out = regfile.map_out;
-    player_position_out[15-:8] = regfile.player_position_1_out;
-    player_position_out[7-:8] = regfile.player_position_2_out;
-    win_position_out = regfile.win_position_out;
-    win_bool_out = regfile.win_bool_out;
-    loss_bool_out = regfile.loss_bool_out;
-    portrait_orientation_out = regfile.portrait_orientation_out;
-    horizontal_orientation_out = regfile.horizontal_orientation_out;
-    vertical_orientation_out = regfile.vertical_orientation_out;
-    map_index = map.map_index;
+    // button input to map fsm
+    map.button_stage_left = button_stage_left;
+    map.button_stage_right = button_stage_right;
+    map.win_bool_in = regfile.win_bool_out;
+    map.loss_bool_in = regfile.loss_bool_out;
+
+    // button input to control unit
+    control_unit.button_up = button_up;
+    control_unit.button_down = button_down;
+    control_unit.button_left = button_left;
+    control_unit.button_right = button_right;
+    control_unit.button_stage_left = button_stage_left;
+    control_unit.button_stage_right = button_stage_right;
+    control_unit.button_centre = button_centre;
+
+    // initialise with default values
     data_a_output = 0;
     data_b_output = 0;
-    alu_output = alu16.alu;
-    state_index = control_unit.state_index;
 
     // initialise default regfile values
     regfile.map_in = map.map_out;
-    // regfile.player_position_in = regfile.player_position_out;
     regfile.win_position_in = map.win_position_out;
-    // regfile.win_bool_in = regfile.win_bool_out;
-    // regfile.loss_bool_in = regfile.loss_bool_out;
-    // regfile.portrait_orientation_in = regfile.portrait_orientation_out;
-    // regfile.horizontal_orientation_in = regfile.horizontal_orientation_out;
-    // regfile.vertical_orientation_in = regfile.vertical_orientation_out;
 
-    // io between regfile and control_unit
+    // data path between regfile and control_unit
     regfile.write_address = control_unit.write_address;
     regfile.write_enable = control_unit.write_enable;
     regfile.read_address_a = control_unit.read_address_a;
     regfile.read_address_b = control_unit.read_address_b;
-
-    control_unit.output_a = regfile.output_a;
-    control_unit.output_b = regfile.output_b;
 
     // data path
     // a select mux
@@ -113,18 +107,11 @@ module game (
     alu16.a = data_a;
     alu16.b = data_b;
 
-    // input to map fsm
-    map.button_stage_left = button_stage_left;
-    map.button_stage_right = button_stage_right;
-    map.win_bool_in = regfile.win_bool_out;
-    map.loss_bool_in = regfile.loss_bool_out;
+    // debug, direct data input from regfile to control unit
+    control_unit.output_a = regfile.output_a;
+    control_unit.output_b = regfile.output_b;
+    control_unit.output_alu = alu16.alu;
 
-    // button input to control_unit
-    control_unit.button_up = button_up;
-    control_unit.button_down = button_down;
-    control_unit.button_left = button_left;
-    control_unit.button_right = button_right;
-    control_unit.button_centre = button_centre;
 
     // debug io for control_unit
     control_unit.io_dip = io_dip;
@@ -146,5 +133,20 @@ module game (
     regfile.portrait_orientation_in = control_unit.portrait_orientation_out;
     regfile.horizontal_orientation_in = control_unit.horizontal_orientation_out;
     regfile.vertical_orientation_in = control_unit.vertical_orientation_out;    
+
+    // assign outputs to mojo_top for debugging
+    map_out = regfile.map_out;
+    player_position_out[15-:8] = regfile.player_position_1_out;
+    player_position_out[7-:8] = regfile.player_position_2_out;
+    win_position_out = regfile.win_position_out;
+    win_bool_out = regfile.win_bool_out;
+    loss_bool_out = regfile.loss_bool_out;
+    portrait_orientation_out = regfile.portrait_orientation_out;
+    horizontal_orientation_out = regfile.horizontal_orientation_out;
+    vertical_orientation_out = regfile.vertical_orientation_out;
+    map_index = map.map_index;
+    alu_output = alu16.alu;
+    state_index = control_unit.state_index;
+    temp_var_out = control_unit.temp_var_out;
   }
 }

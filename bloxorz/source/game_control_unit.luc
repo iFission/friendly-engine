@@ -2,11 +2,14 @@ module control_unit (
     input clk,  // clock
     input rst,  // reset
 
+    // button inputs
     input button_up,
     input button_down,
     input button_left,
     input button_right,
     input button_centre,
+    input button_stage_left,
+    input button_stage_right,
 
     // output to regfile
     output write_address[4],
@@ -22,12 +25,13 @@ module control_unit (
     output b_select[3],
     output wd_select[2],
 
-    input output_a,
-    input output_b,
+    // input from regfile and alu
+    input output_a[16],
+    input output_b[16],
+    input output_alu[16],
 
     // debug io
     input io_dip[8],
-
     input map_in[256],
     input player_position_1_in[8],
     input player_position_2_in[8],
@@ -38,7 +42,6 @@ module control_unit (
     input portrait_orientation_in,
     input horizontal_orientation_in,
     input vertical_orientation_in,
-
     output player_position_1_out[8],
     output player_position_2_out[8],
     output win_bool_out,
@@ -46,38 +49,82 @@ module control_unit (
     output portrait_orientation_out,
     output horizontal_orientation_out,
     output vertical_orientation_out,
-
-    output state_index[8]
+    output state_index[8], // debug output, shows which state it's currently in
+    output temp_var_out[8]
   ) 
 
 {
   .clk(clk){
     .rst(rst){
-      fsm movement_fsm = {
+      dff temp_var[16]; // temp var to store output from alu
+
+      // main fsm logic:
+      // upon each button press
+      // step through various states to compute value using ALU, then update to regfile
+      // update orientation, check win/loss
+      fsm movement_fsm = { // main fsm for all states of the game movement
         START,
-        PORTRAIT_ORIENTATION_IDLE,
+        START_INITIALISE,
+        PORTRAIT_ORIENTATION,
         PORTRAIT_ORIENTATION_CHECK_WIN,
-        PORTRAIT_ORIENTATION_CHECK_WIN_2,
         PORTRAIT_ORIENTATION_WRITE_WIN,
         PORTRAIT_ORIENTATION_CHECK_LOSS,
-        HORIZONTAL_ORIENTATION,
-        VERTICAL_ORIENTATION,
-        PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1,
-        PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2,PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_CHECK,
+        PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_COMPUTE,
+        PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_COMPUTE,PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_WRITE,
+        PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_WRITE,
         PORTRAIT_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION,
         PORTRAIT_ORIENTATION_LEFT_UPDATE_HORIZONTAL_ORIENTATION,
-        PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1,
-        PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2,
+        PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_COMPUTE,
+        PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_COMPUTE,PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_WRITE,
+        PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_WRITE,
         PORTRAIT_ORIENTATION_RIGHT_UPDATE_PORTRAIT_ORIENTATION,
         PORTRAIT_ORIENTATION_RIGHT_UPDATE_HORIZONTAL_ORIENTATION,
-        PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1,
-        PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2,
+        PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_COMPUTE,
+        PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_COMPUTE,PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_WRITE,
+        PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_WRITE,
         PORTRAIT_ORIENTATION_UP_UPDATE_PORTRAIT_ORIENTATION,
-        PORTRAIT_ORIENTATION_UP_UPDATE_HORIZONTAL_ORIENTATION,
-        PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1,
-        PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2,
+        PORTRAIT_ORIENTATION_UP_UPDATE_VERTICAL_ORIENTATION,
+        PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_COMPUTE,
+        PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_COMPUTE,PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_WRITE,
+        PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_WRITE,
         PORTRAIT_ORIENTATION_DOWN_UPDATE_PORTRAIT_ORIENTATION,
-        PORTRAIT_ORIENTATION_DOWN_UPDATE_HORIZONTAL_ORIENTATION
+        PORTRAIT_ORIENTATION_DOWN_UPDATE_VERTICAL_ORIENTATION,
+        HORIZONTAL_ORIENTATION,
+        HORIZONTAL_ORIENTATION_CHECK_LOSS,
+        HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_COMPUTE,
+        HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_COMPUTE,HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_WRITE,
+        HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_WRITE,
+        HORIZONTAL_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION,
+        HORIZONTAL_ORIENTATION_LEFT_UPDATE_HORIZONTAL_ORIENTATION,
+        HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_COMPUTE,
+        HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_COMPUTE,HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_WRITE,
+        HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_WRITE,
+        HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PORTRAIT_ORIENTATION,
+        HORIZONTAL_ORIENTATION_RIGHT_UPDATE_HORIZONTAL_ORIENTATION,
+        HORIZONTAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_COMPUTE,
+        HORIZONTAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_COMPUTE,HORIZONTAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_WRITE,
+        HORIZONTAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_WRITE,
+        HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_COMPUTE,
+        HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_COMPUTE,HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_WRITE,
+        HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_WRITE,
+        VERTICAL_ORIENTATION,
+        VERTICAL_ORIENTATION_CHECK_LOSS,
+        VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_COMPUTE,
+        VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_COMPUTE,VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_WRITE,
+        VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_WRITE,
+        VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_COMPUTE,
+        VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_COMPUTE,VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_WRITE,
+        VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_WRITE,
+        VERTICAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_COMPUTE,
+        VERTICAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_COMPUTE,VERTICAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_WRITE,
+        VERTICAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_WRITE,
+        VERTICAL_ORIENTATION_UP_UPDATE_VERTICAL_ORIENTATION,
+        VERTICAL_ORIENTATION_UP_UPDATE_PORTRAIT_ORIENTATION,
+        VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_COMPUTE,
+        VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_COMPUTE,VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_WRITE,
+        VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_WRITE,
+        VERTICAL_ORIENTATION_DOWN_UPDATE_VERTICAL_ORIENTATION,
+        VERTICAL_ORIENTATION_DOWN_UPDATE_PORTRAIT_ORIENTATION
         };
     }
   }
@@ -87,7 +134,7 @@ module control_unit (
     write_address = 0;
     write_enable = 0;
     read_address_a = io_dip[7-:4];
-    read_address_b = 0;
+    read_address_b = io_dip[7-:4]+1;
     alufn = 0;
     a_select = 0;
     b_select = 0;
@@ -101,47 +148,46 @@ module control_unit (
     horizontal_orientation_out = horizontal_orientation_in;
     vertical_orientation_out = vertical_orientation_in;
 
-    state_index = 0;
+    state_index = 0; // debug output, shows which state it's currently in
+    temp_var_out = temp_var.q;
 
     case(movement_fsm.q){
-      movement_fsm.START:
-        player_position_1_out = player_position_in_init;
-        player_position_2_out = 0;
+      movement_fsm.START: // reset to default values
+        state_index = 1;
         win_bool_out = 0;
         loss_bool_out = 0;
         portrait_orientation_out = 1;
         horizontal_orientation_out = 0;
         vertical_orientation_out = 0;
+        movement_fsm.d = movement_fsm.START_INITIALISE;
 
-        state_index = 1;
+      movement_fsm.START_INITIALISE:
+        player_position_1_out = player_position_in_init;
+        player_position_2_out = 0;
 
         movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN;
 
-      movement_fsm.PORTRAIT_ORIENTATION_IDLE:
+      movement_fsm.PORTRAIT_ORIENTATION: // in portrait orientation, wait for button press
           state_index = 2;
           if (button_left == 1)
           {
-            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1;
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_COMPUTE;
           }
           if (button_right == 1)
           {
-            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1;
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_COMPUTE;
           }
           if (button_up == 1)
           {
-            player_position_1_out = player_position_1_in - 32;
-            player_position_2_out = player_position_1_in - 16;
-            vertical_orientation_out = 1;
-            portrait_orientation_out = 0;
-            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION;
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_COMPUTE;
           }
           if (button_down == 1)
           {
-            player_position_1_out = player_position_1_in + 16;
-            player_position_2_out = player_position_1_in + 32;
-            vertical_orientation_out = 1;
-            portrait_orientation_out = 0;
-            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION;
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_COMPUTE;
+          }
+          if (button_stage_left || button_stage_right)
+          {
+            movement_fsm.d = movement_fsm.START;
           }
 
       movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN:
@@ -154,39 +200,17 @@ module control_unit (
           write_address = 4b0100;
           wd_select = 2b00;
 
-          if (player_position_1_in == win_position_in){
-          win_bool_out = 1;
-          }
-          if (button_centre){
-          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN_2;
-          }
-        
-      movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN_2:
-          state_index = 4;
-          // check orientation is portrait and is on win position to determine WIN
-
-          if (button_centre){
-          if (win_bool_in == 1b1)
-          {
-
+          if (output_alu == 1b1){
+            win_bool_out = output_alu;
             movement_fsm.d = movement_fsm.START;
           }
           else {
             movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_LOSS;
           }
-          }
-
-      movement_fsm.PORTRAIT_ORIENTATION_WRITE_WIN:
-          state_index = 5;
-          // win_bool_out = 1;
-          if (button_centre){
-          movement_fsm.d = movement_fsm.START;
-          }
           
       movement_fsm.PORTRAIT_ORIENTATION_CHECK_LOSS:
           state_index = 6;
           // check position is out to determine LOSS
-          if (button_centre){
           if (map_in[255 - player_position_1_in] == 0){
             // loss_bool_out = 1;
             write_enable = 1;
@@ -195,48 +219,90 @@ module control_unit (
             movement_fsm.d = movement_fsm.START;
           }
           else {
-            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_IDLE;
-          }
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION;
           }
 
-
-      movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1:
+      movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_COMPUTE:
           state_index = 7;
           // player_position_1_out = player_position_1_in - 2;
           read_address_a = 4b0001;
-          write_address = 4b0001;
+          // write_address = 4b0001;
           a_select = 1b0;
-          b_select = 3b010;
-          alufn = 6b000001;
-          wd_select = 2b00;
+          b_select = 3b010; // select 2
+          alufn = 6b000001; // subtract
+          // wd_select = 2b00;
+          temp_var.d = output_alu;
           if (button_centre){
-            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_CHECK;
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_WRITE;
           }
 
-      movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_CHECK:
-      
+      movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_WRITE:
+          state_index = 8;
+          player_position_1_out = temp_var.q;
           if (button_centre){
-            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2;
+            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_COMPUTE;
           }
 
-      movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2:
-          player_position_2_out = player_position_1_in + 1;
+      movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_COMPUTE:
+          state_index = 9;
+          // player_position_2_out = player_position_1_in + 1;
+          read_address_a = 4b0001;
+          // write_address = 4b0001;
+          a_select = 1b0;
+          b_select = 3b001; // select 1
+          alufn = 6b000000; // add
+          // wd_select = 2b00;
+          temp_var.d = output_alu;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_WRITE;
+          }
+
+      movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_WRITE:
+          state_index = 10;
+          // player_position_2_out = player_position_1_in + 1;
+          player_position_2_out = temp_var.q;
+          if (button_centre){
           movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION;
-
+          }
       movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION:
+          state_index = 10;
           portrait_orientation_out = 0;
+          if (button_centre){
           movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_HORIZONTAL_ORIENTATION;
+          }
 
       movement_fsm.PORTRAIT_ORIENTATION_LEFT_UPDATE_HORIZONTAL_ORIENTATION:
+          state_index = 11;
           horizontal_orientation_out = 1;
-          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_CHECK_LOSS;
+          }
+      movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_COMPUTE:
+          // player_position_1_out = player_position_1_in + 1;
+          read_address_a = 4b0001;
+          // write_address = 4b0001;
+          a_select = 1b0;
+          b_select = 3b001; // select 1
+          alufn = 6b000000; // add
+          temp_var.d = output_alu;          
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_WRITE;
 
-      movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1:
-          player_position_1_out = player_position_1_in + 1;
-          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2;
+      movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_WRITE:
+          player_position_1_out = temp_var.q;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_COMPUTE;
 
-      movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2:
-          player_position_2_out = player_position_1_in + 1;
+      movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_COMPUTE:
+          // player_position_2_out = player_position_1_in + 1;
+          read_address_a = 4b0001;
+          // write_address = 4b0001;
+          a_select = 1b0;
+          b_select = 3b001; // select 1
+          alufn = 6b000000; // add
+          temp_var.d = output_alu;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_WRITE;
+
+      movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_WRITE:
+          player_position_2_out = temp_var.q;
           movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PORTRAIT_ORIENTATION;
 
       movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_PORTRAIT_ORIENTATION:
@@ -245,78 +311,401 @@ module control_unit (
 
       movement_fsm.PORTRAIT_ORIENTATION_RIGHT_UPDATE_HORIZONTAL_ORIENTATION:
           horizontal_orientation_out = 1;
-          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_CHECK_LOSS;
 
-      movement_fsm.VERTICAL_ORIENTATION:
+      movement_fsm.PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_COMPUTE:
+          // player_position_1_out = player_position_1_in - 32;
+          read_address_a = 4b0001;
+          // write_address = 4b0001;
+          a_select = 1b0;
+          b_select = 3b100; // select 32
+          alufn = 6b000001; // subtract
+          temp_var.d = output_alu;          
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_WRITE;
+
+      movement_fsm.PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_WRITE:
+          player_position_1_out = temp_var.q;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_COMPUTE;
+
+      movement_fsm.PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_COMPUTE:
+          // player_position_2_out = player_position_1_in + 16;
+          read_address_a = 4b0001;
+          // write_address = 4b0001;
+          a_select = 1b0;
+          b_select = 3b011; // select 16
+          alufn = 6b000000; // add
+          temp_var.d = output_alu;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_WRITE;
+
+      movement_fsm.PORTRAIT_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_WRITE:
+          player_position_2_out = temp_var.q;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_UP_UPDATE_PORTRAIT_ORIENTATION;
+
+      movement_fsm.PORTRAIT_ORIENTATION_UP_UPDATE_PORTRAIT_ORIENTATION:
+          portrait_orientation_out = 0;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_UP_UPDATE_VERTICAL_ORIENTATION;
+
+      movement_fsm.PORTRAIT_ORIENTATION_UP_UPDATE_VERTICAL_ORIENTATION:
+          horizontal_orientation_out = 1;
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_CHECK_LOSS;
+
+      movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_COMPUTE:
+          // player_position_1_out = player_position_1_in + 16;;
+          read_address_a = 4b0001;
+          // write_address = 4b0001;
+          a_select = 1b0;
+          b_select = 3b011; // select 16
+          alufn = 6b000000; // add
+          temp_var.d = output_alu;          
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_WRITE;
+
+      movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_WRITE:
+          player_position_1_out = temp_var.q;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_COMPUTE;
+
+      movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_COMPUTE:
+          // player_position_2_out = player_position_1_in + 16;
+          read_address_a = 4b0001;
+          // write_address = 4b0001;
+          a_select = 1b0;
+          b_select = 3b011; // select 16
+          alufn = 6b000000; // add
+          temp_var.d = output_alu;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_WRITE;
+
+      movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_WRITE:
+          player_position_2_out = temp_var.q;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_PORTRAIT_ORIENTATION;
+
+      movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_PORTRAIT_ORIENTATION:
+          portrait_orientation_out = 0;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_VERTICAL_ORIENTATION;
+
+      movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_VERTICAL_ORIENTATION:
+          horizontal_orientation_out = 1;
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_CHECK_LOSS;
+
+      movement_fsm.VERTICAL_ORIENTATION: // in vertical orientation, wait for button press
           if (button_left == 1)
           {
-            player_position_1_out = player_position_1_in - 1;
-            player_position_2_out = player_position_2_in - 1;
-            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION;
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_COMPUTE;
           }
           if (button_right == 1)
           {
-            player_position_1_out = player_position_1_in + 1;
-            player_position_2_out = player_position_2_in + 1;
-            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION;
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_COMPUTE;
           }
           if (button_up == 1)
           {
-            player_position_1_out = player_position_1_in - 16;
-            player_position_2_out = 0;
-            vertical_orientation_out = 0;
-            portrait_orientation_out = 1;
-            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN;
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_COMPUTE;
           }
           if (button_down == 1)
           {
-            player_position_1_out = player_position_1_in + 32;
-            player_position_2_out = 0;
-            vertical_orientation_out = 0;
-            portrait_orientation_out = 1;
-            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN;
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_COMPUTE;
           }
-          // check position of first and last 8 bits is out to determine OUT
-          if (map_in[255 - player_position_1_in] == 0 || map_in[255 - player_position_2_in] == 0){
-            // loss_bool_out = 1;
-            write_enable = 1;
-            write_address = 3b100;
-            // input_data = 1b1;
-            }
+          if (button_stage_left || button_stage_right)
+          {
+            movement_fsm.d = movement_fsm.START;
+          }
 
-      movement_fsm.HORIZONTAL_ORIENTATION:
-          if (button_left == 1)
-          {
-            player_position_1_out = player_position_1_in - 1;
-            player_position_2_out = 0;
-            horizontal_orientation_out = 0;
-            portrait_orientation_out = 1;
-            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN;
-          }
-          if (button_right == 1)
-          {
-            player_position_1_out = player_position_1_in + 2;
-            player_position_2_out = 0;
-            horizontal_orientation_out = 0;
-            portrait_orientation_out = 1;
-            movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN;
-          }
-          if (button_up == 1)
-          {
-            player_position_1_out = player_position_1_in - 16;
-            player_position_2_out = player_position_2_in - 16;
-            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
-          }
-          if (button_down == 1)
-          {
-            player_position_1_out = player_position_1_in + 16;
-            player_position_2_out = player_position_2_in + 16;
-            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
-          }
-          // check position of first and last 8 bits is out to determine OUT
+      movement_fsm.VERTICAL_ORIENTATION_CHECK_LOSS:
+          // check position is out to determine LOSS
           if (map_in[255 - player_position_1_in] == 0 || map_in[255 - player_position_2_in] == 0){
             movement_fsm.d = movement_fsm.START;
           }
+          else {
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION;
+          }
+
+      movement_fsm.VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_COMPUTE:
+          // player_position_1_out = player_position_1_in - 1;
+          read_address_a = 4b0001;
+          a_select = 1b0;
+          b_select = 3b001; // select 1
+          alufn = 6b000001; // subtract
+          temp_var.d = output_alu;
+          if (button_centre){
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_WRITE;
+          }
+
+      movement_fsm.VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_WRITE:
+          player_position_1_out = temp_var.q;
+          if (button_centre){
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_COMPUTE;
+          }
+
+      movement_fsm.VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_COMPUTE:
+          // player_position_2_out = player_position_2_in - 1;
+          read_address_a = 4b0010;
+          a_select = 1b0;
+          b_select = 3b001; // select 1
+          alufn = 6b000001; // subtract          
+          temp_var.d = output_alu;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_WRITE;
+          }
+
+      movement_fsm.VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_WRITE:
+          player_position_2_out = temp_var.q;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_CHECK_LOSS;
+          }
+
+      movement_fsm.VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_COMPUTE:
+          // player_position_1_out = player_position_1_in + 1;
+          read_address_a = 4b0001;
+          a_select = 1b0;
+          b_select = 3b001; // select 1
+          alufn = 6b000000; // add
+          temp_var.d = output_alu;
+          if (button_centre){
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_WRITE;
+          }
+
+      movement_fsm.VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_WRITE:
+          player_position_1_out = temp_var.q;
+          if (button_centre){
+            movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_COMPUTE;
+          }
+
+      movement_fsm.VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_COMPUTE:
+          // player_position_2_out = player_position_2_in + 1;
+          read_address_a = 4b0010;
+          a_select = 1b0;
+          b_select = 3b001; // select 1
+          alufn = 6b000000; // add
+          temp_var.d = output_alu;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_WRITE;
+          }
+
+      movement_fsm.VERTICAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_WRITE:
+          player_position_2_out = temp_var.q;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_CHECK_LOSS;
+          }
+
+      movement_fsm.VERTICAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_COMPUTE:
+          // player_position_1_out = player_position_1_in - 16;
+          read_address_a = 4b0001;
+          a_select = 1b0;
+          b_select = 3b011; // select 16
+          alufn = 6b000001; // subtract
+          temp_var.d = output_alu;          
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_WRITE;
+
+      movement_fsm.VERTICAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_WRITE:
+          player_position_1_out = temp_var.q;
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_COMPUTE;
+
+      movement_fsm.VERTICAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_COMPUTE:
+          // player_position_2_out = 0;
+          temp_var.d = 0;
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_WRITE;
+
+      movement_fsm.VERTICAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_WRITE:
+          player_position_2_out = temp_var.q;
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_UP_UPDATE_VERTICAL_ORIENTATION;
+
+      movement_fsm.VERTICAL_ORIENTATION_UP_UPDATE_VERTICAL_ORIENTATION:
+          vertical_orientation_out = 0;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_UP_UPDATE_PORTRAIT_ORIENTATION;
+          }
+
+      movement_fsm.VERTICAL_ORIENTATION_UP_UPDATE_PORTRAIT_ORIENTATION:
+          portrait_orientation_out = 1;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN;
+          }
+          
+      movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_COMPUTE:
+          // player_position_1_out = player_position_1_in + 32;
+          read_address_a = 4b0001;
+          a_select = 1b0;
+          b_select = 3b100; // select 32
+          alufn = 6b000000; // add
+          temp_var.d = output_alu;          
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_WRITE;
+
+      movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_WRITE:
+          player_position_1_out = temp_var.q;
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_COMPUTE;
+
+      movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_COMPUTE:
+          // player_position_2_out = 0;
+          temp_var.d = 0;
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_WRITE;
+
+      movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_WRITE:
+          player_position_2_out = temp_var.q;
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_VERTICAL_ORIENTATION;
+
+      movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_VERTICAL_ORIENTATION:
+          vertical_orientation_out = 0;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_PORTRAIT_ORIENTATION;
+          }
+
+      movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_PORTRAIT_ORIENTATION:
+          portrait_orientation_out = 1;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN;
+          }
+
+      movement_fsm.HORIZONTAL_ORIENTATION: // in horizontal orientation, wait for button press
+          if (button_left == 1)
+          {
+            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_COMPUTE;
+          }
+          if (button_right == 1)
+          {
+            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_COMPUTE;
+          }
+          if (button_up == 1)
+          {
+            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_COMPUTE;
+          }
+          if (button_down == 1)
+          {
+            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_COMPUTE;
+          }
+          if (button_stage_left || button_stage_right)
+          {
+            movement_fsm.d = movement_fsm.START;
+          }          
+
+      movement_fsm.HORIZONTAL_ORIENTATION_CHECK_LOSS:
+          // check position is out to determine LOSS
+          if (map_in[255 - player_position_1_in] == 0 || map_in[255 - player_position_2_in] == 0){
+            movement_fsm.d = movement_fsm.START;
+          }
+          else {
+            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION;
+          }
+
+      movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_COMPUTE:
+          // player_position_1_out = player_position_1_in - 1;
+          read_address_a = 4b0001;
+          a_select = 1b0;
+          b_select = 3b001; // select 1
+          alufn = 6b000001; // subtract
+          temp_var.d = output_alu;
+          if (button_centre){
+            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_WRITE;
+          }
+
+      movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_WRITE:
+          player_position_1_out = temp_var.q;
+          if (button_centre){
+            movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_COMPUTE;
+          }
+
+      movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_COMPUTE:
+          // player_position_2_out = 0;
+          temp_var.d = 0;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_WRITE;
+          }
+
+      movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_2_WRITE:
+          player_position_2_out = temp_var.q;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_HORIZONTAL_ORIENTATION;
+          }
+      movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_HORIZONTAL_ORIENTATION:
+          horizontal_orientation_out = 0;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION;
+          }
+
+      movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_PORTRAIT_ORIENTATION:
+          state_index = 11;
+          portrait_orientation_out = 1;
+          if (button_centre){
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN;
+          }
+
+      movement_fsm.HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_COMPUTE:
+          // player_position_1_out = player_position_1_in + 2;
+          read_address_a = 4b0001;
+          a_select = 1b0;
+          b_select = 3b010; // select 2
+          alufn = 6b000000; // add
+          temp_var.d = output_alu;          
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_WRITE;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_1_WRITE:
+          player_position_1_out = temp_var.q;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_COMPUTE;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_COMPUTE:
+          // player_position_2_out = 0;
+          temp_var.d = 0;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_WRITE;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PLAYER_POSITION_2_WRITE:
+          player_position_2_out = temp_var.q;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_RIGHT_UPDATE_HORIZONTAL_ORIENTATION;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_RIGHT_UPDATE_HORIZONTAL_ORIENTATION:
+          horizontal_orientation_out = 0;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PORTRAIT_ORIENTATION;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_RIGHT_UPDATE_PORTRAIT_ORIENTATION:
+          portrait_orientation_out = 1;
+          movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_COMPUTE:
+          // player_position_1_out = player_position_1_in - 16;
+          read_address_a = 4b0001;
+          a_select = 1b0;
+          b_select = 3b011; // select 16
+          alufn = 6b000001; // subtract
+          temp_var.d = output_alu;          
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_WRITE;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_1_WRITE:
+          player_position_1_out = temp_var.q;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_COMPUTE;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_COMPUTE:
+          // player_position_2_out = player_position_2_in - 16;
+          read_address_a = 4b0010;
+          a_select = 1b0;
+          b_select = 3b011; // select 16
+          alufn = 6b000001; // subtract
+          temp_var.d = output_alu;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_WRITE;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_UP_UPDATE_PLAYER_POSITION_2_WRITE:
+          player_position_2_out = temp_var.q;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_CHECK_LOSS;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_COMPUTE:
+          // player_position_1_out = player_position_1_in + 16;
+          read_address_a = 4b0001;
+          a_select = 1b0;
+          b_select = 3b011; // select 16
+          alufn = 6b000000; // add
+          temp_var.d = output_alu;          
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_WRITE;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_WRITE:
+          player_position_1_out = temp_var.q;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_COMPUTE;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_COMPUTE:
+          // player_position_2_out = player_position_2_in + 16;
+          read_address_a = 4b0010;
+          a_select = 1b0;
+          b_select = 3b011; // select 16
+          alufn = 6b000000; // add
+          temp_var.d = output_alu;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_WRITE;
+
+      movement_fsm.HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_2_WRITE:
+          player_position_2_out = temp_var.q;
+          movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_CHECK_LOSS;
     }
   }
 }
