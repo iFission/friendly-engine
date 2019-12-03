@@ -7,6 +7,8 @@ module control_unit (
     input button_left,
     input button_right,
     input button_centre,
+    input button_stage_left,
+    input button_stage_right,
 
     // output to regfile
     output write_address[4],
@@ -178,8 +180,11 @@ module control_unit (
           }
           if (button_down == 1)
           {
-            
             movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_COMPUTE;
+          }
+          if (button_stage_left || button_stage_right)
+          {
+            movement_fsm.d = movement_fsm.START;
           }
 
       movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN:
@@ -394,6 +399,10 @@ module control_unit (
           {
             movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_COMPUTE;
           }
+          if (button_stage_left || button_stage_right)
+          {
+            movement_fsm.d = movement_fsm.START;
+          }
 
       movement_fsm.VERTICAL_ORIENTATION_CHECK_LOSS:
           // check position is out to determine LOSS
@@ -557,6 +566,10 @@ module control_unit (
           {
             movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_DOWN_UPDATE_PLAYER_POSITION_1_COMPUTE;
           }
+          if (button_stage_left || button_stage_right)
+          {
+            movement_fsm.d = movement_fsm.START;
+          }          
 
       movement_fsm.HORIZONTAL_ORIENTATION_CHECK_LOSS:
           // check position is out to determine LOSS
