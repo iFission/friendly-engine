@@ -12,7 +12,7 @@ module regfile (
   output output_a[256], //read port a
   output output_b[256], //read port b
 
-  // debug
+  // debug IO
   input map_in[256],
   input player_position_1_in[8],
   input player_position_2_in[8],
@@ -22,7 +22,6 @@ module regfile (
   input portrait_orientation_in,
   input horizontal_orientation_in,
   input vertical_orientation_in,
-
   output map_out[256],
   output player_position_1_out[8],
   output player_position_2_out[8],
@@ -94,7 +93,7 @@ module regfile (
       4b1000: output_b = vertical_orientation.q;
     }
 
-    // debug
+    // debug, output content of registers directly without addressing
     map.d = map_in;
     map_out = map.q;
 

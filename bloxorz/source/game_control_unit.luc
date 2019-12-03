@@ -2,6 +2,7 @@ module control_unit (
     input clk,  // clock
     input rst,  // reset
 
+    // button inputs
     input button_up,
     input button_down,
     input button_left,
@@ -31,7 +32,6 @@ module control_unit (
 
     // debug io
     input io_dip[8],
-
     input map_in[256],
     input player_position_1_in[8],
     input player_position_2_in[8],
@@ -42,7 +42,6 @@ module control_unit (
     input portrait_orientation_in,
     input horizontal_orientation_in,
     input vertical_orientation_in,
-
     output player_position_1_out[8],
     output player_position_2_out[8],
     output win_bool_out,
@@ -50,16 +49,20 @@ module control_unit (
     output portrait_orientation_out,
     output horizontal_orientation_out,
     output vertical_orientation_out,
-
-    output state_index[8],
+    output state_index[8], // debug output, shows which state it's currently in
     output temp_var_out[8]
   ) 
 
 {
   .clk(clk){
     .rst(rst){
-      dff temp_var[16];
-      fsm movement_fsm = {
+      dff temp_var[16]; // temp var to store output from alu
+
+      // main fsm logic:
+      // upon each button press
+      // step through various states to compute value using ALU, then update to regfile
+      // update orientation, check win/loss
+      fsm movement_fsm = { // main fsm for all states of the game movement
         START,
         START_INITIALISE,
         PORTRAIT_ORIENTATION,
@@ -145,11 +148,11 @@ module control_unit (
     horizontal_orientation_out = horizontal_orientation_in;
     vertical_orientation_out = vertical_orientation_in;
 
-    state_index = 0;
+    state_index = 0; // debug output, shows which state it's currently in
     temp_var_out = temp_var.q;
 
     case(movement_fsm.q){
-      movement_fsm.START:
+      movement_fsm.START: // reset to default values
         state_index = 1;
         win_bool_out = 0;
         loss_bool_out = 0;
@@ -164,7 +167,7 @@ module control_unit (
 
         movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN;
 
-      movement_fsm.PORTRAIT_ORIENTATION:
+      movement_fsm.PORTRAIT_ORIENTATION: // in portrait orientation, wait for button press
           state_index = 2;
           if (button_left == 1)
           {
@@ -382,7 +385,7 @@ module control_unit (
           horizontal_orientation_out = 1;
           movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_CHECK_LOSS;
 
-      movement_fsm.VERTICAL_ORIENTATION:
+      movement_fsm.VERTICAL_ORIENTATION: // in vertical orientation, wait for button press
           if (button_left == 1)
           {
             movement_fsm.d = movement_fsm.VERTICAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_COMPUTE;
@@ -549,7 +552,7 @@ module control_unit (
           movement_fsm.d = movement_fsm.PORTRAIT_ORIENTATION_CHECK_WIN;
           }
 
-      movement_fsm.HORIZONTAL_ORIENTATION:
+      movement_fsm.HORIZONTAL_ORIENTATION: // in horizontal orientation, wait for button press
           if (button_left == 1)
           {
             movement_fsm.d = movement_fsm.HORIZONTAL_ORIENTATION_LEFT_UPDATE_PLAYER_POSITION_1_COMPUTE;
